@@ -1,0 +1,46 @@
+{
+    'FILE_TYPES' : [{'name' : 'fastq', 'ext' : 'fastq.gz' },
+                    {'name' : 'mpa', 'ext' : 'mpa.tsv'},
+                    'tsv'],
+    
+    'SAMPLE_TYPES':['environmental_dna'],
+
+    'RESULT_TYPES': [
+        {
+            'NAME' : 'raw_short_read_dna',
+            'FILES' : {
+                'read1' : 'fastq',
+                'read2' : 'fastq'
+            }
+        },
+
+        {
+            'NAME' : 'filtered_short_read_dna',
+            'MODULE' : 'filter_short_read_dna', // Same name as the schema, by default
+            'DEPENDENCIES' : ['raw_short_read_dna'],
+            'FILES' : {
+                'read1' : 'FASTQ',
+                'read2' : 'FASTQ'
+            }
+        },
+    
+        {
+            'NAME' : 'kraken',
+            'DEPENDENCIES' : ['filtered_short_read_dna'], // None, by default
+            'FILES' : {
+                'raw' : 'tsv',
+                'mpa' : 'mpa'
+            }
+        },
+    
+        {
+            'NAME' : 'kraken_distance',
+            'LEVEL' : 'GROUP', // 'SAMPLE', by default
+            'DEPENDENCIES' : ['kraken'],
+            'FILES' : {
+                'cosine' : 'tsv',
+                'jsd' : 'tsv'
+            }
+        }
+    ]
+}
