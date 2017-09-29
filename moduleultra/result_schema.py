@@ -2,12 +2,18 @@ from .utils import getOrDefault
 
 class ResultSchema:
 
-    def __init__(self,  schema):
+    def __init__(self,  muRepo, pipelineName, schema):
+        self.muRepo = muRepo
+        self.muConfig = self.muRepo.muConfig
+        self.pipelineName = pipelineName
+        
         self.name = schema['NAME']
         self.dependencies = getOrDefault( schema, 'DEPENDENCIES', [])
         self.module = getOrDefault( schema, 'MODULE', self.name)
         self.level = getOrDefault( schema, 'LEVEL', 'RESULT')
-        self.snakemakeFile = schema['SNAKEMAKE_FILE']
+
+        self.snakeFile = self.muConfig.getSnakeFile(self.pipelineName,
+                                                    schema['SNAKEMAKE_FILE'])
         self.files = {}
         files = schema['FILES']
         if type(files) == []:
@@ -29,4 +35,12 @@ class ResultSchema:
         '''
 
         pass
-    
+
+    def preprocessSnakemake(self):
+        '''
+        Every result schema preprocesses its own snakefile 
+        and returns it as a string
+
+        Adds a register rule
+        '''
+        pass
