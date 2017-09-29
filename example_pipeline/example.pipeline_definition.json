@@ -1,10 +1,25 @@
 {
+    // This is an example of a 'pipeline definition' it is the root of all the
+    // information that ModuleUltra needs to run (though it does reference other
+    // files) 
+    
     'FILE_TYPES' : [{'name' : 'fastq', 'ext' : 'fastq.gz' },
                     {'name' : 'mpa', 'ext' : 'mpa.tsv'},
                     'tsv'],
     
     'SAMPLE_TYPES':['environmental_dna'],
 
+    'ORIGINS': ['raw_short_read_dna'],
+
+    // by default ENDPOINTS is every result type that is not an origin
+    'ENDPOINTS' : ['kraken', 'kraken_distance'], 
+
+    'SNAKEFILE_DIR' : 'example.snakefiles',
+    'SNAKEMAKE_CONF': 'example.snakemake_config.json',
+
+    'PYPI_DEPENDENCIES': 'example.pip_requirements.txt',
+    'CONDA_DEPENDENCIES' : 'example.conda_requirements.txt',
+    
     'RESULT_TYPES': [
         {
             'NAME' : 'raw_short_read_dna',
@@ -16,6 +31,7 @@
 
         {
             'NAME' : 'filtered_short_read_dna',
+            'SNAKEFILE' : 'filter_reads.snkmk', // <module>.snkmk, by default
             'MODULE' : 'filter_short_read_dna', // Same name as the schema, by default
             'DEPENDENCIES' : ['raw_short_read_dna'],
             'FILES' : {
@@ -35,7 +51,7 @@
     
         {
             'NAME' : 'kraken_distance',
-            'LEVEL' : 'GROUP', // 'SAMPLE', by default
+            'LEVEL' : 'GROUP', // 'RESULT', by default
             'DEPENDENCIES' : ['kraken'],
             'FILES' : {
                 'cosine' : 'tsv',
