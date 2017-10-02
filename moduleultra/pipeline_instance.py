@@ -64,7 +64,7 @@ class PipelineInstance:
         
 
     def listEndpoints(self):
-        pass
+        return self.endpoints
 
     def addEndpointsAndDataToSnakemakeConf(self, endpts, groups, samples, results):
         resultDir = self.muRepo.getResultDir()

@@ -1,7 +1,8 @@
 from yaml_backed_structs import *
 import os.path
-import os.environ
+import os
 from json import loads as jloads
+from .errors import *
 
 class ModuleUltraConfig:
     '''
@@ -12,6 +13,7 @@ class ModuleUltraConfig:
     '''
     configDirName='.module_ultra_config'
     pipelineDirName = 'installed_pipelines'
+    stagingDirName = 'staging'
     pipelineSetName = 'installed_pipelines.yml'    
     configVarsRoot='config_variables.yml'
 
@@ -67,6 +69,7 @@ class ModuleUltraConfig:
             configRoot = os.environ['MODULE_ULTRA_CONFIG']
         except KeyError:
             configRoot = ModuleUltraConfig.configDirName
+            configRoot = os.path.join( os.environ['HOME'], configRoot)
         return os.path.abspath( configRoot)
             
     @classmethod
@@ -78,4 +81,14 @@ class ModuleUltraConfig:
 
     @classmethod
     def initConfig(ctype, dest=None):
-        os.mkdir(ctype.getConfigDir())
+        try:
+            os.mkdir(ctype.getConfigDir())
+
+            pipeDir = os.path.join(ctype.getConfigDir(), ctype.pipelineDirName)
+            os.mkdir(pipeDir)
+
+            stagingDir = os.path.join( pipeDir, ctype.stagingDirName)
+            os.mkdir(stagingDir)
+            
+        except FileExistsError:
+            raise ModuleUltraConfigAlreadyExists()
