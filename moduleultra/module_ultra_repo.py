@@ -21,6 +21,9 @@ class ModuleUltraRepo:
         self.pipelines = PersistentSet(pipePath)
 
 
+    def datasuperRepo(self):
+        return ds.Repo.loadRepo()
+        
     def addPipeline(self, pipelineName, version=None):
         '''
         Add a pipeline that has already been installed
@@ -45,6 +48,7 @@ class ModuleUltraRepo:
         self.pipelines.add( joinPipelineNameVersion(pipelineName, version))
 
     def getPipelineInstance(self, pipelineName, version=None):
+        assert joinPipelineNameVersion(pipelineName,version) in self.pipelines
         pipelineDef = self.muConfig.getPipelineDefinition(pipelineName,
                                                           version=version)
         return PipelineInstance(self, pipelineDef)
