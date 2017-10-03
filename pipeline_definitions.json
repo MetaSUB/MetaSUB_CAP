@@ -1,0 +1,125 @@
+{
+    'NAME': 'metasub_cap',
+    'VERSION': '0.0.1',
+    'SAMPLE_TYPES' : [
+	'enviromental_swab',
+	'enviromental_air',
+	'enviromental_water',
+	'phone_swab'
+    ],
+    'FILE_TYPES': [
+	{ 'name': 'fastq', 'ext': 'fastq.gz'},
+    ],
+    'ORIGINS': ['raw_short_read_dna'],
+    'RESULT_TYPES': [
+	{
+	    'NAME': 'raw_short_read_dna',
+	    'FILES': {
+		'read1': 'fastq',
+		'read2': 'fastq'
+	    },
+	},
+	{
+	    'NAME': 'clean_short_read_dna',
+	    'DEPENDENCIES': ['raw_short_read_dna'],
+	    'FILES': {
+		'read1': 'fastq',
+		'read2': 'fastq',
+		'fastqc':
+	    }
+	},
+	{
+	    'NAME': 'microbial_short_read_dna',
+	    'MODULE': 'group_cleaned_reads',
+	    'DEPENDENCIES': ['clean_short_read_dna'],
+	    'FILES': {
+		'read1': 'fastq',
+		'read2': 'fastq',
+	    }
+	},
+	{
+	    'NAME': 'macroscopic_short_read_dna',
+	    'MODULE': 'group_cleaned_reads',
+	    'DEPENDENCIES': ['clean_short_read_dna'],
+	    'FILES': {
+		'read1': 'fastq',
+		'read2': 'fastq',
+		'bam': 'bam'
+	    }
+	},
+	{
+	    'NAME': 'metaspades_assembled_contigs',
+	    'DEPENDENCIES': ['macroscopic_short_read_dna'],
+	    'FILES': {
+		'contigs': 'fasta',
+		'scaffolds': 'fasta',
+		'graph': 'fastg'
+	    }
+	},
+	// Macroscopic DNA
+	{
+	    'NAME': 'human_short_read_dna',
+	    'DEPENDENCIES': ['macroscopic_short_read_dna'],
+	    'FILES': {
+		'read1': 'fastq',
+		'read2': 'fastq',
+		'bam': 'bam',
+	    }
+	},
+	{
+	    'NAME': 'human_variants',
+	    'DEPENDENCIES': ['human_short_read_dna'],
+	    'FILES': {
+		'vcf': 'vcf'
+	    }
+	},
+	{
+	    'NAME': 'non_human_macroscopic_abundance',
+	    'DEPENDENCIES': ['macroscopic_short_read_dna'],
+	    'FILES': {}
+	},
+	// Short read DNA
+	{
+	    'NAME': 'microbial_dna_statistics',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'shortbred_antibiotic_resistance',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': { 'table' : 'tsv'}
+	},
+	{
+	    'NAME': 'crass_crispr_sequences',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'humann2_function_profiling',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'microbe_census_genome_estimates',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'kraken_taxonomy_profiling',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {},
+	},
+	{
+	    'NAME': 'mash_intersample_distances',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'LEVEL': 'GROUP',
+	    'FILES' :{
+		'sketch': ,
+		'distance_table': ,
+	    }
+	}
+    ]
+}
+	    
+	    
+	    
