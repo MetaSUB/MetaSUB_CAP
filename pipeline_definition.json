@@ -124,7 +124,10 @@
 	{
 	    'NAME': 'kraken_taxonomy_profiling',
 	    'DEPENDENCIES': ['microbial_short_read_dna'],
-	    'FILES': {},
+	    'FILES': {
+		'read_assignments':,
+		'mpa': 'mpa'
+	    },
 	},
 	{
 	    'NAME': 'mash_intersample_distances',

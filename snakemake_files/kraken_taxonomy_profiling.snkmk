@@ -1,0 +1,60 @@
+'''
+This is an example of a basic one-to-one result. It takes
+a previously computed result (in this case paired end reads with 
+macroscopic DNA removed) and computes another result.
+
+The only thing that needs to be specified here are the snakemake rules
+that produce the necessary output files. Each module (this is a module)
+needs to correspond to a result-definition given in 
+pipeline_definitions.json. This definition tells ModuleUltra what outputs
+it should expect.
+'''
+
+
+rule kraken_read_assignment:
+	input:
+            # these file patterns are automatically generated when
+            # the snakemake is preprocessed. The definitions used
+            # to generate can be found in pipeline_definition.json.
+	    reads1 = config['microbial_short_read_dna']['read1'] 
+            reads2 = config['microbial_short_read_dna']['read2']
+	output:
+	    readAssignments = config['kraken']['read_assignments']
+	threads: int( config['kraken']['threads'])
+          # User specified parameters like this can be stored in pipeline_config.json
+          # The parameters can be user supplied parameters or constants as necessary
+	version: config['kraken']['exc']['version']
+          # version isn't required but helps with provenance
+	params:
+		kraken = config['kraken']['exc']['filepath'],
+		db = config['kraken']['db']['filepath'],
+		job_name=config['JOB_NAME_PREFIX'] + 'kraken_read_assignment_{result_name}'
+	resources:
+		time=int(config['kraken']['time']),
+		n_gb_ram=int(config['kraken']['ram'])
+	run:
+	    cmd = (
+                '{params.kraken} --gzip-compressed --fastq-input --threads {threads} '
+	        '--paired --preload --db {params.db} {input.reads1} {input.reads2} '
+                '> {output.readAssignments}')
+	    shell(cmd)
+
+
+rule kraken_mpa_single:
+	input:
+		raw = config['kraken']['read_assignments']
+	output:
+		mpa = config['kraken']['mpa']
+	threads: 1
+	version: config['kraken']['mpa_exc']['version']
+	params:
+		kraken_mpa = config['kraken']['mpa_exc']['filepath'],
+		db = config['kraken']['db']['filepath'],
+		job_name=config['JOB_NAME_PREFIX'] + 'kraken_mpa_{result_name}'
+	resources:
+		time=1
+		n_gb_ram=5
+	shell:
+		'{params.kraken_mpa} {input.raw} --db {params.db} > {output.mpa}'
+
+
