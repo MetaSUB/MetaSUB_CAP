@@ -1,0 +1,145 @@
+{
+    'NAME': 'metasub_cap',
+    'VERSION': '0.0.1',
+
+    'SNAKEMAKE' :{
+	'DIR': 'snakemake_files',
+	'CONF': 'pipeline_config.json'
+    },
+
+    'REQUIREMENTS' :{
+    },
+    
+    'ORIGINS': ['raw_short_read_dna'],
+    'SAMPLE_TYPES' : [
+	'enviromental_swab',
+	'enviromental_air',
+	'enviromental_water',
+	'phone_swab'
+    ],
+    'FILE_TYPES': [
+	{ 'name': 'gz_fastq', 'ext': 'fastq.gz'},
+	'fastqc',
+	'bam',
+	'fasta',
+	'fastg',
+	'vcf',
+	'tsv',
+	{'name': 'gz_tsv', 'ext': 'tsv.gz'},
+	'json'
+    ],
+    'RESULT_TYPES': [
+	{
+	    'NAME': 'raw_short_read_dna',
+	    'FILES': {
+		'read1': 'gz_fastq',
+		'read2': 'gz_fastq'
+	    },
+	},
+	{
+	    'NAME': 'clean_short_read_dna',
+	    'DEPENDENCIES': ['raw_short_read_dna'],
+	    'FILES': {
+		'read1': 'gz_fastq',
+		'read2': 'gz_fastq',
+		'fastqc':
+	    }
+	},
+	{
+	    'NAME': 'microbial_short_read_dna',
+	    'MODULE': 'group_cleaned_reads',
+	    'DEPENDENCIES': ['clean_short_read_dna'],
+	    'FILES': {
+		'read1': 'gz_fastq',
+		'read2': 'gz_fastq',
+	    }
+	},
+	{
+	    'NAME': 'macroscopic_short_read_dna',
+	    'MODULE': 'group_cleaned_reads',
+	    'DEPENDENCIES': ['clean_short_read_dna'],
+	    'FILES': {
+		'read1': 'gz_fastq',
+		'read2': 'gz_fastq',
+		'bam': 'bam'
+	    }
+	},
+	{
+	    'NAME': 'metaspades_assembled_contigs',
+	    'DEPENDENCIES': ['macroscopic_short_read_dna'],
+	    'FILES': {
+		'contigs': 'fasta',
+		'scaffolds': 'fasta',
+		'graph': 'fastg'
+	    }
+	},
+	// Macroscopic DNA
+	{
+	    'NAME': 'human_short_read_dna',
+	    'DEPENDENCIES': ['macroscopic_short_read_dna'],
+	    'FILES': {
+		'read1': 'gz_fastq',
+		'read2': 'gz_fastq',
+		'bam': 'bam',
+	    }
+	},
+	{
+	    'NAME': 'human_variants',
+	    'DEPENDENCIES': ['human_short_read_dna'],
+	    'FILES': {
+		'vcf': 'vcf'
+	    }
+	},
+	{
+	    'NAME': 'non_human_macroscopic_abundance',
+	    'DEPENDENCIES': ['macroscopic_short_read_dna'],
+	    'FILES': {}
+	},
+	// Short read DNA
+	{
+	    'NAME': 'microbial_dna_statistics',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'shortbred_antibiotic_resistance',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': { 'table' : 'tsv'}
+	},
+	{
+	    'NAME': 'crass_crispr_sequences',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'humann2_function_profiling',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'microbe_census_genome_estimates',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {}
+	},
+	{
+	    'NAME': 'kraken_taxonomy_profiling',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'FILES': {
+		'read_assignments':,
+		'mpa': 'mpa'
+	    },
+	},
+	{
+	    'NAME': 'mash_intersample_distances',
+	    'DEPENDENCIES': ['microbial_short_read_dna'],
+	    'LEVEL': 'GROUP',
+	    'FILES' :{
+		'sketch': ,
+		'distance_table': ,
+	    }
+	}
+    ]
+}
+	    
+	    
+	    
