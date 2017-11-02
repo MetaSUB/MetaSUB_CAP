@@ -1,0 +1,56 @@
+{
+    "metaphlan2_taxonomy_profiling": {
+	"exc": {
+	    "filepath": "`which metaphlan2.py`",
+	    "version": "`metaphlan2.py --version`"
+	},
+	"threads": "2",
+	"time": "2",
+	"ram": "5"
+    },
+    "kraken_taxonomy_profiling": {
+	"exc": {
+	    "filepath": "`which kraken`",
+	    "version": "`kraken --version`"
+	},
+	"db": {
+	    "filepath" : ""
+	},
+	"mpa_exc": {
+	    "filepath": "",
+	    "version": ""
+	},
+	"threads": "2",
+	"time": "2",
+	"ram": "5"
+    },
+
+    "shortbred_amr_profiling": {
+	"exc": {
+	    "filepath": "`which shortbred_quantify.py`",
+	    "version": ""
+	},
+	"ref": {
+	    "filepath": ""
+	},
+	"threads": "2",
+	"time": "2",
+	"ram": "5"
+	
+    },
+    "filter_macrobial_dna": {
+	"bt2" : {
+	    "exc" : {
+		"filepath": "`which bowtie2`",
+		"version": "`bowtie2 --version"
+	    }
+	},
+	"db" : {
+	    "filepath" : ""
+	},
+	"threads": "6",
+	"time": "10",
+	"ram": "10"
+    }
+}
+	    
