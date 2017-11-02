@@ -59,6 +59,7 @@ If your module needs custom scripts you may add them to the scripts directory he
 **You should add your module on a seperate branch named** `module.<module_name>`
 
 How to make a branch
+
 .. code-block:: bash
    
    cd /path/to/MetaSUB_CAP
