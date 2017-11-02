@@ -56,11 +56,30 @@ Most modules will need extra parameters at runtime. These may be stored in pipel
 
 If your module needs custom scripts you may add them to the scripts directory here. You can reference this directory in your modules as config['pipeline_dir']['script_dir']. We are working on a protocol to download and store large databases but this is not yet complete.
 
+**You should add your module on a seperate branch named `module.<module_name>`**
+
 Planned Modules
 ----------------
 
 - Humann2
-- CRASS
+- Human Variant Calling
+- Read Statistics
+- Proportions Classified
+- Intrasample Diversity
+- Comparisons to HMP
+- Microbe Census (Avergae Genome Size, Genome Counts)
+- Microbe DB Annotations
+- CLARK for taxonomy profiling
+- Taxonomy Normalisation using genome counts
+- MUSICc
+- CRASS (CRISPRs)
+- Blast AMRs
+- Blast Methyltransferases
+- MICA + NR
+- MEGARes
+- StrainPhlan
+
+
 
 Finished Modules
 ----------------
@@ -69,6 +88,8 @@ Finished Modules
 - Metaphlan2
 - MASH
 - microbial/macrobial filtering
+- fastqc
+- multiqc
 
 Module Dependencies
 -------------------
