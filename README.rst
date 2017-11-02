@@ -39,7 +39,9 @@ Adding Modules
 
 Roughly, a module is meant to encapsulate a single program (e.g. kraken or metaphlan). Each module should consist of 1-3 snakemake rules and a bit of metadata.
 
-In order to add a module to the CAP you need to write a snakemake rule and a bit of metadata describing the rule. You can check out snakemake_files/kraken_taxonomy_profiling.snkmk and snakemake_files/mash_intersample_dists.snkmk as examples. In particular you need to write a definition of the type of _result_ you expect your module to produce. This definition is a small JSON object that defines:
+In order to add a module to the CAP you need to write a snakemake rule and a bit of metadata describing the rule. You can check out snakemake_files/kraken_taxonomy_profiling.snkmk and snakemake_files/mash_intersample_dists.snkmk as examples. In particular you need to write a definition of the type of _result_ you expect your module to produce. 
+
+This definition is a small JSON object that defines:
  - The name of the module
  - The names of the files in the modules
  - The types of files in the module (you may also define your own file types)
