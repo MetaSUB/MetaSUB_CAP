@@ -1,0 +1,18 @@
+{
+    'FILENAME_TEMPLATE': '{result_dir}/{result_name}.{result_type}.{result_file}.{file_ext}',
+
+    'filter_short_read_dna' : {
+        'exc' : '',
+        'db' : '',
+    },
+    
+    'kraken' : {
+        'exc' : 'kraken',
+        'mpa-exc' : '',
+        'db' : '',
+    },
+
+    'kraken_distance' : {
+        'exc' : '',
+    }
+}
