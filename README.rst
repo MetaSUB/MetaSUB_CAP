@@ -56,14 +56,27 @@ Most modules will need extra parameters at runtime. These may be stored in pipel
 
 If your module needs custom scripts you may add them to the scripts directory here. You can reference this directory in your modules as config['pipeline_dir']['script_dir']. We are working on a protocol to download and store large databases but this is not yet complete.
 
+Planned Modules
+----------------
 
-Requirements
-^^^^^^^^^^^^
+- Humann2
+- CRASS
 
-Compatibility
--------------
+Finished Modules
+----------------
+
+- Kraken
+- Metaphlan2
+- MASH
+- microbial/macrobial filtering
+
+Module Dependencies
+-------------------
+
+We are building a system so that every pipeline can be run in its own conda environement. In principle modules can use any software on Conda or PyPi. Projects on github or bitbucket are also fine so long as they can be installed by script.
 
 Licence
 -------
 
+MIT License
 
