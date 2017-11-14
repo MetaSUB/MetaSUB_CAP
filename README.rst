@@ -68,15 +68,12 @@ How to make a branch
 Planned Modules
 ----------------
 
-<<<<<<< HEAD
-=======
 Feel free to add to this list
 
 - Human Variant Calling
 - Read Statistics
 - Proportions Classified
 - Intrasample Diversity
-- Comparisons to HMP
 - Microbe DB Annotations
 - CLARK for taxonomy profiling
 - Taxonomy Normalisation using genome counts
@@ -101,6 +98,7 @@ Finished Modules
 - microbial/macrobial filtering
 - fastqc
 - multiqc
+- Comparisons to HMP  
 
 Module Dependencies
 -------------------
