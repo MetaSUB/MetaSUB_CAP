@@ -59,7 +59,24 @@
 	    "NAME": "metaphlan2_taxonomy_profiling",
 	    "DEPENDENCIES": ["microbial_short_read_dna"],
 	    "FILES": { "mpa": "mpa"}
+	},
+	{
+	    "NAME": "microbe_census",
+	    "DEPENDENCIES": ["microbial_short_read_dna"],
+	    "FILES": {"stats": "txt"}
+	},
+	{
+	    "NAME": "humann2_functional_profiling",
+	    "DEPENDENCIES": ["microbial_short_read_dna"],
+	    "FILES": {
+		"m8": "m8",
+		"genes": "tsv",
+		"path_abunds": "tsv",
+		"path_cov":"tsv"
+	    }
 	}
+
+	
     ]
 }
 	    

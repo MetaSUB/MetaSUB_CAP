@@ -61,13 +61,11 @@ If your module needs custom scripts you may add them to the scripts directory he
 Planned Modules
 ----------------
 
-- Humann2
 - Human Variant Calling
 - Read Statistics
 - Proportions Classified
 - Intrasample Diversity
 - Comparisons to HMP
-- Microbe Census (Avergae Genome Size, Genome Counts)
 - Microbe DB Annotations
 - CLARK for taxonomy profiling
 - Taxonomy Normalisation using genome counts
@@ -84,6 +82,8 @@ Planned Modules
 Finished Modules
 ----------------
 
+- Humann2
+- Microbe Census (Avergae Genome Size, Genome Counts) 
 - Kraken
 - Metaphlan2
 - MASH

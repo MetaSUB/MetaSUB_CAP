@@ -24,7 +24,34 @@
 	"time": "2",
 	"ram": "5"
     },
-
+    "humann2_functional_profiling": {
+	"exc": {
+	    "filepath":"`which humann2`",
+	    "version":"`humann2 --version`"
+	},
+	"db": {
+	    "filepath":
+	},
+	"dmnd": {
+	    "time": "10",
+	    "ram": "64",
+	    "threads": "10",
+	    "block_size": "6"	    
+	},
+	"threads": "1",
+	"time": "1",
+	"ram": "4"
+    },
+    "microbe_census": {
+	"threads": "6",
+	"time": "4",
+	"ram": "10",
+	"exc": {
+	    "filepath" : "`which run_microbe_census.py`"
+	    "version": "`run_microbe_census.py --version`"
+	}
+	
+    },	
     "shortbred_amr_profiling": {
 	"exc": {
 	    "filepath": "`which shortbred_quantify.py`",
