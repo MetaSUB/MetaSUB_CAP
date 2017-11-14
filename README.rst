@@ -79,12 +79,7 @@ Feel free to add to this list
 - Taxonomy Normalisation using genome counts
 - MUSICc
 - CRASS (CRISPRs)
-- Blast AMRs
-- Blast Methyltransferases
 - MICA + NR
-- MEGARes
-- StrainPhlan
-
 
 
 Finished Modules
@@ -99,7 +94,10 @@ Finished Modules
 - fastqc
 - multiqc
 - Comparisons to HMP  
-
+- Map to AMRs
+- Map to Methyltransferases
+- Resistome MEGARes
+  
 Module Dependencies
 -------------------
 

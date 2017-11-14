@@ -86,6 +86,16 @@
 	"threads": "6",
 	"time": "10",
 	"ram": "10"
-    }
+    },
+    "align_to_methyltransferases": {
+	"threads": "6",
+	"time": "10",
+	"ram":"10"
+    },
+    "align_to_amr_genes": {
+	"threads": "6",
+	"time": "10",
+	"ram":"10"
+    }	
 }
 	    

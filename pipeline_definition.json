@@ -108,7 +108,18 @@
 		"path_abunds": "tsv",
 		"path_cov":"tsv"
 	    }
+	},
+	{
+	    "NAME" : "align_to_methyltransferases",
+	    "DEPENDENCIES": ["microbial_short_read_dna"],
+	    "FILES": { "bam": "bam"}
+	},
+	{
+	    "NAME" : "align_to_amr_genes",
+	    "DEPENDENCIES": ["microbial_short_read_dna"],
+	    "FILES": { "bam": "bam"}
 	}
+	
 
 	
     ]
