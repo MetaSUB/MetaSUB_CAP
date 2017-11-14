@@ -56,10 +56,21 @@ Most modules will need extra parameters at runtime. These may be stored in pipel
 
 If your module needs custom scripts you may add them to the scripts directory here. You can reference this directory in your modules as config['pipeline_dir']['script_dir']. We are working on a protocol to download and store large databases but this is not yet complete.
 
-**You should add your module on a seperate branch named `module.<module_name>`**
+**You should add your module on a seperate branch named** `module.<module_name>`
+
+How to make a branch
+
+.. code-block:: bash
+   
+   cd /path/to/MetaSUB_CAP
+   git checkout -b module.<module_name>
 
 Planned Modules
 ----------------
+
+<<<<<<< HEAD
+=======
+Feel free to add to this list
 
 - Human Variant Calling
 - Read Statistics
