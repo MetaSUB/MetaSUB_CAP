@@ -65,13 +65,21 @@
 	"ram": "5"
 	
     },
+    "resistome_amrs" : {
+	"threads": "4",
+	"thresh" : "80",
+	"exc" : {
+	    "filepath" : "`which resistome`"
+	}
+    },
+    "bt2" : {
+	"exc" : {
+	    "filepath": "`which bowtie2`",
+	    "version": "`bowtie2 --version"
+	}
+    },
+
     "filter_macrobial_dna": {
-	"bt2" : {
-	    "exc" : {
-		"filepath": "`which bowtie2`",
-		"version": "`bowtie2 --version"
-	    }
-	},
 	"db" : {
 	    "filepath" : ""
 	},

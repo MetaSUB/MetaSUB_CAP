@@ -33,7 +33,7 @@
 	},
 	{
 	    "NAME": "filter_macrobial_dna",
-	    "DEPENDENCIES": ["raw_short_read_dna"],
+	    "DEPENDENCIES": ["filter_macrobial_dna"],
 	    "FILES": {
 		"macrobial_read1": "gz_fastq",
 		"macrobial_read2": "gz_fastq",
@@ -43,9 +43,31 @@
 	    }
 	},
 	{
+	    "NAME": "filter_human_dna",
+	    "DEPENDENCIES": ["raw_short_read_dna"],
+	    "FILES": {
+		"human1": "gz_fastq",
+		"human2": "gz_fastq",
+		"non_human1": "gz_fastq",
+		"non_human2": "gz_fastq",
+		"bam": "bam"
+	    }
+	},
+	{
 	    "NAME": "shortbred_amr_profiling",
 	    "DEPENDENCIES": ["microbial_short_read_dna"],
 	    "FILES": { "table" : "tsv"}
+	},
+	{
+	    "NAME": "resistome_amrs",
+	    "DEPENDENCIES": ["microbial_short_read_dna"],
+	    "FILES": {
+		"sam" : "sam",
+		"gene" : "tsv",
+		"group" : "tsv",
+		"classus" : "tsv",
+		"mech" : "tsv"
+	    }
 	},
 	{
 	    "NAME": "kraken_taxonomy_profiling",
