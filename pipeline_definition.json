@@ -5,6 +5,9 @@
     "DIR": "snakemake_files",
     "CONF": "pipeline_config.json"
   },
+  "PACKAGE_MEGA": {
+    "RECIPE_DIR": "recipes"
+  },
   "REQUIREMENTS": {},
   "ORIGINS": [
     "raw_short_read_dna"
