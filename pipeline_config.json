@@ -2,7 +2,7 @@
   "metaphlan2_taxonomy_profiling": {
     "exc": {
       "filepath": "`which metaphlan2.py`",
-      "version": "`metaphlan2.py --version`"
+      "version": "`metaphlan2.py --version 2>&1`"
     },
     "threads": "2",
     "time": "2",
@@ -17,8 +17,8 @@
       "filepath": "`packagemega database minikraken.db.dir`"
     },
     "mpa_exc": {
-      "filepath": "`which kraken-mpa`",
-      "version": "kraken-mpa --version"
+      "filepath": "`which kraken-mpa-report`",
+      "version": "`kraken-mpa-report --version`"
     },
     "threads": "2",
     "time": "2",
@@ -27,7 +27,7 @@
   "humann2_functional_profiling": {
     "exc": {
       "filepath": "`which humann2`",
-      "version": "`humann2 --version`"
+      "version": "`humann2 --version 2>&1`"
     },
     "db": {
       "filepath": "`packagemega database uniref90.dmnd.0`"
@@ -48,7 +48,7 @@
     "ram": "10",
     "exc": {
       "filepath": "`which run_microbe_census.py`",
-      "version": "`run_microbe_census.py --version`"
+      "version": "`run_microbe_census.py --version 2>&1`"
     }
   },
   "shortbred_amr_profiling": {

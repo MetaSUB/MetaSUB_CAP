@@ -1,5 +1,5 @@
 from packagemega import BaseRecipe, SourceFile, ConstructedFile
-
+from glob import glob
 
 class HG38UCSCGenomeRecipe(BaseRecipe):
     '''
@@ -35,6 +35,8 @@ class HG38UCSCGenomeRecipe(BaseRecipe):
                             'fasta',
                             self.source.filepath())
         self.bt2.resolve()
+        bt2Indices = glob(self.bt2.filepath() + '*')
+        print(bt2Indices)
         self.repo.saveFiles(self,
                             'bt2',
-                            self.bt2.filepath())
+                            *bt2Indices)
