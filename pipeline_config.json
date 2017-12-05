@@ -1,101 +1,97 @@
 {
-    "metaphlan2_taxonomy_profiling": {
-	"exc": {
-	    "filepath": "`which metaphlan2.py`",
-	    "version": "`metaphlan2.py --version`"
-	},
-	"threads": "2",
-	"time": "2",
-	"ram": "5"
+  "metaphlan2_taxonomy_profiling": {
+    "exc": {
+      "filepath": "`which metaphlan2.py`",
+      "version": "`metaphlan2.py --version`"
     },
-    "kraken_taxonomy_profiling": {
-	"exc": {
-	    "filepath": "`which kraken`",
-	    "version": "`kraken --version`"
-	},
-	"db": {
-	    "filepath" : ""
-	},
-	"mpa_exc": {
-	    "filepath": "",
-	    "version": ""
-	},
-	"threads": "2",
-	"time": "2",
-	"ram": "5"
+    "threads": "2",
+    "time": "2",
+    "ram": "5"
+  },
+  "kraken_taxonomy_profiling": {
+    "exc": {
+      "filepath": "`which kraken`",
+      "version": "`kraken --version`"
     },
-    "humann2_functional_profiling": {
-	"exc": {
-	    "filepath":"`which humann2`",
-	    "version":"`humann2 --version`"
-	},
-	"db": {
-	    "filepath":
-	},
-	"dmnd": {
-	    "time": "10",
-	    "ram": "64",
-	    "threads": "10",
-	    "block_size": "6"	    
-	},
-	"threads": "1",
-	"time": "1",
-	"ram": "4"
+    "db": {
+      "filepath": "`packagemega database minikraken.db.0`"
     },
-    "microbe_census": {
-	"threads": "6",
-	"time": "4",
-	"ram": "10",
-	"exc": {
-	    "filepath" : "`which run_microbe_census.py`"
-	    "version": "`run_microbe_census.py --version`"
-	}
-	
-    },	
-    "shortbred_amr_profiling": {
-	"exc": {
-	    "filepath": "`which shortbred_quantify.py`",
-	    "version": ""
-	},
-	"ref": {
-	    "filepath": ""
-	},
-	"threads": "2",
-	"time": "2",
-	"ram": "5"
-	
+    "mpa_exc": {
+      "filepath": "`which kraken-mpa`",
+      "version": "kraken-mpa --version"
     },
-    "resistome_amrs" : {
-	"threads": "4",
-	"thresh" : "80",
-	"exc" : {
-	    "filepath" : "`which resistome`"
-	}
+    "threads": "2",
+    "time": "2",
+    "ram": "5"
+  },
+  "humann2_functional_profiling": {
+    "exc": {
+      "filepath": "`which humann2`",
+      "version": "`humann2 --version`"
     },
-    "bt2" : {
-	"exc" : {
-	    "filepath": "`which bowtie2`",
-	    "version": "`bowtie2 --version"
-	}
+    "db": {
+      "filepath": "`packagemega database uniref90.dmnd.0`"
     },
-
-    "filter_macrobial_dna": {
-	"db" : {
-	    "filepath" : ""
-	},
-	"threads": "6",
-	"time": "10",
-	"ram": "10"
+    "dmnd": {
+      "time": "10",
+      "ram": "64",
+      "threads": "10",
+      "block_size": "6"
     },
-    "align_to_methyltransferases": {
-	"threads": "6",
-	"time": "10",
-	"ram":"10"
+    "threads": "1",
+    "time": "1",
+    "ram": "4"
+  },
+  "microbe_census": {
+    "threads": "6",
+    "time": "4",
+    "ram": "10",
+    "exc": {
+      "filepath": "`which run_microbe_census.py`",
+      "version": "`run_microbe_census.py --version`"
+    }
+  },
+  "shortbred_amr_profiling": {
+    "exc": {
+      "filepath": "`which shortbred_quantify.py`",
+      "version": ""
     },
-    "align_to_amr_genes": {
-	"threads": "6",
-	"time": "10",
-	"ram":"10"
-    }	
+    "ref": {
+      "filepath": "packagemega database card.shortbred.0"
+    },
+    "threads": "2",
+    "time": "2",
+    "ram": "5"
+  },
+  "resistome_amrs": {
+    "threads": "4",
+    "thresh": "80",
+    "exc": {
+      "filepath": "`which resistome`"
+    }
+  },
+  "bt2": {
+    "exc": {
+      "filepath": "`which bowtie2`",
+      "version": "`bowtie2 --version"
+    }
+  },
+  "filter_macrobial_dna": {
+    "db": {
+      "filepath": "`packagemega database common_macrobial.bt2.prefix`"
+    },
+    "threads": "6",
+    "time": "10",
+    "ram": "10"
+  },
+  "align_to_methyltransferases": {
+    "threads": "6",
+    "time": "10",
+    "ram": "10"
+  },
+  "align_to_amr_genes": {
+    "threads": "6",
+    "time": "10",
+    "ram": "10"
+  }
 }
-	    
