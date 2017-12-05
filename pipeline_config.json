@@ -14,7 +14,7 @@
       "version": "`kraken --version`"
     },
     "db": {
-      "filepath": "`packagemega database minikraken.db.0`"
+      "filepath": "`packagemega database minikraken.db.dir`"
     },
     "mpa_exc": {
       "filepath": "`which kraken-mpa`",
@@ -57,7 +57,7 @@
       "version": ""
     },
     "ref": {
-      "filepath": "packagemega database card.shortbred.0"
+      "filepath": "packagemega database card.sbred.0"
     },
     "threads": "2",
     "time": "2",
@@ -79,6 +79,14 @@
   "filter_macrobial_dna": {
     "db": {
       "filepath": "`packagemega database common_macrobial.bt2.prefix`"
+    },
+    "threads": "6",
+    "time": "10",
+    "ram": "10"
+  },
+  "filter_human_dna": {
+    "db": {
+      "filepath": "`packagemega database hg38_ucsc.bt2.prefix`"
     },
     "threads": "6",
     "time": "10",

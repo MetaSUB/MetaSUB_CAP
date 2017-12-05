@@ -14,11 +14,11 @@ rule align_to_methyls:
         n_gb_ram=int(config['align_to_methyltransferases']['ram'])
     run:
         cmd = (' {params.bt2} '
-	       '-p {threads} '
-	       '--very-sensitive '
-	       ' -x {input.db} '
-	       ' -1 {input.reads1} '
-	       ' -2 {input.reads2} '
-	       '| samtools view -F 4 -b '
-	       '> {output.bam} ')
+           '-p {threads} '
+           '--very-sensitive '
+           ' -x {input.db} '
+           ' -1 {input.reads1} '
+           ' -2 {input.reads2} '
+           '| samtools view -F 4 -b '
+           '> {output.bam} ')
         shell(cmd)

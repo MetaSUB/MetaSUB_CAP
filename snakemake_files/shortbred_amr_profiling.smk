@@ -18,7 +18,7 @@ rule shortbred_make_amr_table:
         cmd = ('{params.shortbred} '
                '--markers {params.ref} '
                '--wgs {input.reads1} {input.reads2} '
-	       '--results {output.table} '
+           '--results {output.table} '
                '--threads {threads} ')
         shell(cmd)
 

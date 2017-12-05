@@ -34,7 +34,7 @@ rule kraken_read_assignment:
     run:
         cmd = (
             '{params.kraken} --gzip-compressed --fastq-input --threads {threads} '
-	    '--paired --preload --db {params.db} {input.reads1} {input.reads2} '
+        '--paired --preload --db {params.db} {input.reads1} {input.reads2} '
             '> {output.readAssignments}')
         shell(cmd)
 

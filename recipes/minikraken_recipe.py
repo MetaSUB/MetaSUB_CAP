@@ -1,4 +1,5 @@
 from packagemega import BaseRecipe, SourceFile, ConstructedFile
+import os.path
 
 
 class MiniKrakenRecipe(BaseRecipe):
@@ -8,7 +9,7 @@ class MiniKrakenRecipe(BaseRecipe):
 
     def __init__(self):
         super(MiniKrakenRecipe, self).__init__()
-        self.source = SourceFile(self.repo, "minikraken.db")
+        self.source = SourceFile(self.repo, "minikraken-db")
 
     def name(self):
         return 'minikraken'
@@ -18,11 +19,16 @@ class MiniKrakenRecipe(BaseRecipe):
 
     def resultSchema(self):
         return {
-            'minikraken': 'kraken-db'
+            'minikraken': ['kraken-db'] * 4
         }
 
     def makeRecipe(self):
         self.source.resolve()
-        self.repo.saveFiles(self,
-                            'minikraken',
-                            self.source.filepath())
+        dbIdx = os.path.join(self.source.filepath(), 'database.idx')
+        kDb = os.path.join(self.source.filepath(), 'database.kdb')
+        taxa = os.path.join(self.source.filepath(), 'taxonomy')
+        taxaNames = os.path.join(taxa, 'names.dmp')
+        taxaNodes = os.path.join(taxa, 'nodes.dmp')
+        fs = [dbIdx, kDb, taxaNames, taxaNodes]
+
+        self.repo.saveFiles(self, 'minikraken', fs)

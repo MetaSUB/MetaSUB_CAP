@@ -1,9 +1,8 @@
 
 
-
 def replaceDiff(c, s1, s2):
     out = ''
-    for c1, c2 in zip(s1,s2):
+    for c1, c2 in zip(s1, s2):
         if c1 == c2:
             out += c1
         else:
@@ -13,8 +12,8 @@ def replaceDiff(c, s1, s2):
 
 rule filter_macrobial_dna:
     input:
-        reads1 = config['filter_human_dna']['non_human1']
-        reads2 = config['filter_human_dna']['non_human2']
+        reads1 = config['filter_human_dna']['nonhuman_read1']
+        reads2 = config['filter_human_dna']['nonhuman_read2']
         db = config['databases']['nonhuman_macrobes']['bt2']
     output:
         macrobial_reads1 = config['filter_macrobial_dna']['macrobial_read1'],
@@ -23,23 +22,23 @@ rule filter_macrobial_dna:
         microbial_reads2 = config['filter_macrobial_dna']['microbial_read2'],
         bam = config['filter_macrobial_dna']['bam']
     params:
-        bt2=config['bt2']['exc']['filepath'],
+        bt2 = config['bt2']['exc']['filepath'],
     threads: int(config['filter_macrobial_dna']['threads'])
     resources:
-        time=int(config['filter_macrobial_dna']['time']),
-        n_gb_ram=int(config['filter_macrobial_dna']['ram'])
+        time = int(config['filter_macrobial_dna']['time']),
+        n_gb_ram = int(config['filter_macrobial_dna']['ram'])
     run:
         macrobialPattern = replaceDiff('%', output.macrobial_reads1, output.macrobial_reads2)
         microbialPattern = replaceDiff('%', output.microbial_reads1, output.microbial_reads2)
         cmd = (' {params.bt2} '
-	       '-p {threads} '
-	       '--very-fast '
-	       ' --al-conc-gz ' + macrobialPattern,
-	       ' --un-conc-gz ' + microbialPattern,
-	       ' -x {input.db} '
-	       ' -1 {input.reads1} '
-	       ' -2 {input.reads2} '
-	       '| samtools view -F 4 -b '
-	       '> {output.bam} ')
+           '-p {threads} '
+           '--very-fast '
+           ' --al-conc-gz ' + macrobialPattern,
+           ' --un-conc-gz ' + microbialPattern,
+           ' -x {input.db} '
+           ' -1 {input.reads1} '
+           ' -2 {input.reads2} '
+           '| samtools view -F 4 -b '
+           '> {output.bam} ')
         cmd = ''.join(cmd)
         shell(cmd)

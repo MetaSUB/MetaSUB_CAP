@@ -15,13 +15,13 @@ rule align_reads_to_megares:
         n_gb_ram=int(config['resistome_amrs']['bt2_ram'])
     run:
         cmd = (' {params.bt2} '
-	       '-p {threads} '
-	       '--very-sensitive '
-	       ' -x {input.db} '
-	       ' -1 {input.reads1} '
-	       ' -2 {input.reads2} '
-	       '| samtools view -F 4  '
-	       '> {output.sam} ')
+         '-p {threads} '
+         '--very-sensitive '
+         ' -x {input.db} '
+         ' -1 {input.reads1} '
+         ' -2 {input.reads2} '
+         '| samtools view -F 4  '
+         '> {output.sam} ')
         shell(cmd)
 
 

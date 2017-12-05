@@ -13,31 +13,30 @@ rule mash_sketch:
         # It gets every file matching the pattern from the group being processed
         allReads1 = expandGroup( config['filter_microbial_dna']['microbial_reads1'])
     output:
-	sketch = config['mash_intersample_distances']['sketch'],
+        sketch = config['mash_intersample_distances']['sketch'],
     threads: 1
     params:
-	exc=config['mash']['exc']['filepath'],
-	job_name=config['JOB_NAME_PREFIX'] + 'mash_sketch_{group_name}',
+        exc=config['mash']['exc']['filepath'],
+        job_name=config['JOB_NAME_PREFIX'] + 'mash_sketch_{group_name}',
     resources:
-	time=1,
-	n_gb_ram=10
+        time = 1,
+        n_gb_ram = 10
     run:
         allReads = ' '.join(input.allReads1)
-	cmd = '{params.exc} sketch -s 10000000 -o {output.sketch} '+allReads
-	shell(cmd)
+        cmd = '{params.exc} sketch -s 10000000 -o {output.sketch} '+allReads
+        shell(cmd)
 
 
 rule mash_dists:
     input:
-	sketch= config['mash_intersample_dists']['sketch']
+        sketch= config['mash_intersample_dists']['sketch']
     output:
-	distTable=config['mash_intersample_dists']['distance_table']
+        distTable=config['mash_intersample_dists']['distance_table']
     resources:
-	time=1,
-	n_gb_ram=10
+        time=1,
+        n_gb_ram=10
     threads: 1
     params:
-	exc=config['mash']['exc']['filepath'],
-	job_name=config['JOB_NAME_PREFIX'] + 'mash_dist_{group_name}',
+        exc=config['mash']['exc']['filepath'],
     shell:
-	'{params.exc} dist {input.sketch} {input.sketch} > {output.distTable}'
+        '{params.exc} dist {input.sketch} {input.sketch} > {output.distTable}'

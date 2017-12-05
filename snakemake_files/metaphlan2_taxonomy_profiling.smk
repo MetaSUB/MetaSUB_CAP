@@ -18,7 +18,7 @@ rule metaphlan2_make_mpa:
                '--input_type fastq '
                '-s {output.sam} '
                '{input.reads1},{input.reads2} '
-	       '--nproc {threads} '
+         '--nproc {threads} '
                '> {output.mpa}')
         shell(cmd)
 
