@@ -36,7 +36,6 @@ class HG38UCSCGenomeRecipe(BaseRecipe):
                             self.source.filepath())
         self.bt2.resolve()
         bt2Indices = glob(self.bt2.filepath() + '*')
-        print(bt2Indices)
         self.repo.saveFiles(self,
                             'bt2',
                             *bt2Indices)
