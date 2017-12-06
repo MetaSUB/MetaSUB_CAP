@@ -18,8 +18,15 @@
       "name": "gz_fastq",
       "ext": "fastq.gz"
     },
+      {
+	  "name": "minsketch",
+	  "ext": "msh"
+      },
     "fastqc",
     "bam",
+      "sam",
+      "txt",
+      "m8",
     {
       "name": "mpa",
       "ext": "mpa.tsv"
@@ -27,7 +34,8 @@
     "fasta",
     "fastg",
     "vcf",
-    "tsv",
+      "tsv",
+      "csv",
     {
       "name": "gz_tsv",
       "ext": "tsv.gz"
@@ -100,13 +108,29 @@
         "mpa": "mpa"
       }
     },
+      {
+	  "NAME": "mash_sketch",
+	  "DEPENDENCIES": ["microbial_short_read_dna"],
+	  "FILES": {
+	      "sketch": "minsketch"
+	  }
+      },
+      {
+	  "NAME": "mash_intersample_dists",
+	  "LEVEL": "GROUP",
+	  "DEPENDENCIES": ["mash_sketch"],
+	  "FILES": {
+	      "distance_table": "csv"
+	  }
+      },
     {
       "NAME": "metaphlan2_taxonomy_profiling",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
       ],
       "FILES": {
-        "mpa": "mpa"
+          "mpa": "mpa",
+	  "sam": "sam"
       }
     },
     {

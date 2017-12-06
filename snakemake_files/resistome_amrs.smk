@@ -4,7 +4,7 @@ rule align_reads_to_megares:
     input:
         reads1 = config['filter_macrobial_dna']['microbial_read1'],
         reads2 = config['filter_macrobial_dna']['microbial_read2'],
-        db = config['databases']['megares_amrs']['bt2']
+        db = config['resistome_amrs']['db']['bt2']
     output:
         sam = config['resistome_amrs']['sam']
     threads: int( config['resistome_amrs']['threads'])
@@ -28,8 +28,8 @@ rule align_reads_to_megares:
 rule analyze_with_resistome:
     input:
         sam = config['resistome_amrs']['sam'],
-        fasta = config['databases']['megares_amrs']['fasta']
-        annot =config['databases']['megares_amrs']['annotations']
+        fasta = config['resistome_amrs']['db']['fasta'],
+        annot =config['resistome_amrs']['db']['annotations']
     output:
         gene = config['resistome_amrs']['gene'],
         group = config['resistome_amrs']['group'],

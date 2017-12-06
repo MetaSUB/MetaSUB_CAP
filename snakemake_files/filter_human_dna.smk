@@ -12,9 +12,9 @@ def replaceDiff(c, s1, s2):
 
 rule filter_human_dna:
     input:
-        reads1 = config['filter_human_dna']['non_human1']
-        reads2 = config['filter_human_dna']['non_human2']
-        db = config['databases']['nonhuman_macrobes']['bt2']
+        reads1 = getOriginResultFiles(config, "raw_short_read_dna", "read1"),
+        reads2 = getOriginResultFiles(config, "raw_short_read_dna", "read2"),
+        db = config['filter_human_dna']['db']['filepath']
     output:
         human_reads1 = config['filter_human_dna']['human_read1'],
         human_reads2 = config['filter_human_dna']['human_read2'],

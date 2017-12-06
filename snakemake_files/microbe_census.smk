@@ -17,7 +17,7 @@ rule microbe_census:
         cmd = ('{params.mic_census} '
                    '-t {threads} '
                    '{input.reads1},{input.reads2} '
-                   '{output.main}'
+                   '{output.main}')
         shell(cmd)
 
 

@@ -11,19 +11,25 @@
   "kraken_taxonomy_profiling": {
     "exc": {
       "filepath": "`which kraken`",
-      "version": "`kraken --version`"
+      "version": "`kraken --version | tr '\n' ' '`"
     },
     "db": {
       "filepath": "`packagemega database minikraken.db.dir`"
     },
     "mpa_exc": {
       "filepath": "`which kraken-mpa-report`",
-      "version": "`kraken-mpa-report --version`"
+      "version": "`kraken-mpa-report --version | tr '\n' ' '`"
     },
     "threads": "2",
     "time": "2",
     "ram": "5"
   },
+    "mash": {
+	"exc": {
+	    "filepath": "`which mash`",
+	    "version": "`mash --version`"
+	}
+    },
   "humann2_functional_profiling": {
     "exc": {
       "filepath": "`which humann2`",
@@ -68,7 +74,14 @@
     "thresh": "80",
     "exc": {
       "filepath": "`which resistome`"
-    }
+    },
+      "db": {
+	  "bt2": "",
+	  "fasta": "",
+	  "annotations": ""
+      },
+      "bt2_time": "2",
+      "bt2_ram": "10"
   },
   "bt2": {
     "exc": {
@@ -76,6 +89,12 @@
       "version": "`bowtie2 --version"
     }
   },
+    "diamond": {
+	"exc": {
+	    "filepath": "`which diamond`",
+	    "version": "`diamond --version`"
+	}
+    },
   "filter_macrobial_dna": {
     "db": {
       "filepath": "`packagemega database common_macrobial.bt2.prefix`"
@@ -95,11 +114,17 @@
   "align_to_methyltransferases": {
     "threads": "6",
     "time": "10",
-    "ram": "10"
+      "ram": "10",
+      "db":{
+	  "bt2": ""
+      }
   },
   "align_to_amr_genes": {
     "threads": "6",
     "time": "10",
-    "ram": "10"
+      "ram": "10",
+      "card_amrs": {
+	  "bt2": ""
+      }
   }
 }

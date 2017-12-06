@@ -12,9 +12,9 @@ def replaceDiff(c, s1, s2):
 
 rule filter_macrobial_dna:
     input:
-        reads1 = config['filter_human_dna']['nonhuman_read1']
-        reads2 = config['filter_human_dna']['nonhuman_read2']
-        db = config['databases']['nonhuman_macrobes']['bt2']
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'],
+        db = config['filter_macrobial_dna']['db']['filepath']
     output:
         macrobial_reads1 = config['filter_macrobial_dna']['macrobial_read1'],
         macrobial_reads2 = config['filter_macrobial_dna']['macrobial_read2'],

@@ -8,7 +8,7 @@ rule humann2_make_blastm8:
         dmnd_db = config['humann2_functional_profiling']['db']['filepath']
     output:
         m8 = config['humann2_functional_profiling']['m8']
-        threads: int( config['humann2_functional_profiling']['dmnd']['threads'])
+    threads: int( config['humann2_functional_profiling']['dmnd']['threads'])
     params:
         dmnd = config['diamond']['exc']['filepath'],
         bsize=int( config['humann2_functional_profiling']['dmnd']['block_size']),
@@ -21,16 +21,16 @@ rule humann2_make_blastm8:
                '-d {input.dmnd_db} '
                '-q {input.reads1} '
                '--block-size {params.bsize} '
-               '> {output.m8} ' 
-    shell(cmd)
+               '> {output.m8} ') 
+    	shell(cmd)
 
 rule humann2_make_summaries:
     input:
         m8 = config['humann2_functional_profiling']['m8']
     output:
-        genes = config['humann2_functional_profiling']['gene_families'],
-        path_abunds = config['humann2_functional_profiling']['path_abundance'],
-        path_cov  = config['humann2_functional_profiling']['path_coverage']
+        genes = config['humann2_functional_profiling']['genes'],
+        path_abunds = config['humann2_functional_profiling']['path_abunds'],
+        path_cov  = config['humann2_functional_profiling']['path_cov']
     threads: int( config['humann2_functional_profiling']['threads'])
     params:
         exc=config['humann2_functional_profiling']['exc']['filepath'],
@@ -40,9 +40,9 @@ rule humann2_make_summaries:
         n_gb_ram=int(config['humann2_functional_profiling']['ram'])
     run:
         odir = params.sample_name + '_humann2'
-        genes =
-        abunds
-        covs
+        genes = 'foo'
+        abunds = 'bar'
+        covs = 'bizz'
                
         cmd = ('{params.exc} '
                '--input {input.m8} '
@@ -50,4 +50,4 @@ rule humann2_make_summaries:
                'mv ' + genes + ' {output.genes} ; '
                'mv ' + abunds + ' {output.path_abunds} ; '
                'mv ' + covs + ' {output.path_cov} ; ')
-    shell(cmd)
+    	shell(cmd)

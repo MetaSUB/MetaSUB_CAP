@@ -1,9 +1,9 @@
 
 rule align_to_amr_genes:
     input:
-        reads1 = config['filter_macrobial_dna']['microbial_read1']
-        reads2 = config['filter_macrobial_dna']['microbial_read2']
-        db = config['databases']['card_amrs']['bt2']
+        reads1 = config['filter_macrobial_dna']['microbial_read1'],
+        reads2 = config['filter_macrobial_dna']['microbial_read2'],
+        db = config['align_to_amr_genes']['card_amrs']['bt2']
     output:
         bam = config['align_to_amr_genes']['bam']
     params:
