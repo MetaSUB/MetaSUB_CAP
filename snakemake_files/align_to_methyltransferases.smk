@@ -3,11 +3,11 @@ rule align_to_methyls:
     input:
         reads1 = config['filter_macrobial_dna']['microbial_read1'],
         reads2 = config['filter_macrobial_dna']['microbial_read2'],
-        db = config['align_to_methyltransferases']['db']['bt2']
     output:
         bam = config['align_to_methyltransferases']['bam']
     params:
         bt2=config['bt2']['exc']['filepath'],
+        db = config['align_to_methyltransferases']['db']['bt2']
     threads: int(config['align_to_methyltransferases']['threads'])
     resources:
         time=int(config['align_to_methyltransferases']['time']),

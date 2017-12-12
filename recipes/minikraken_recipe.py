@@ -19,7 +19,7 @@ class MiniKrakenRecipe(BaseRecipe):
 
     def resultSchema(self):
         return {
-            'kdb': ['kraken-db'] * 4
+            'kraken-db': ['kraken-db'] * 4
         }
 
     def makeRecipe(self):
@@ -31,4 +31,4 @@ class MiniKrakenRecipe(BaseRecipe):
         taxaNodes = os.path.join(taxa, 'nodes.dmp')
         fs = [dbIdx, kDb, taxaNames, taxaNodes]
 
-        self.repo.saveFiles(self, 'kdb', *fs)
+        self.repo.saveFiles(self, 'kraken-db', *fs)

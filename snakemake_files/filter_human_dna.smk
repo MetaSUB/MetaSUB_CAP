@@ -14,7 +14,6 @@ rule filter_human_dna:
     input:
         reads1 = getOriginResultFiles(config, "raw_short_read_dna", "read1"),
         reads2 = getOriginResultFiles(config, "raw_short_read_dna", "read2"),
-        db = config['filter_human_dna']['db']['filepath']
     output:
         human_reads1 = config['filter_human_dna']['human_read1'],
         human_reads2 = config['filter_human_dna']['human_read2'],
@@ -23,6 +22,7 @@ rule filter_human_dna:
         bam = config['filter_human_dna']['bam']
     params:
         bt2 = config['bt2']['exc']['filepath'],
+        db = config['filter_human_dna']['db']['filepath']	
     threads: int(config['filter_human_dna']['threads'])
     resources:
         time = int(config['filter_human_dna']['time']),
@@ -35,7 +35,7 @@ rule filter_human_dna:
            '--very-fast '
            ' --al-conc-gz ' + humanPattern,
            ' --un-conc-gz ' + nonhumanPattern,
-           ' -x {input.db} '
+           ' -x {params.db} '
            ' -1 {input.reads1} '
            ' -2 {input.reads2} '
            '| samtools view -F 4 -b '

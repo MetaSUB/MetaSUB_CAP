@@ -4,12 +4,12 @@ rule align_reads_to_megares:
     input:
         reads1 = config['filter_macrobial_dna']['microbial_read1'],
         reads2 = config['filter_macrobial_dna']['microbial_read2'],
-        db = config['resistome_amrs']['db']['bt2']
     output:
         sam = config['resistome_amrs']['sam']
     threads: int( config['resistome_amrs']['threads'])
     params:
-        bt2=config['bt2']['exc']['filepath'],        
+        bt2=config['bt2']['exc']['filepath'],
+        db = config['resistome_amrs']['db']['bt2']
     resources:
         time=int(config['resistome_amrs']['bt2_time']),
         n_gb_ram=int(config['resistome_amrs']['bt2_ram'])
@@ -17,7 +17,7 @@ rule align_reads_to_megares:
         cmd = (' {params.bt2} '
          '-p {threads} '
          '--very-sensitive '
-         ' -x {input.db} '
+         ' -x {params.db} '
          ' -1 {input.reads1} '
          ' -2 {input.reads2} '
          '| samtools view -F 4  '
