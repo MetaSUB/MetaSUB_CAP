@@ -73,6 +73,7 @@ tot = nNonHum + nHum
 assert nUnk >= 0
 
 out = {
+    'total_reads': tot,
     'host': nHum / tot,
     'non_host_macrobial': nMacrobe / tot,
     'unknown': nUnk / tot,
