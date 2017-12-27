@@ -16,6 +16,9 @@
   "read_classification_proportions": {
     "script": "scripts/count_classified_reads.py"
   },
+  "read_stats": {
+    "script": "scripts/read_stats.py"
+  },
   "metaphlan2_taxonomy_profiling": {
     "exc": {
       "filepath": "`which metaphlan2.py`",
