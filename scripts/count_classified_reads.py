@@ -14,12 +14,13 @@ or virus.
 
 Arguments are rudimentary and positional:
 
-     <cmd> [human read fastq.gz] [non human read fastq.gz] [kraken mpa report]
+     <cmd> [human read fastq.gz] [non human reads fastq.gz] [non macrobial reads fastq.gz] [kraken mpa report]
 
 Output is a JSON string to stdout and in the following form:
 
 {
 host:    <proportion>
+non_host_macrobial: <proportion>
 unknown:  <proportion>
 bacteria: <proportion>
 viral:    <proportion>
@@ -32,13 +33,19 @@ if len(sys.argv) != 4:
     sys.exit(1)
 
 hum = sys.argv[1]
-non = sys.argv[2]
-mpa = sys.argv[3]
+nonHum = sys.argv[2]
+nonMacrobe = sys.argv[3]
+mpa = sys.argv[4]
 
 
-nHum = int( sp.getoutput('zcat {} | wc -l'.format(hum)).split()[0]) / 4
-nNon = int( sp.getoutput('zcat {} | wc -l'.format(non)).split()[0]) / 4
+def countFastq(fname):
+    raw = sp.getoutput('zcat {} | wc -l'.format(hum)).split()[0]
+    return int(raw) / 4
 
+
+nHum = countFastq(hum)
+nNonHum = countFastq(nonHum)
+nNonMacrobe = countFastq(nonMacrobe)
 
 nBact = 0
 nArch = 0
@@ -59,17 +66,19 @@ with open(mpa) as mf:
             nViral = int(line.split()[-1])
 
 
-nUnk = nNon - nBact - nArch - nViral
-tot = nNon + nHum
+nMacrobe = nNonHum - nNonMacrobe
+nUnk = nNonMacrobe - nBact - nArch - nViral
+tot = nNonHum + nHum
 
 assert nUnk >= 0
 
-out={
-    'host': 100.0*nHum / tot,
-    'unknown': 100.0*nUnk / tot,
-    'bacteria': 100.0*nBact / tot,
-    'archaea': 100.0*nArch / tot,
-    'virus': 100.0*nViral / tot,
-    }
+out = {
+    'host': nHum / tot,
+    'non_host_macrobial': nMacrobe / tot,
+    'unknown': nUnk / tot,
+    'bacteria': nBact / tot,
+    'archaea': nArch / tot,
+    'virus': nViral / tot,
+}
 
 sys.stdout.write(json.dumps(out))

@@ -5,7 +5,7 @@ rule measure_alpha_diversity:
         metaphlan2 = config['metaphlan2_taxonomy_profiling']['mpa'],
         kraken = config['kraken_taxonomy_profiling']['mpa']
     output:
-        json = config['alpha_dicersity_stats']['json']
+        json = config['alpha_diversity_stats']['json']
     params:
         script = config['alpha_diversity_stats']['script']
     run:

@@ -13,6 +13,9 @@
   "beta_diversity_stats": {
     "script": "scripts/beta_diversity_stats.py"
   },
+  "read_classification_proportions": {
+    "script": "scripts/count_classified_reads.py"
+  },
   "metaphlan2_taxonomy_profiling": {
     "exc": {
       "filepath": "`which metaphlan2.py`",

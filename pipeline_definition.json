@@ -121,6 +121,16 @@
 	    }
     },
     {
+      "NAME": "read_classification_proportions",
+      "DEPENDENCIES": [
+        "kraken_taxonomy_profiling", 
+        "microbial_short_read_dna",
+        "filter_human_dna",
+        "filter_macrobial_dna"
+      ],
+      "FILES": {"json": "json"}
+    },
+    {
       "NAME": "alpha_diversity_stats",
       "DEPENDENCIES": [
         "kraken_taxonomy_profiling", 
