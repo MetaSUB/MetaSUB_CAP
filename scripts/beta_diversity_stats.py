@@ -1,7 +1,9 @@
 import sys
 import click
 from scipy import pdist, squareform, entropy
+from scipy.stats import gmean
 from numpy.linalg import norm
+import numpy as np
 from math import sqrt
 from json import dumps as jdumps
 import pandas as pd
@@ -17,6 +19,21 @@ def checkLevel(taxon, level):
     elif level == 'genus':
         return ('g__' in taxon) and ('s__' not in taxon)
     raise LevelNotFoundException()
+
+
+def clr(X):
+    _X = X / norm(X, ord=1)
+    g = gmean(_X)
+    _X = np.divide(_X, g)
+    _X = np.log(_X)
+    return _X
+
+
+def rhoProportionality(P, Q):
+    _P, _Q = clr(P), clr(Q)
+    N = np.var(_P - _Q)
+    D = np.var(_P) + np.var(_Q)
+    return 1 - (N / D)
 
 
 def jensenShannonDistance(P, Q):
@@ -44,6 +61,8 @@ class SampleSet:
         X = self.mpas.as_matrix()
         if metric == 'jensen_shannon_distance':
             distm = squareform(pdist(X, jensenShannonDistance))
+        elif metric == 'rho_proportionality':
+            distm = squareform(pdist(X, rhoProportionality))
         distm = pd.DataFrame(distm, index=self.mpas.index)
         return distm.to_dict()
 
@@ -81,9 +100,11 @@ def main(toolSets):
     obj = {
         'species': {
             'jensen_shannon_distance': {},
+            'rho_proportionality': {},
         },
         'genus': {
             'jensen_shannon_distance': {},
+            'rho_proportionality': {},
         }
     }
     for level in obj.keys():
