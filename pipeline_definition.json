@@ -118,9 +118,26 @@
 	  "DEPENDENCIES": ["microbial_short_read_dna"],
 	  "FILES": {
 	      "sketch": "minsketch"
-	  }
-      },
-      {
+	    }
+    },
+    {
+      "NAME": "alpha_diversity_stats",
+      "DEPENDENCIES": [
+        "kraken_taxonomy_profiling", 
+        "metaphlan2_taxonomy_profiling"
+      ],
+      "FILES": {"json": "json"}
+    },
+    {
+      "NAME": "beta_diversity_stats",
+      "DEPENDENCIES": [
+        "kraken_taxonomy_profiling", 
+        "metaphlan2_taxonomy_profiling"
+      ],
+      "LEVEL": "GROUP",
+      "FILES": {"json": "json"}
+    },
+    {
 	  "NAME": "mash_intersample_dists",
 	  "LEVEL": "GROUP",
 	  "DEPENDENCIES": ["mash_sketch"],

@@ -2,10 +2,16 @@
     "align_to_sa_n315": {
     "threads": "6",
     "time": "10",
-    "ram":"10"
-    "db" :{
+    "ram":"10",
+    "db": {
       "bt2": "`packagemega database staph_aureus_n315.bt2.prefix`"
     }
+  },
+  "alpha_diversity_stats": {
+    "script": "scripts/alpha_diversity_stats.py"
+  },
+  "beta_diversity_stats": {
+    "script": "scripts/beta_diversity_stats.py"
   },
   "metaphlan2_taxonomy_profiling": {
     "exc": {
