@@ -44,6 +44,11 @@
   ],
   "RESULT_TYPES": [
     {
+      "NAME" : "align_to_sa_n315",
+      "DEPENDENCIES": ["microbial_short_read_dna"],
+      "FILES": { "bam": "bam"}
+    },
+    {
       "NAME": "raw_short_read_dna",
       "FILES": {
         "read1": "gz_fastq",
