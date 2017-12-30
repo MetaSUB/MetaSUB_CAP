@@ -190,9 +190,7 @@
         "mash_intersample_dists"
       ],
       "FILES": {
-        "metaphlan2": "json",
-        "kraken": "json",
-        "mash": "json"
+        "metaphlan2": "json"
       }
     },
     {

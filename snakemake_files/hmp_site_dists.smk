@@ -3,7 +3,6 @@
 rule measure_hmp_dists_metaphlan2:
 	input:
 		mpa= config['metaphlan2_taxonomy_profiling']['mpa'],
-                db=config['pipeline_dir'] + '/references/hmp_site_dists/metaphlan2.csv'
 	output:
 		main=config['hmp_site_dists']['metaphlan2']
 	resources:
@@ -11,11 +10,12 @@ rule measure_hmp_dists_metaphlan2:
 		n_gb_ram=2
 	threads: 1
 	params:
-		script=config['pipeline_dir'] + '/scripts/hmp_site_dists/find_mpa_dists.py',
+		script=config['pipeline_dir'] + '/scripts/hmp_sites_metaphlan_dists.py',
+        db=config['pipeline_dir'] + '/scripts/hmp_sites_metaphlan2'
 	shell:
-		'{params.script} {input.db} {input.mpa} > {output.main}'
+		'{params.script} {params.db} {input.mpa} > {output.main}'
 
-
+'''
 rule measure_hmp_dists_kraken:
 	input:
 		mpa= config['kraken_taxonomy_profiling']['mpa'],
@@ -47,3 +47,4 @@ rule measure_hmp_dists_mash:
 		script=config['pipeline_dir'] + '/scripts/hmp_site_dists/find_mash_dists.py',
 	shell:
 		'{params.script} {input.db} {input.mpa} > {output.main}'
+'''
