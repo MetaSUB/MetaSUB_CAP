@@ -29,7 +29,7 @@ rule analyze_with_resistome:
     input:
         sam = config['resistome_amrs']['sam'],
         fasta = config['resistome_amrs']['db']['fasta'],
-        annot =config['resistome_amrs']['db']['annotations']
+        annot = config['resistome_amrs']['db']['annotations']
     output:
         gene = config['resistome_amrs']['gene'],
         group = config['resistome_amrs']['group'],

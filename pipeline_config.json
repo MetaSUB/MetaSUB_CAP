@@ -96,9 +96,9 @@
       "filepath": "`which resistome`"
     },
       "db": {
-	  "bt2": "",
-	  "fasta": "",
-	  "annotations": ""
+	  "bt2": "`packagemega database megares.bt2.prefix`",
+	  "fasta": "`packagemega database megares.fasta.0`",
+	  "annotations": "`packagemega database megares.csv.0`"
       },
       "bt2_time": "2",
       "bt2_ram": "10"
