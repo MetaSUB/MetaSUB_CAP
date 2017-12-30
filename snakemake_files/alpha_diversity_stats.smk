@@ -7,7 +7,7 @@ rule measure_alpha_diversity:
     output:
         json = config['alpha_diversity_stats']['json']
     params:
-        script = config['alpha_diversity_stats']['script']
+        script = config['pipeline_dir'] + config['alpha_diversity_stats']['script']
     run:
         cmd = '{params.script} '
         cmd += 'metaphlan2,{input.metaphlan2} '

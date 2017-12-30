@@ -6,7 +6,7 @@ rule measure_beta_diversity:
     output:
         json = config['alpha_dicersity_stats']['json']
     params:
-        script = config['beta_diversity_stats']['script']
+        script = config['pipeline_dir'] + config['beta_diversity_stats']['script']
     run:
         cmd = '{params.script} '
         cmd += '-t metaphlan2 '
