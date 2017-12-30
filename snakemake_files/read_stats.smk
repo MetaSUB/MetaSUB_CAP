@@ -7,7 +7,7 @@ rule find_read_stats:
     output:
         json = config['read_stats']['json']
     params:
-        script = config['pipeline_dir'] + config['read_classification_proportions']['script']
+        script = config['pipeline_dir'] + config['read_classification_proportions']['script'],
         nseqs = 100 * 1000
     run:
         cmd = ('{params.script} '

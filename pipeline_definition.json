@@ -134,7 +134,7 @@
       "NAME": "read_stats",
       "DEPENDENCIES": [
         "microbial_short_read_dna",
-        "raw_short_read_dna",
+        "raw_short_read_dna"
       ],
       "FILES": {"json": "json"}
     },

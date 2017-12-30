@@ -44,12 +44,6 @@
     "time": "2",
     "ram": "5"
   },
-  "kraken_taxonomy_profiling": {
-    "exc": {
-      "filepath": "`which kraken`",
-      "version": "`kraken --version | tr '\n' ' '`"
-    },
-  },
   "mash": {
 	  "exc": {
 	    "filepath": "`which mash`",
