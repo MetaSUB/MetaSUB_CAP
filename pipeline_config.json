@@ -8,16 +8,16 @@
     }
   },
   "alpha_diversity_stats": {
-    "script": "scripts/alpha_diversity_stats.py"
+    "script": "/scripts/alpha_diversity_stats.py"
   },
   "beta_diversity_stats": {
-    "script": "scripts/beta_diversity_stats.py"
+    "script": "/scripts/beta_diversity_stats.py"
   },
   "read_classification_proportions": {
-    "script": "scripts/count_classified_reads.py"
+    "script": "/scripts/count_classified_reads.py"
   },
   "read_stats": {
-    "script": "scripts/read_stats.py"
+    "script": "/scripts/read_stats.py"
   },
   "metaphlan2_taxonomy_profiling": {
     "exc": {
@@ -60,7 +60,7 @@
     },
     "dmnd": {
       "time": "10",
-      "ram": "64",
+      "ram": "6",
       "threads": "10",
       "block_size": "6"
     },
@@ -83,7 +83,7 @@
       "version": ""
     },
     "ref": {
-      "filepath": "packagemega database card.sbred.0"
+      "filepath": "`packagemega database card.sbred.0`"
     },
     "threads": "2",
     "time": "2",

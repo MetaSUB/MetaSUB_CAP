@@ -6,7 +6,8 @@ rule metaphlan2_make_mpa:
         reads2 = config['filter_macrobial_dna']['microbial_read2'] 
     output:
         mpa = config['metaphlan2_taxonomy_profiling']['mpa'],
-        sam = config['metaphlan2_taxonomy_profiling']['sam'],        
+        sam = config['metaphlan2_taxonomy_profiling']['sam'],
+        bt2 = temp(config['metaphlan2_taxonomy_profiling']['mpa'] + '.bt2_temp')
     threads: int(config['metaphlan2_taxonomy_profiling']['threads'])
     params:
         metaphlan2=config['metaphlan2_taxonomy_profiling']['exc']['filepath'],
@@ -17,8 +18,9 @@ rule metaphlan2_make_mpa:
         cmd = ('{params.metaphlan2} '
                '--input_type fastq '
                '-s {output.sam} '
+               '--bowtie2out {output.bt2} '
                '{input.reads1},{input.reads2} '
-         '--nproc {threads} '
+               '--nproc {threads} '
                '> {output.mpa}')
         shell(cmd)
 

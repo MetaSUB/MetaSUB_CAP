@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 import sys
 import math
 import argparse as ap
@@ -65,9 +67,9 @@ def main():
     for level in obj.keys():
         for mpaFilePair in args.mpa_files:
             tool, mpaFile = mpaFilePair.split(',')
-            sample = Sample.parseMPA(tool, args.mpa_file, level)
+            sample = Sample.parseMPA(tool, mpaFile, level)
             obj[level]['richness'][tool] = sample.richness()
-            obj[level]['shannon_index'][tool] = sample.shannon_index()
+            obj[level]['shannon_index'][tool] = sample.shannonIndex()
     sys.stdout.write(jdumps(obj))
 
 
@@ -76,7 +78,7 @@ def parseArgs():
     parser.add_argument('mpa_files', nargs='+',
                         help='pairs of tool_name,mpa_file')
     args = parser.parse_args()
-    return argip
+    return args
 
 
 if __name__ == '__main__':

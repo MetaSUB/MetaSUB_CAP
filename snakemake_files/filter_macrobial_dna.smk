@@ -35,7 +35,7 @@ rule filter_macrobial_dna:
            '--very-fast '
            ' --al-conc-gz ' + macrobialPattern,
            ' --un-conc-gz ' + microbialPattern,
-           ' -x {input.db} '
+           ' -x {params.db} '
            ' -1 {input.reads1} '
            ' -2 {input.reads2} '
            '| samtools view -F 4 -b '

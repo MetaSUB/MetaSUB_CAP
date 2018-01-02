@@ -12,9 +12,9 @@ rule count_class_proportions:
         script = config['pipeline_dir'] + config['read_classification_proportions']['script']
     run:
         cmd = ('{params.script} '
-               '{input.human_read1} '
-               '{input.nonhuman_read1} '
-               '{input.microbial_read1} '
+               '{input.human_reads1} '
+               '{input.nonhuman_reads1} '
+               '{input.microbial_reads1} '
                '{input.kraken} '
                ' > {output.json}')
 

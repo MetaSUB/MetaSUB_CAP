@@ -15,7 +15,7 @@ rule shortbred_make_amr_table:
         time=int(config['shortbred_amr_profiling']['time']),
         n_gb_ram=int(config['shortbred_amr_profiling']['ram'])
     run:
-        cmd = ('{params.shortbred} '
+        cmd = ('python2 {params.shortbred} '
                '--markers {params.ref} '
                '--wgs {input.reads1} {input.reads2} '
            '--results {output.table} '

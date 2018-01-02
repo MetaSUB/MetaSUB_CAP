@@ -16,7 +16,7 @@ rule align_to_sa_n315:
         cmd = (' {params.bt2} '
                '-p {threads} '
                 '--very-sensitive '
-                ' -x {input.db} '
+                ' -x {params.db} '
                 ' -1 {input.reads1} '
                 ' -2 {input.reads2} '
                 '| samtools view -F 4 -b '

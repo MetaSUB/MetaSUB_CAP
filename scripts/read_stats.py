@@ -2,17 +2,15 @@
 import sys
 from json import dumps as jdumps
 import click
+from subprocess import getoutput
 
 
 def sampleFastq(fastqf, n):
-    out = []
-    with open(fastqf) as fqf:
-        for i, line in enumerate(fqf):
-            if (i % 4) != 1:
-                continue
-            out.append(line.strip())
-            if len(out) == n:
-                break
+    cmd = 'zcat {} | head -{}'.format(fastqf, 4 * n)
+    rawOut = getoutput(cmd).split('\n')
+    out = [line.strip()
+           for i, line in enumerate(rawOut)
+           if (i % 4) == 1]
     return out
 
 
@@ -27,7 +25,7 @@ def gcContent(seqs):
 
 
 @click.command()
-@click.option('-n', '--num-seqs', type=int, default=100000)
+@click.option('-n', '--num-seqs', type=int, default=10000)
 @click.argument('raw_reads')
 @click.argument('microbial_reads')
 def main(num_seqs, raw_reads, microbial_reads):

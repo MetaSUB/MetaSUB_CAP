@@ -9,11 +9,9 @@ rule measure_beta_diversity:
         script = config['pipeline_dir'] + config['beta_diversity_stats']['script']
     run:
         cmd = '{params.script} '
-        cmd += '-t metaphlan2 '
-        for mphlan2 in mphlan2s:
-            cmd += getSample(mphlan2) + ' ' + mphlan2 + ' '
-        cmd += '-t kraken '
-        for kraken in krakens:
-            cmd += getSample(kraken) + ' ' + krakens + ' '
+        for mphlan2 in input.mphlan2s:
+            cmd += '-t metaphlan2 ' + getSample(mphlan2) + ' ' + mphlan2 + ' '
+        for kraken in input.krakens:
+            cmd += '-t kraken ' + getSample(kraken) + ' ' + kraken + ' '
         cmd += ' > {output.json}'
         shell(cmd)

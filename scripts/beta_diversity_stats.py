@@ -1,7 +1,10 @@
+#! /usr/bin/env python3
+
+
 import sys
 import click
-from scipy import pdist, squareform, entropy
-from scipy.stats import gmean
+from scipy.spatial.distance import pdist, squareform
+from scipy.stats import gmean, entropy
 from numpy.linalg import norm
 import numpy as np
 from math import sqrt
@@ -22,6 +25,7 @@ def checkLevel(taxon, level):
 
 
 def clr(X):
+    print('$$$')
     _X = X / norm(X, ord=1)
     g = gmean(_X)
     _X = np.divide(_X, g)
@@ -48,14 +52,12 @@ class SampleSet:
 
     def __init__(self, tool, mpas):
         self.tool = tool
-        self.mpaFiles = []
-        for i in range(0, len(mpas) + 1, 2):
-            self.mpaFiles.append((mpas[i], mpas[i + 1]))
+        self.mpaFiles = mpas
 
     def parse(self, level):
         mpas = {name: Sample.parseMPA(name, mpaf, level).abunds
                 for name, mpaf in self.mpaFiles}
-        self.mpas = pd.DataFrame(mpas)
+        self.mpas = pd.DataFrame(mpas).transpose()
 
     def distanceMatrix(self, metric):
         X = self.mpas.as_matrix()
@@ -64,7 +66,7 @@ class SampleSet:
         elif metric == 'rho_proportionality':
             distm = squareform(pdist(X, rhoProportionality))
         distm = pd.DataFrame(distm, index=self.mpas.index)
-        return distm.to_dict()
+        return distm.to_json()
 
 
 class Sample:
@@ -89,13 +91,19 @@ class Sample:
 
 
 @click.command()
-@click.option('-t', '--tool-set', nargs=-1, multiple=True)
-def main(toolSets):
-    sampleSets = []
+@click.option('-t', '--tool-set', nargs=3, multiple=True)
+def main(tool_set):
+    toolSets = tool_set
+    condensed = {}
     for toolSet in toolSets:
         tool = toolSet[0]
-        mpas = toolSet[1:]
-        sampleSets.append(SampleSet(tool, mpas))
+        sampleName = toolSet[1]
+        mpa = toolSet[2]
+        try:
+            condensed[tool].append((sampleName, mpa))
+        except KeyError:
+            condensed[tool] = [(sampleName, mpa)]
+    sampleSets = [SampleSet(tool, mpas) for tool, mpas in condensed.items()]
 
     obj = {
         'species': {
