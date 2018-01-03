@@ -44,6 +44,15 @@
     "time": "2",
     "ram": "5"
   },
+  "microbe_census_group_summary": {
+    "script" : "/scripts/summarize_microbe_census.py"
+  },
+  "kraken_group_summary": {
+    "script" : "/scripts/summarize_kraken.py"
+  },
+  "normalized_kraken_taxonomy": {
+    "script" : "/scripts/average_genome_size_normalization.py"
+  },
   "mash": {
 	  "exc": {
 	    "filepath": "`which mash`",
