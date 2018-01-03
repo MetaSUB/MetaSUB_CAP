@@ -28,6 +28,22 @@
     "time": "2",
     "ram": "5"
   },
+  "midas_single_samples": {
+    "time": "",
+    "ram": "",
+    "threads": "",
+    "exc": {
+      "filepath": ""
+    },
+    "db": {
+      "filepath": ""
+    }
+  },
+  "midas_merge_groups": {
+    "exc": {
+      "filepath": ""
+    },
+  },
   "kraken_taxonomy_profiling": {
     "exc": {
       "filepath": "`which kraken`",

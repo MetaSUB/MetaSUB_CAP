@@ -104,6 +104,22 @@
       }
     },
     {
+      "NAME": "midas_merge_groups",
+      "LEVEL": "GROUP",
+      "FILES":{
+        "rel_abund": "tsv",
+        "count_reads": "tsv",
+        "coverage": "tsv",
+        "species_prevalence": "tsv"
+      }
+    },
+    {
+      "NAME": "midas_single_samples",
+      "FILES":{
+        "profile": "tsv"
+      }
+    },
+    {
       "NAME": "kraken_taxonomy_profiling",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
