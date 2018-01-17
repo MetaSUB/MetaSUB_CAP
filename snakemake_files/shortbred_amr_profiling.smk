@@ -8,7 +8,7 @@ rule shortbred_make_amr_table:
         table = config['shortbred_amr_profiling']['table']
     params:
         ref=config['shortbred_amr_profiling']['ref']['filepath'],
-        shortbred=config['shortbred_amr_profiling']['exc']['filepath']
+        shortbred=config['shortbred']['exc']['filepath']
     threads: int(config['shortbred_amr_profiling']['threads'])
     version: config['shortbred_amr_profiling']['exc']['version']
     resources:

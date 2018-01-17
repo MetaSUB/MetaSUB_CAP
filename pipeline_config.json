@@ -10,6 +10,10 @@
   "alpha_diversity_stats": {
     "script": "/scripts/alpha_diversity_stats.py"
   },
+  "microbe_directory_annotate": {
+    "script": "/scripts/amicrobe_directory_annotate.py",
+    "db": "/scripts/microbe-directory.csv"
+  },
   "beta_diversity_stats": {
     "script": "/scripts/beta_diversity_stats.py"
   },
@@ -91,7 +95,7 @@
     },
     "threads": "1",
     "time": "1",
-    "ram": "4"
+    "ram": "8"
   },
   "microbe_census": {
     "threads": "6",
@@ -102,11 +106,13 @@
       "version": "`run_microbe_census.py --version 2>&1`"
     }
   },
-  "shortbred_amr_profiling": {
+  "shortbred": {
     "exc": {
       "filepath": "`which shortbred_quantify.py`",
       "version": ""
     },
+  },
+  "shortbred_amr_profiling": {
     "ref": {
       "filepath": "`packagemega database card.sbred.0`"
     },
@@ -157,12 +163,12 @@
     "ram": "10"
   },
   "align_to_methyltransferases": {
-    "threads": "6",
-    "time": "10",
-      "ram": "10",
-      "db":{
-	  "bt2": ""
-      }
+    "ref": {
+      "filepath": "`packagemega database methyls.sbred.0`"
+    },
+    "threads": "2",
+    "time": "2",
+    "ram": "5"
   },
   "align_to_amr_genes": {
     "threads": "6",
@@ -171,5 +177,8 @@
       "card_amrs": {
 	  "bt2": ""
       }
+  },
+  "humann2_normalize_genes": {
+    "script": "normalize_genes.py"
   }
 }

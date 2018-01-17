@@ -176,6 +176,13 @@
       "FILES": {"json": "json"}
     },
     {
+      "NAME": "microbe_directory_annotate",
+      "DEPENDENCIES": [
+        "metaphlan2_taxonomy_profiling"
+      ],
+      "FILES": {"json": "json"}
+    },
+    {
       "NAME": "alpha_diversity_stats",
       "DEPENDENCIES": [
         "kraken_taxonomy_profiling", 
@@ -243,12 +250,18 @@
       }
     },
     {
+      "NAME": "humann2_normalize_genes",
+      "FILES": {
+        "norm_genes": "tsv"
+      }
+    },
+    {
       "NAME": "align_to_methyltransferases",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
       ],
       "FILES": {
-        "bam": "bam"
+        "table": "tsv"
       }
     },
     {
