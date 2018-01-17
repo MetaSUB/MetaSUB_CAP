@@ -113,7 +113,28 @@
         "mpa": "mpa"
       }
     },
-      {
+    {
+      "NAME": "microbe_census_group_summary",
+      "LEVEL": "GROUP",
+      "FILES": {
+        "vector": "json"
+      }
+    },
+    {
+      "NAME": "kraken_group_summary",
+      "LEVEL": "GROUP",
+      "FILES": {
+        "json": "json"
+      }
+    },
+    {
+      "NAME": "normalized_kraken_taxonomy",
+      "LEVEL": "GROUP",
+      "FILES": {
+        "json": "json"
+      }
+    },
+    {
 	  "NAME": "mash_sketch",
 	  "DEPENDENCIES": ["microbial_short_read_dna"],
 	  "FILES": {
