@@ -34,7 +34,7 @@
       "version": "`kraken --version | tr '\n' ' '`"
     },
     "db": {
-      "filepath": "`packagemega database minikraken.db.dir`"
+      "filepath": "`packagemega database minikraken.kraken-db.dir`"
     },
     "mpa_exc": {
       "filepath": "`which kraken-mpa-report`",
@@ -65,8 +65,8 @@
       "block_size": "6"
     },
     "threads": "1",
-    "time": "1",
-    "ram": "4"
+    "time": "2",
+    "ram": "8"
   },
   "microbe_census": {
     "threads": "6",
@@ -144,7 +144,10 @@
     "time": "10",
       "ram": "10",
       "card_amrs": {
-	  "bt2": ""
+	  "bt2": "/athena/masonlab/scratch/users/dcd3001/Refs/CAP_databases/abr_genes/CARD/ARmeta-genes.nt2"
       }
+  },
+  "samtools": {
+    "filepath": "`which samtools`"
   }
 }

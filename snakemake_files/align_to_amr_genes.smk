@@ -7,6 +7,7 @@ rule align_to_amr_genes:
         bam = config['align_to_amr_genes']['bam']
     params:
         bt2=config['bt2']['exc']['filepath'],
+        samtools = config['samtools']['filepath'],
         db = config['align_to_amr_genes']['card_amrs']['bt2']
     threads: int(config['align_to_amr_genes']['threads'])
     resources:
@@ -19,6 +20,6 @@ rule align_to_amr_genes:
            ' -x {params.db} '
            ' -1 {input.reads1} '
            ' -2 {input.reads2} '
-           '| samtools view -F 4 -b '
+           '| {params.samtools} view -F 4 -b '
            '> {output.bam} ')
         shell(cmd)
