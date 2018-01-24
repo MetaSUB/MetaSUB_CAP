@@ -13,19 +13,24 @@ Please contact David C. Danko (dcd3001@med.cornell.edu) if you have questions ab
 Installation
 ------------
 
-To install the Core Analysis Pipeline in developer mode you will need to install DataSuper, ModuleUltra and the CAP itself. This process will be streamlined in the future.
+To install the Core Analysis Pipeline in developer mode you will need to install PackageMega, DataSuper, ModuleUltra and the CAP itself. This process will be streamlined in the future.
 
 .. code-block:: bash
    
-    git clone git@github.com:MetaSUB/DataSuper.git 
+    git clone git@github.com:dcdanko/DataSuper.git 
     cd DataSuper
     python setup.py develop
-    cd..
+    cd ..
     
-    git clone git@github.com:MetaSUB/ModuleUltra.git 
+    git clone git@github.com:dcdanko/PackageMega.git 
+    cd DataSuper
+    python setup.py develop
+    cd ..
+    
+    git clone git@github.com:dcdanko/ModuleUltra.git 
     cd ModuleUltra
     python setup.py develop
-    cd..
+    cd ..
     
     git clone git@github.com:MetaSUB/MetaSUB_CAP
     
@@ -33,6 +38,31 @@ To install the Core Analysis Pipeline in developer mode you will need to install
     moduleultra init
     moduleultra install --dev /path/to/MetaSUB_CAP
     moduleultra add pipeline metasub_cap
+
+Running
+-------
+
+To run the CAP use the following commands
+
+.. code-block:: bash
+
+   cd /analysis/dir
+   python /path/to/MetaSUB_CAP/add_fastq_data_to_datasuper.py <sample_type> [<fastq files>...]
+   moduleultra run -p metasub_cap -j <njobs> [--dryrun]
+   
+To see more options just use the help commands
+
+.. code-block:: bash
+
+   moduleultra run --help
+   moduleultra --help
+   datasuper --help
+   
+Most cluster systems will need a custom submit script. You can set a default script using the following command
+   
+.. code-block:: bash
+   
+   moduleultra config cluster_submit /path/to/submit_script
 
 Adding Modules
 --------------
@@ -70,34 +100,35 @@ Planned Modules
 
 Feel free to add to this list
 
-- Human Variant Calling
-- Read Statistics
-- Proportions Classified
-- Intrasample Diversity
-- Microbe DB Annotations
 - CLARK for taxonomy profiling
 - Taxonomy Normalisation using genome counts
-- MUSICc
 - CRASS (CRISPRs)
-- MICA + NR
-
+- StrainPhlAn
+- Repeat Masker
 
 Finished Modules
 ----------------
+
+See docs.modules.rst for more detail.
 
 - Humann2
 - Microbe Census (Avergae Genome Size, Genome Counts) 
 - Kraken
 - Metaphlan2
-- MASH
+- Mash
 - microbial/macrobial filtering
-- fastqc
-- multiqc
 - Comparisons to HMP  
 - Map to AMRs
 - Map to Methyltransferases
 - Resistome MEGARes
-  
+- Intrasample (beta) Diversity
+- Intersample (alpha) diversity
+- Microbe DB Annotations
+- Read Statistics
+- Proportions Classified
+- Adapter Removal
+
+
 Module Dependencies
 -------------------
 
