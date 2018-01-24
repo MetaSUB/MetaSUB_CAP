@@ -2,15 +2,16 @@
 
 rule summarize_kraken:
     input:
-        stats = expandGroup(config['kraken_taxonomy_profilimg']['mpa'], names=True)
+        kraken = expandGroup(config['kraken_taxonomy_profiling']['mpa'])
     output:
-        vector = config['kraken_summary']['json']
+        vector = config['kraken_group_summary']['json']
     threads: 1
     params:
-        script = config['pipeline_dir'] + config['kraken_summary']['script']
+        script = config['pipeline_dir'] + config['kraken_group_summary']['script'],
+        statNames = expandGroup(config['kraken_taxonomy_profiling']['mpa'], names=True)
     run:
         cmd = '{params.script} '
-        for sname, mcf in input.stats:
-            cmd += '-s {} {}'.format(sname, mcf)
+        for sname, mcf in zip(params.statNames, input.kraken):
+            cmd += ' -s {} {}'.format(sname, mcf)
         cmd += ' > {output.vector}'
         shell(cmd)

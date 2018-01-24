@@ -3,14 +3,14 @@
 
 rule midas_merge_taxa_profile:
     input:
-        profiles = expandGroup(config['midas_single_samples']['species_out'])
+        profiles = expandGroup(config['midas_single_samples']['profile'])
     output:
         rel_abund = config['midas_merge_groups']['rel_abund'],
         count_reads = config['midas_merge_groups']['count_reads'],
         coverage = config['midas_merge_groups']['coverage'],
         species_prevalence = config['midas_merge_groups']['species_prevalence'],
     params:
-        group_name='{group_name}'
+        group_name='{group_name}',
         midas = config['midas_merge_groups']['exc']['filepath'],
         ref = config['midas_single_samples']['db']['filepath']
     resources:
