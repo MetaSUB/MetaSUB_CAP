@@ -34,6 +34,31 @@ To install the Core Analysis Pipeline in developer mode you will need to install
     moduleultra install --dev /path/to/MetaSUB_CAP
     moduleultra add pipeline metasub_cap
 
+Running
+-------
+
+To run the CAP use the following commands
+
+.. code-block:: bash
+
+   cd /analysis/dir
+   python /path/to/MetaSUB_CAP/add_fastq_data_to_datasuper.py <sample_type> [<fastq files>...]
+   moduleultra run -p metasub_cap -j <njobs> [--dryrun]
+   
+To see more options just use the help commands
+
+.. code-block:: bash
+
+   moduleultra run --help
+   moduleultra --help
+   datasuper --help
+   
+Most cluster systems will need a custom submit script. You can set a default script using the following command
+   
+.. code-block:: bash
+   
+   moduleultra config cluster_submit /path/to/submit_script
+
 Adding Modules
 --------------
 
