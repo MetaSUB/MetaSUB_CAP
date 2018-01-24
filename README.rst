@@ -95,34 +95,35 @@ Planned Modules
 
 Feel free to add to this list
 
-- Human Variant Calling
-- Read Statistics
-- Proportions Classified
-- Intrasample Diversity
-- Microbe DB Annotations
 - CLARK for taxonomy profiling
 - Taxonomy Normalisation using genome counts
-- MUSICc
 - CRASS (CRISPRs)
-- MICA + NR
-
+- StrainPhlAn
+- Repeat Masker
 
 Finished Modules
 ----------------
+
+See docs.modules.rst for more detail.
 
 - Humann2
 - Microbe Census (Avergae Genome Size, Genome Counts) 
 - Kraken
 - Metaphlan2
-- MASH
+- Mash
 - microbial/macrobial filtering
-- fastqc
-- multiqc
 - Comparisons to HMP  
 - Map to AMRs
 - Map to Methyltransferases
 - Resistome MEGARes
-  
+- Intrasample (beta) Diversity
+- Intersample (alpha) diversity
+- Microbe DB Annotations
+- Read Statistics
+- Proportions Classified
+- Adapter Removal
+
+
 Module Dependencies
 -------------------
 
