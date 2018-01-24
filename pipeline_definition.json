@@ -71,7 +71,7 @@
     {
       "NAME": "filter_human_dna",
       "DEPENDENCIES": [
-        "raw_short_read_dna"
+        "adpater_removal"
       ],
       "FILES": {
         "human_read1": "gz_fastq",
@@ -271,6 +271,16 @@
       ],
       "FILES": {
         "bam": "bam"
+      }
+    },
+    {
+      "NAME": "adapter_removal",
+      "DEPENDENCIES": [
+        "raw_short_read_dna"
+      ],
+      "FILES": {
+        "clean_read1": "gz_fastq",
+        "clean_read2": "gz_fastq"
       }
     }
   ]

@@ -184,5 +184,14 @@
   "humann2_normalize_genes": {
     "script": "/scripts/normalize_genes.py"
   },
-  "python2": "`which python2`"
+  "python2": "`which python2`",
+  "adapter_removal": {
+    "time": "2",
+    "threads": "6",
+    "ram": "10",
+    "exc": {
+      "filepath": "`which AdapterRemoval`",
+      "version": "`AdapterRemoval --version`"
+    }
+  }
 }
