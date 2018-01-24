@@ -13,19 +13,24 @@ Please contact David C. Danko (dcd3001@med.cornell.edu) if you have questions ab
 Installation
 ------------
 
-To install the Core Analysis Pipeline in developer mode you will need to install DataSuper, ModuleUltra and the CAP itself. This process will be streamlined in the future.
+To install the Core Analysis Pipeline in developer mode you will need to install PackageMega, DataSuper, ModuleUltra and the CAP itself. This process will be streamlined in the future.
 
 .. code-block:: bash
    
-    git clone git@github.com:MetaSUB/DataSuper.git 
+    git clone git@github.com:dcdanko/DataSuper.git 
     cd DataSuper
     python setup.py develop
-    cd..
+    cd ..
     
-    git clone git@github.com:MetaSUB/ModuleUltra.git 
+    git clone git@github.com:dcdanko/PackageMega.git 
+    cd DataSuper
+    python setup.py develop
+    cd ..
+    
+    git clone git@github.com:dcdanko/ModuleUltra.git 
     cd ModuleUltra
     python setup.py develop
-    cd..
+    cd ..
     
     git clone git@github.com:MetaSUB/MetaSUB_CAP
     
