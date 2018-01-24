@@ -8,14 +8,15 @@ rule shortbred_make_amr_table:
         table = config['shortbred_amr_profiling']['table']
     params:
         ref=config['shortbred_amr_profiling']['ref']['filepath'],
-        shortbred=config['shortbred']['exc']['filepath']
+        shortbred=config['shortbred']['exc']['filepath'],
+        python2 = config['python2']
     threads: int(config['shortbred_amr_profiling']['threads'])
-    version: config['shortbred_amr_profiling']['exc']['version']
+    version: config['shortbred']['exc']['version']
     resources:
         time=int(config['shortbred_amr_profiling']['time']),
         n_gb_ram=int(config['shortbred_amr_profiling']['ram'])
     run:
-        cmd = ('python2 {params.shortbred} '
+        cmd = ('{params.python2} {params.shortbred} '
                '--markers {params.ref} '
                '--wgs {input.reads1} {input.reads2} '
            '--results {output.table} '

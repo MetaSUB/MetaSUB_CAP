@@ -19,11 +19,12 @@ def checkLevel(taxon, level):
 
 def getColumnDist(mdb, sample, col):
     out = {}
-    for taxa, abund in sample.iterTaxa():
+    for taxonkey, abund in sample.iterTaxa():
+        #print(taxonkey)
         try:
-            val = mdb.loc[sample][col]
+            val = mdb[taxonkey][col]
         except KeyError:
-            val = 'NA'
+            val = 'NaN'
         try:
             out[val] += abund
         except KeyError:
@@ -39,9 +40,12 @@ class Sample:
         self.total = 0.0
 
     def addLine(self, line):
+        if line[0] == '#':
+            return
         taxon, abund = line.split()
+        taxonList = [t.split('__')[1] for t in taxon.split('|')]
         if checkLevel(taxon, 'species'):
-            self.abunds[taxon] = float(abund)
+            self.abunds['__'.join(taxonList).lower()] = float(abund)
             self.total += float(abund)
 
     def iterTaxa(self):
@@ -58,7 +62,15 @@ class Sample:
 
 
 def parseMDB(mdbf):
-    mdb = pd.DataFrame.from_csv(mdbf)
+    mdb = {}
+    ranks = 'kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'species'
+    for rowname, row in pd.read_csv(mdbf).iterrows():
+        key = ''
+        for rank in ranks:
+            key += row.loc[rank]
+            key += '__'
+        key = '_'.join(key[:-2].lower().split())
+        mdb[key] = row
     return mdb
 
 

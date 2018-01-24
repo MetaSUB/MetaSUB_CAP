@@ -8,6 +8,7 @@ rule measure_beta_diversity:
     params:
         script = config['pipeline_dir'] + config['beta_diversity_stats']['script']
     run:
+        print(input)
         cmd = '{params.script} '
         for mphlan2 in input.mphlan2s:
             cmd += '-t metaphlan2 ' + getSample(mphlan2) + ' ' + mphlan2 + ' '

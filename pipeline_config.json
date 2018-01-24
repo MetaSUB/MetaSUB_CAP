@@ -11,7 +11,7 @@
     "script": "/scripts/alpha_diversity_stats.py"
   },
   "microbe_directory_annotate": {
-    "script": "/scripts/amicrobe_directory_annotate.py",
+    "script": "/scripts/microbe_directory_annotate.py",
     "db": "/scripts/microbe-directory.csv"
   },
   "beta_diversity_stats": {
@@ -33,20 +33,20 @@
     "ram": "5"
   },
   "midas_single_samples": {
-    "time": "",
-    "ram": "",
-    "threads": "",
+    "time": "4",
+    "ram": "4",
+    "threads": "6",
     "exc": {
-      "filepath": ""
+      "filepath": "`which run_midas.py`"
     },
     "db": {
-      "filepath": ""
+      "filepath": "`packagemega database midas.default_midas.0`"
     }
   },
   "midas_merge_groups": {
     "exc": {
-      "filepath": ""
-    },
+      "filepath": "`which merge_midas.py`"
+    }
   },
   "kraken_taxonomy_profiling": {
     "exc": {
@@ -94,8 +94,8 @@
       "block_size": "6"
     },
     "threads": "1",
-    "time": "1",
-    "ram": "8"
+    "time": "4",
+    "ram": "32"
   },
   "microbe_census": {
     "threads": "6",
@@ -110,7 +110,7 @@
     "exc": {
       "filepath": "`which shortbred_quantify.py`",
       "version": ""
-    },
+    }
   },
   "shortbred_amr_profiling": {
     "ref": {
@@ -182,6 +182,7 @@
     "filepath": "`which samtools`"
   },
   "humann2_normalize_genes": {
-    "script": "normalize_genes.py"
-  }
+    "script": "/scripts/normalize_genes.py"
+  },
+  "python2": "`which python2`"
 }
