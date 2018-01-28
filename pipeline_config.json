@@ -191,7 +191,7 @@
     "ram": "10",
     "exc": {
       "filepath": "`which AdapterRemoval`",
-      "version": "`AdapterRemoval --version`"
+      "version": "`AdapterRemoval --version 2>&1`"
     }
   }
 }

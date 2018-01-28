@@ -1,8 +1,8 @@
 
 rule align_to_amr_genes:
     input:
-        reads1 = config['filter_macrobial_dna']['microbial_read1'],
-        reads2 = config['filter_macrobial_dna']['microbial_read2'],
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'],
     output:
         bam = config['align_to_amr_genes']['bam']
     params:

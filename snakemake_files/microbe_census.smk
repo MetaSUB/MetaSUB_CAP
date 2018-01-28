@@ -2,8 +2,8 @@
 # MicrobeCensus
 rule microbe_census:
     input:
-        reads1 = config['filter_macrobial_dna']['microbial_read1'],
-        reads2 = config['filter_macrobial_dna']['microbial_read2'] 
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'] 
     output:
         main = config['microbe_census']['stats']
     threads: int( config['microbe_census']['threads'])

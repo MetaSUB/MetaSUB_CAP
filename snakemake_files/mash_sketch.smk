@@ -2,7 +2,7 @@
 
 rule mash_sketch:
     input:
-        reads1 = config['filter_macrobial_dna']['microbial_read1']
+        reads1 = config['filter_human_dna']['nonhuman_read1']
     output:
         sketch = config['mash_sketch']['sketch'],
     threads: 1

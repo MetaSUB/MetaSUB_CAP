@@ -2,8 +2,8 @@
 
 rule metaphlan2_make_mpa:
     input:
-        reads1 = config['filter_macrobial_dna']['microbial_read1'],
-        reads2 = config['filter_macrobial_dna']['microbial_read2'] 
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2']
     output:
         mpa = config['metaphlan2_taxonomy_profiling']['mpa'],
         sam = config['metaphlan2_taxonomy_profiling']['sam'],

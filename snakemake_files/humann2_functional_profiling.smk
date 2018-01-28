@@ -3,8 +3,8 @@ from glob import glob
 
 rule humann2_make_blastm8:
     input:
-        reads1 = config['filter_macrobial_dna']['microbial_read1'],
-        reads2 = config['filter_macrobial_dna']['microbial_read2'],
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'],
         dmnd_db = config['humann2_functional_profiling']['db']['filepath']
     output:
         m8 = config['humann2_functional_profiling']['m8']

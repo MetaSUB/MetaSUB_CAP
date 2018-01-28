@@ -16,8 +16,8 @@ rule kraken_read_assignment:
         # these file patterns are automatically generated when
         # the snakemake is preprocessed. The definitions used
         # to generate can be found in pipeline_definition.json.
-        reads1 = config['filter_macrobial_dna']['microbial_read1'],
-        reads2 = config['filter_macrobial_dna']['microbial_read2'] 
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'] 
     output:
         readAssignments = config['kraken_taxonomy_profiling']['read_assignments']
     threads: int( config['kraken_taxonomy_profiling']['threads'])
