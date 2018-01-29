@@ -6,7 +6,7 @@ rule measure_beta_diversity:
     output:
         json = config['beta_diversity_stats']['json']
     params:
-        script = config['pipeline_dir'] + config['beta_diversity_stats']['script']
+        script = config['beta_diversity_stats']['script']
     run:
         print(input)
         cmd = '{params.script} '

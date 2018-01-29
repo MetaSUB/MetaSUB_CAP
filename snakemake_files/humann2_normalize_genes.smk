@@ -7,7 +7,7 @@ rule humann2_normalize_genes:
     output:
         ngenes = config['humann2_normalize_genes']['norm_genes']
     params:
-        script = config['pipeline_dir'] + config['humann2_normalize_genes']['script'] 
+        script = config['humann2_normalize_genes']['script'] 
     run:
         cmd = ('{params.script} '
                 '{input.genes} '

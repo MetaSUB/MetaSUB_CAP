@@ -5,8 +5,8 @@ rule annotate_with_microbe_directory:
     output:
         json = config['microbe_directory_annotate']['json']
     params:
-        script = config['pipeline_dir'] + config['microbe_directory_annotate']['script'],
-        db = config['pipeline_dir'] + config['microbe_directory_annotate']['db']
+        script = config['microbe_directory_annotate']['script'],
+        db = config['microbe_directory_annotate']['db']
     run:
         cmd = '{params.script} '
         cmd += '{params.db} '

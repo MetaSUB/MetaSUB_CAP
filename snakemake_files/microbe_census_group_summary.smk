@@ -6,7 +6,7 @@ rule summarize_microbe_census:
         vector = config['microbe_census_group_summary']['vector']
     threads: 1
     params:
-        script = config['pipeline_dir'] + config['microbe_census_group_summary']['script'],
+        script = config['microbe_census_group_summary']['script'],
         statNames = expandGroup(config['microbe_census']['stats'], names=True)
     run:
         cmd = '{params.script} '

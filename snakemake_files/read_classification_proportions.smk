@@ -9,7 +9,7 @@ rule count_class_proportions:
     output:
         json = config['read_classification_proportions']['json']
     params:
-        script = config['pipeline_dir'] + config['read_classification_proportions']['script']
+        script = config['read_classification_proportions']['script']
     run:
         cmd = ('{params.script} '
                '{input.human_reads1} '

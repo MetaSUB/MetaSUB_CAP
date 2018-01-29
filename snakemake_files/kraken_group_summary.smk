@@ -7,7 +7,7 @@ rule summarize_kraken:
         vector = config['kraken_group_summary']['json']
     threads: 1
     params:
-        script = config['pipeline_dir'] + config['kraken_group_summary']['script'],
+        script = config['kraken_group_summary']['script'],
         statNames = expandGroup(config['kraken_taxonomy_profiling']['mpa'], names=True)
     run:
         cmd = '{params.script} '

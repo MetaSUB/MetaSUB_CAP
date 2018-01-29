@@ -3,7 +3,7 @@
   "VERSION": "0.0.1",
   "SNAKEMAKE": {
     "DIR": "snakemake_files",
-    "CONF": "pipeline_config.json"
+    "CONF": "pipeline_config.py"
   },
   "PACKAGE_MEGA": {
     "RECIPE_DIR": "recipes"

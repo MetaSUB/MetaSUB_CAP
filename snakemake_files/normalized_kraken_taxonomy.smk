@@ -7,7 +7,7 @@ rule normalize_kraken_taxonomy:
         json = config['normalized_kraken_taxonomy']['json']
     threads: 1
     params:
-        script = config['pipeline_dir'] + config['normalized_kraken_taxonomy']['script']
+        script = config['normalized_kraken_taxonomy']['script']
     run:
         cmd = '{params.script} {input.ags} {input.kraken} > {output.json}'
         shell(cmd)
