@@ -1,15 +1,18 @@
 from moduleultra.pipeline_config_utils import *
-from os.path import join
+from packagemega import PMRepo
+from packagemega.mini_language import processOperand
+
+pipeDir = fromPipelineDir('')
+pmrepo = PMRepo.loadRepo()
 
 
 def scriptDir(fpath):
-    dname = fromPipelineDir('/scripts/')
+    dname = pipeDir + '/scripts/'
     return dname + fpath
 
 
 def pmegaDB(operand):
-    cmd = 'packagemega database {}'.format(operand)
-    return resolveCmd(cmd)
+    return processOperand(pmrepo, operand, stringify=True)
 
 
 def which(tool):
@@ -201,7 +204,8 @@ config = {
         'filepath': which('samtools')
     },
     'humann2_normalize_genes': {
-        'script': scriptDir('normalize_genes.py')
+        'read_depth_script': scriptDir('normalize_genes_by_depth.py'),
+        'ags_script': scriptDir('normalize_genes_by_ags.py')
     },
     'python2': which('python2'),
     'adapter_removal': {

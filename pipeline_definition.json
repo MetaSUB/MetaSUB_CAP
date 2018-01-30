@@ -252,7 +252,8 @@
     {
       "NAME": "humann2_normalize_genes",
       "FILES": {
-        "norm_genes": "tsv"
+        "ags_norm_genes": "tsv",
+        "read_depth_norm_genes": "tsv"
       }
     },
     {

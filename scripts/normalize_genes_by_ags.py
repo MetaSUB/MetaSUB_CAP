@@ -8,7 +8,10 @@ Average Genome Size from microbe census
 
 Gene output from humann2 is already in reads per kilobase (RPK)
 
-Produces output in reads per kilobase per genome (RPKG)
+In a previous step we normalize by sample depth to get 
+reads per kilobase millions of reads (RPKM)
+
+Produces output in reads per kilobase per genome (RPKMG)
 
 The source paper for microbe census describes this normalization
 in detail
@@ -27,8 +30,8 @@ def mcParse(mcFile):
 @click.argument('humann2_genes')
 @click.argument('microbe_census')
 def main(humann2_genes, microbe_census):
-    ags = mcParse(microbe_census)
-    print('# Normalized RPKG\tAGS={}'.format(ags))
+    ags = mcParse(microbe_census) / (1000 * 1000)
+    print('# Normalized RPKMG\tAGS={}M'.format(ags))
     with open(humann2_genes) as hgs:
         for line in hgs:
             line = line.strip()
