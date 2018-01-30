@@ -7,7 +7,7 @@ from subprocess import getoutput
 
 def nreads(fastqf):
     cmd = 'zcat {} | wc -l'.format(fastqf)
-    rawOut = int(getoutput(cmd).split('\n'))
+    rawOut = int(getoutput(cmd))
     out = rawOut / 4
     return out
 
