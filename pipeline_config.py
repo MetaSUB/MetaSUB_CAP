@@ -216,5 +216,16 @@ config = {
             'filepath': which('AdapterRemoval'),
             'version': resolveCmd('AdapterRemoval --version 2>&1')
         }
+    },
+    'vfdb_quantify': {
+        'script': scriptDir('quantify_vfdb_alignments'),
+        'fasta_db': {'filepath': pmegaDB('vfdb.fasta.0')},
+        'dmnd': {
+            'filepath': pmegaDB('vfdb.dmnd.0'),
+            'threads': 6,
+            'time': 2,
+            'ram': 6,
+            'block_size': 6
+        }
     }
 }

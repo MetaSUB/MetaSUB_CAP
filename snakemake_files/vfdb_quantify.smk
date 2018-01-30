@@ -5,7 +5,7 @@ rule vfdb_make_blastm8:
     input:
         reads1 = config['filter_human_dna']['nonhuman_read1'],
         reads2 = config['filter_human_dna']['nonhuman_read2'],
-        dmnd_db = config['vfdb_quantify']['dmnd_db']['filepath']
+        dmnd_db = config['vfdb_quantify']['dmnd']['filepath']
     output:
         m8 = config['vfdb_quantify']['m8']
     threads: int(config['vfdb_quantify']['dmnd']['threads'])
