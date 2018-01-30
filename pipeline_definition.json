@@ -266,6 +266,13 @@
       }
     },
     {
+      "NAME": "vfdb_quantify",
+      "FILES": {
+        "table": "tsv",
+        "m8": "m8"
+      }
+    },
+    {
       "NAME": "align_to_amr_genes",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
