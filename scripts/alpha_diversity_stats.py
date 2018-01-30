@@ -47,7 +47,7 @@ class Sample:
         brkpoints = [0]
         rmap = {}
         for i, (key, val) in enumerate(self.abunds.items()):
-            brkpoints.append(brkpoints[i + 1] + val)
+            brkpoints.append(brkpoints[i] + val)
             rmap[i] = key
 
         i = 0
