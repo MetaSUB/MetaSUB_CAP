@@ -24,10 +24,10 @@ class VFDBRecipe(BaseRecipe):
         }
 
     def makeRecipe(self):
-        self.source.resolve()
+        self.fasta.resolve()
         self.repo.saveFiles(self,
                             'fasta',
-                            self.source.filepath())
+                            self.fasta.filepath())
         self.dmnd.resolve()
         self.repo.saveFiles(self,
                             'dmnd',

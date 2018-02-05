@@ -121,7 +121,7 @@ config = {
             'block_size': 6
         },
         'threads': 1,
-        'time': 1,
+        'time': 4,
         'ram': 32
     },
     'microbe_census': {
@@ -190,11 +190,14 @@ config = {
         'ram': 10
     },
     'align_to_methyltransferases': {
-        'threads': 6,
-        'time': 10,
-        'ram': 10,
-        'db': {
-            'bt2': ''
+        'script': scriptDir('quantify_geneset_alignments.py'),
+        'fasta_db': {'filepath': pmegaDB('methyl.fasta.0')},
+        'dmnd': {
+            'filepath': pmegaDB('methyl.dmnd.0'),
+            'threads': 6,
+            'time': 2,
+            'ram': 6,
+            'block_size': 6
         }
     },
     'align_to_amr_genes': {
@@ -214,7 +217,7 @@ config = {
     },
     'python2': which('python2'),
     'adapter_removal': {
-        'time': 2,
+        'time': 5,
         'threads': 6,
         'ram': 10,
         'exc': {
@@ -223,7 +226,7 @@ config = {
         }
     },
     'vfdb_quantify': {
-        'script': scriptDir('quantify_vfdb_alignments'),
+        'script': scriptDir('quantify_geneset_alignments.py'),
         'fasta_db': {'filepath': pmegaDB('vfdb.fasta.0')},
         'dmnd': {
             'filepath': pmegaDB('vfdb.dmnd.0'),
