@@ -52,7 +52,8 @@ class Sample:
 
         i = 0
         outAbunds = {}
-        indices = sorted(choices(range(self.total()), k=n))
+        indices = choices(range(int(self.total())), k=n)
+        indices = sorted(indices)
         for ind in indices:
             while ind >= brkpoints[i + 1]:
                 i += 1
@@ -122,12 +123,14 @@ def handleCounts(tool, fname):
         'species': {
             'richness': {},
             'shannon_index': {},
-            'gini-simpson': {}
+            'gini-simpson': {},
+            'chao1': {}
         },
         'genus': {
             'richness': {},
             'shannon_index': {},
-            'gini-simpson': {}
+            'gini-simpson': {},
+            'chao1': {}
         }
     }
     for level in obj.keys():
