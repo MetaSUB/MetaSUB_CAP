@@ -52,8 +52,9 @@ class Sample:
 
         i = 0
         outAbunds = {}
-        indices = choices(range(int(self.total())), k=n)
-        indices = sorted(indices)
+        indices = range(int(self.total()))
+        indices = sorted(choices(indices, k=n))
+
         for ind in indices:
             while ind >= brkpoints[i + 1]:
                 i += 1

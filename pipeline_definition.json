@@ -262,6 +262,7 @@
         "microbial_short_read_dna"
       ],
       "FILES": {
+        "m8": "m8",
         "table": "tsv"
       }
     },

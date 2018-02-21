@@ -9,27 +9,28 @@ class MethyltransferaseRecipe(BaseRecipe):
 
     def __init__(self):
         super(MethyltransferaseRecipe, self).__init__()
-        self.source = SourceFile(self.repo, "methyl.faa.gz")
-        self.sbred = ConstructedFile(self.repo, "methyl.shortbred_markers.faa")
+        self.fasta = SourceFile(self.repo, "methyls.faa")
+        self.dmnd = ConstructedFile(self.repo, "methyls.dmnd")
 
     def name(self):
-        return 'methyls'
+        return 'methyl'
 
     def fileTypes(self):
-        return ['gz_fasta_aa', 'fasta_aa']
+        return ['gz_fasta_aa', 'dmnd-db']
 
     def resultSchema(self):
         return {
             'fasta': 'gz_fasta_aa',
-            'sbred': 'fasta_aa'
+            'dmnd': 'dmnd-db'
         }
 
     def makeRecipe(self):
-        self.source.resolve()
+        self.fasta.resolve()
         self.repo.saveFiles(self,
                             'fasta',
-                            self.source.filepath())
-        self.sbred.resolve()
+                            self.fasta.filepath())
+        self.dmnd.resolve()
         self.repo.saveFiles(self,
-                            'sbred',
-                            self.sbred.filepath())
+                            'dmnd',
+                            self.dmnd.filepath())
+
