@@ -135,15 +135,27 @@
       }
     },
     {
-      "NAME": "kraken_taxonomy_profiling",
+      "NAME": "krakenhll_taxonomy_profiling",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
       ],
       "FILES": {
         "read_assignments": "tsv",
+        "report": "tsv",
         "mpa": "mpa"
       }
     },
+    {
+      "NAME": "bracken_abundance_estimation",
+      "DEPENDENCIES": [
+        "microbial_short_read_dna"
+      ],
+      "FILES": {
+        "species_report": "tsv",
+        "genus_report": "tsv",
+        "phylum_report": "tsv",
+      }
+    }
     {
       "NAME": "microbe_census_group_summary",
       "LEVEL": "GROUP",

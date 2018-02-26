@@ -26,3 +26,4 @@ rule krakenhll_read_assignment:
 rule krakenhll_filter_assignments:
     input:
         readAssignments = config['krakenhll_taxonomy_profiling']['read_assignments']
+
