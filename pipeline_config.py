@@ -26,6 +26,31 @@ def which(tool):
 
 
 config = {
+    'gottcha_taxonomy_profiling': {
+        'threads': 6,
+        'exc': {
+            'filepath': which('gottcha')
+        },
+        'index': {
+            'filepath': pmegaDB('gottcha.db.0')
+        },
+        'time': 10,
+        'ram': 20
+    },
+    'centrifuge_taxonomy_profiling': {
+        'threads': 6,
+        'centrifuge': {
+            'filepath': which('centrifuge')
+        },
+        'kreport': {
+            'filepath': which('centrifuge-kreport')
+        },
+        'index': {
+            'filepath': pmegaDB('centrifuge.db.0')
+        },
+        'time': 10,
+        'ram': 20
+    },
     'align_to_sa_n315': {
         'threads': 6,
         'time': 10,

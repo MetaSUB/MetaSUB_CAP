@@ -29,6 +29,8 @@ rule centrifuge_read_assignments:
 rule centrifuge_make_mpa:
     input:
         classification = config['centrifuge_taxonomy_profiling']['classification']
+    output:
+        kreport = config['centrifuge_taxonomy_profiling']['mpa']
     params:
         index = config['centrifuge_taxonomy_profiling']['index']['filepath'],
         kreport = config['centrifuge_taxonomy_profiling']['kreport']['filepath']
@@ -36,5 +38,7 @@ rule centrifuge_make_mpa:
         cmd = ('{params.kreport} '
                '-x {params.index} '
                '{input.classification} '
+               '> '
+               '{output.mpa} '
         )
         shell(cmd)
