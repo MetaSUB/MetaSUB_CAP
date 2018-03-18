@@ -138,10 +138,13 @@ def handleCounts(tool, fname):
         sample = Sample.parseMPA(tool, fname, level)
         for subsetSize in getSubsets(sample.total()):
             subsample = sample.subset(subsetSize)
-            obj[level]['richness'][subsetSize] = subsample.richness()
-            obj[level]['shannon_index'][subsetSize] = subsample.shannonIndex()
-            obj[level]['gini-simpson'][subsetSize] = subsample.ginisimpson()
-            obj[level]['chao1'][subsetSize] = subsample.chao1()
+            key = str(subsetSize)
+            if subsample == sample:
+                key = 'all_reads'
+            obj[level]['shannon_index'][key] = subsample.shannonIndex()
+            obj[level]['richness'][key] = subsample.richness()
+            obj[level]['gini-simpson'][key] = subsample.ginisimpson()
+            obj[level]['chao1'][key] = subsample.chao1()
     return obj
 
 

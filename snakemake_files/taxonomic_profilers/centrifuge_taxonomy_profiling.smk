@@ -2,8 +2,8 @@
 
 rule centrifuge_read_assignments:
     input:
-        reads1 = config['filter_human_dna']['nonhuman_read1'],
-        reads2 = config['filter_human_dna']['nonhuman_read2']
+        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
+        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
     output:
         report = config['centrifuge_taxonomy_profiling']['report']
         classification = config['centrifuge_taxonomy_profiling']['classification']

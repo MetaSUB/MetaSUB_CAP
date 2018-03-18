@@ -2,8 +2,8 @@
 
 rule methyl_make_blastm8:
     input:
-        reads1 = config['filter_human_dna']['nonhuman_read1'],
-        reads2 = config['filter_human_dna']['nonhuman_read2'],
+        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
+        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
         dmnd_db = config['align_to_methyltransferases']['dmnd']['filepath']
     output:
         m8 = config['align_to_methyltransferases']['m8']

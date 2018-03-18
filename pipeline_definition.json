@@ -10,7 +10,7 @@
   },
   "REQUIREMENTS": {},
   "ORIGINS": [
-    "raw_short_read_dna"
+    "filter_human_dna"
   ],
   "SAMPLE_TYPES": [],
   "FILE_TYPES": [
@@ -64,33 +64,11 @@
       "FILES": { "bam": "bam"}
     },
     {
-      "NAME": "raw_short_read_dna",
-      "FILES": {
-        "read1": "gz_fastq",
-        "read2": "gz_fastq"
-      }
-    },
-    {
-      "NAME": "filter_macrobial_dna",
-      "DEPENDENCIES": [
-        "filter_macrobial_dna"
-      ],
-      "FILES": {
-        "macrobial_read1": "gz_fastq",
-        "macrobial_read2": "gz_fastq",
-        "microbial_read1": "gz_fastq",
-        "microbial_read2": "gz_fastq",
-        "bam": "bam"
-      }
-    },
-    {
       "NAME": "filter_human_dna",
       "DEPENDENCIES": [
         "adpater_removal"
       ],
       "FILES": {
-        "human_read1": "gz_fastq",
-        "human_read2": "gz_fastq",
         "nonhuman_read1": "gz_fastq",
         "nonhuman_read2": "gz_fastq",
         "bam": "bam"
@@ -307,16 +285,6 @@
       ],
       "FILES": {
         "bam": "bam"
-      }
-    },
-    {
-      "NAME": "adapter_removal",
-      "DEPENDENCIES": [
-        "raw_short_read_dna"
-      ],
-      "FILES": {
-        "clean_read1": "gz_fastq",
-        "clean_read2": "gz_fastq"
       }
     }
   ]

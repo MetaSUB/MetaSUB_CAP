@@ -1,10 +1,11 @@
 
+# TODO
 
 rule count_class_proportions:
     input:
         kraken = config['kraken_taxonomy_profiling']['mpa'],
         human_reads1 = config['filter_human_dna']['human_read1'],
-        nonhuman_reads1 = config['filter_human_dna']['nonhuman_read1'],
+        nonhuman_reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
         microbial_reads1 = config['filter_macrobial_dna']['microbial_read1'],
     output:
         json = config['read_classification_proportions']['json']
