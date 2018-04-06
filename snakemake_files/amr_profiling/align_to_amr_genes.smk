@@ -30,7 +30,7 @@ rule amr_quantify:
         bam = config['align_to_amr_genes']['bam'],
         readstats = config['read_stats']['json'],
         ags = config['microbe_census']['stats'],
-        fasta = config['align_to_amr_genes']['fasta_db']['filepath']
+        fasta = config['align_to_amr_genes']['fasta']
     output:
         tbl = config['align_to_amr_genes']['table']
     params:

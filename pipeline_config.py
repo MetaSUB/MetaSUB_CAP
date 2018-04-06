@@ -212,8 +212,10 @@ config = {
         'threads': 6,
         'time': 10,
         'ram': 10,
+        'script': scriptDir('quantify_geneset_alignments.py'),
         'card_amrs': {
-            'bt2': '/athena/masonlab/scratch/users/dcd3001/Refs/CAP_databases/abr_genes/CARD/ARmeta-genes.nt2'
+            'bt2': '/athena/masonlab/scratch/users/dcd3001/Refs/CAP_databases/abr_genes/CARD/ARmeta-genes.nt2',
+            'fasta': 'foobar',
         }
     },
     'samtools': {
