@@ -100,6 +100,22 @@ config = {
         'time': 2,
         'ram': 5
     },
+    'krakenhll_taxonomy_profiling': {
+        'exc': {
+            'filepath': which('kraken'),
+            'version': resolveCmd('kraken --version | tr "\n"  " "')
+        },
+        'db': {
+            'filepath': pmegaDB('minikraken.kraken-db.dir')
+        },
+        'mpa_exc': {
+            'filepath': which('kraken-mpa-report'),
+            'version': resolveCmd('kraken-mpa-report --version | tr "\n"  " "')
+        },
+        'threads': 2,
+        'time': 2,
+        'ram': 5
+    },
     'microbe_census_group_summary': {
         'script': scriptDir('summarize_microbe_census.py')
     },
