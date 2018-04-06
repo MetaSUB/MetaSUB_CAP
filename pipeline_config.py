@@ -172,6 +172,7 @@ config = {
         'ram': 5
     },
     'resistome_amrs': {
+        'script': scriptDir('quantify_resistome_table.py'),
         'threads': 4,
         'thresh': 80,
         'exc': {
