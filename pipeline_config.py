@@ -32,7 +32,7 @@ config = {
             'filepath': which('gottcha')
         },
         'index': {
-            'filepath': pmegaDB('gottcha.db.0')
+            'filepath': pmegaDB('gottcha.bact_species.prefix')
         },
         'time': 10,
         'ram': 20
