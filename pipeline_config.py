@@ -46,7 +46,7 @@ config = {
             'filepath': which('centrifuge-kreport')
         },
         'index': {
-            'filepath': pmegaDB('centrifuge.db.0')
+            'filepath': pmegaDB('centrifuge.nt.prefix')
         },
         'time': 10,
         'ram': 20
