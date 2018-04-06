@@ -143,13 +143,13 @@ config = {
             'filepath': pmegaDB('uniref90.dmnd.0')
         },
         'dmnd': {
-            'time': 10,
+            'time': 99,
             'ram': 6,
             'threads': 10,
             'block_size': 6
         },
         'threads': 1,
-        'time': 4,
+        'time': 10,
         'ram': 32
     },
     'microbe_census': {
@@ -230,11 +230,12 @@ config = {
     'python2': which('python2'),
     'vfdb_quantify': {
         'script': scriptDir('quantify_geneset_alignments.py'),
+        'time': 10,
         'fasta_db': {'filepath': pmegaDB('vfdb.fasta.0')},
         'dmnd': {
             'filepath': pmegaDB('vfdb.dmnd.0'),
             'threads': 6,
-            'time': 2,
+            'time': 20,
             'ram': 6,
             'block_size': 6
         }
