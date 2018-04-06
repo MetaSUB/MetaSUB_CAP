@@ -59,7 +59,7 @@ rule quantify_resistome_gene:
     input:
         gene = config['resistome_amrs']['gene'],
         fasta = config['resistome_amrs']['db']['fasta'],
-        annot = config['resistome_amrs']['db']['annotations']
+        annot = config['resistome_amrs']['db']['annotations'],
         readstats = config['read_stats']['json'],
         ags = config['microbe_census']['stats'],
     output:
@@ -88,7 +88,7 @@ rule quantify_resistome_group:
     input:
         group = config['resistome_amrs']['group'],
         fasta = config['resistome_amrs']['db']['fasta'],
-        annot = config['resistome_amrs']['db']['annotations']
+        annot = config['resistome_amrs']['db']['annotations'],
         readstats = config['read_stats']['json'],
         ags = config['microbe_census']['stats'],
     output:
@@ -117,7 +117,7 @@ rule quantify_resistome_classus:
     input:
         classus = config['resistome_amrs']['classus'],
         fasta = config['resistome_amrs']['db']['fasta'],
-        annot = config['resistome_amrs']['db']['annotations']
+        annot = config['resistome_amrs']['db']['annotations'],
         readstats = config['read_stats']['json'],
         ags = config['microbe_census']['stats'],
     output:
@@ -146,7 +146,7 @@ rule quantify_resistome_mech:
     input:
         mech = config['resistome_amrs']['mech'],
         fasta = config['resistome_amrs']['db']['fasta'],
-        annot = config['resistome_amrs']['db']['annotations']
+        annot = config['resistome_amrs']['db']['annotations'],
         readstats = config['read_stats']['json'],
         ags = config['microbe_census']['stats'],
     output:
