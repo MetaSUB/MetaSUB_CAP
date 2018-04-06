@@ -5,7 +5,7 @@ rule find_read_stats:
     input:
         reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
         reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
-        raw_reads1 = config['adapter_removal']['clean_read1'],
+        raw_reads1 = getOriginResultFiles(config, 'adapter_removal', 'clean_read1'),
         microbial_reads1 = config['filter_human_dna']['nonhuman_read2'],
     output:
         json = config['read_stats']['json']
