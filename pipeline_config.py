@@ -105,15 +105,11 @@ config = {
     },
     'krakenhll_taxonomy_profiling': {
         'exc': {
-            'filepath': which('kraken'),
-            'version': resolveCmd('kraken --version | tr "\n"  " "')
+            'filepath': which('krakenhll'),
+            'version': resolveCmd('krakenhll --version | tr "\n"  " "')
         },
         'db': {
-            'filepath': pmegaDB('minikraken.kraken-db.dir')
-        },
-        'mpa_exc': {
-            'filepath': which('kraken-mpa-report'),
-            'version': resolveCmd('kraken-mpa-report --version | tr "\n"  " "')
+            'filepath': pmegaDB('krakenhll.db.dir')
         },
         'threads': 2,
         'time': 2,
