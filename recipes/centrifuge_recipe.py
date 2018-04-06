@@ -26,8 +26,8 @@ class CentrifugeRecipe(BaseRecipe):
 
         def resolve(name, source):
             source.resolve()
-            base = basename(self.source.filepath())
-            dirpath = dirname(self.source.filepath())
+            base = basename(source.filepath())
+            dirpath = dirname(source.filepath())
             pattern = base.split('.')
             pattern = pattern[0] + '.*.' + pattern[2]
             pattern = join(dirpath, pattern)
