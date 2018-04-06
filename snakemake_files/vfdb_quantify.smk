@@ -35,6 +35,8 @@ rule vfdb_quantify:
         tbl = config['vfdb_quantify']['table']
     params:
         script = config['vfdb_quantify']['script'],
+    resources:
+        time = int(config['vfdb_quantify']['time'])
     run:
         cmd = ('{params.script} '
                '-s {input.readstats} '
