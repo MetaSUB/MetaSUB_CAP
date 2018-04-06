@@ -108,6 +108,17 @@
       }
     },
     {
+      "NAME": "kraken_taxonomy_profiling",
+      "DEPENDENCIES": [
+        "microbial_short_read_dna"
+      ],
+      "FILES": {
+        "read_assignments": "tsv",
+        "report": "tsv",
+        "mpa": "mpa"
+      }
+    },
+    {
       "NAME": "bracken_abundance_estimation",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
