@@ -15,6 +15,7 @@ rule amr_make_blastm8:
         n_gb_ram = int(config['align_to_amr_genes']['dmnd']['ram'])
     run:
         cmd = ('{params.dmnd} blastx '
+               '--sensitive '
                '--threads {threads} '
                '-d {input.dmnd_db} '
                '-q {input.reads1} '
