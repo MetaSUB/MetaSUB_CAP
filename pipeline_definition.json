@@ -131,9 +131,9 @@
       "FILES": {
         "species_report": "tsv",
         "genus_report": "tsv",
-        "phylum_report": "tsv",
+        "phylum_report": "tsv"
       }
-    }
+    },
     {
       "NAME": "microbe_census_group_summary",
       "LEVEL": "GROUP",

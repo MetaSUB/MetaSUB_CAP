@@ -84,22 +84,6 @@ config = {
         'time': 2,
         'ram': 5
     },
-    'midas_single_samples': {
-        'time': 4,
-        'ram': 4,
-        'threads': 6,
-        'exc': {
-            'filepath': which('run_midas.py')
-        },
-        'db': {
-            'filepath': pmegaDB('midas.default_midas.0')
-        }
-    },
-    'midas_merge_groups': {
-        'exc': {
-            'filepath': which('merge_midas.py')
-        }
-    },
     'kraken_taxonomy_profiling': {
         'exc': {
             'filepath': which('kraken'),
