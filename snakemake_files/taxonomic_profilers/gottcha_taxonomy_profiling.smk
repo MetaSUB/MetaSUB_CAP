@@ -4,7 +4,7 @@ rule gottcha_taxonomy_profiling:
     input:
         reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
     output:
-        summary = config['gottcha_taxonomy_profiling']['summary_table'],
+        summary = config['gottcha_taxonomy_profiling']['summary'],
         full = config['gottcha_taxonomy_profiling']['full_table'],
     params:
         exc = config['gottcha_taxonomy_profiling']['exc']['filepath'],
