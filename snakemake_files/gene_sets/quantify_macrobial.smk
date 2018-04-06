@@ -2,8 +2,8 @@
 
 rule align_to_macrobial_fragments:
     input:
-        reads1 = config['filter_human_dna']['nonhuman_read1'],
-        reads2 = config['filter_human_dna']['nonhuman_read2']
+        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
+        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
     output:
         bam = config['quantify_macrobial']['bam']
     params:

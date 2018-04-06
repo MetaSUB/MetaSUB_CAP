@@ -26,6 +26,31 @@ def which(tool):
 
 
 config = {
+    'gottcha_taxonomy_profiling': {
+        'threads': 6,
+        'exc': {
+            'filepath': which('gottcha')
+        },
+        'index': {
+            'filepath': pmegaDB('gottcha.db.0')
+        },
+        'time': 10,
+        'ram': 20
+    },
+    'centrifuge_taxonomy_profiling': {
+        'threads': 6,
+        'centrifuge': {
+            'filepath': which('centrifuge')
+        },
+        'kreport': {
+            'filepath': which('centrifuge-kreport')
+        },
+        'index': {
+            'filepath': pmegaDB('centrifuge.db.0')
+        },
+        'time': 10,
+        'ram': 20
+    },
     'align_to_sa_n315': {
         'threads': 6,
         'time': 10,
@@ -173,22 +198,6 @@ config = {
             'version': resolveCmd('diamond --version')
         }
     },
-    'filter_macrobial_dna': {
-        'db': {
-            'filepath': pmegaDB('common_macrobial.bt2.prefix')
-        },
-        'threads': 6,
-        'time': 10,
-        'ram': 10
-    },
-    'filter_human_dna': {
-        'db': {
-            'filepath': pmegaDB('hg38_ucsc.bt2.prefix')
-        },
-        'threads': 6,
-        'time': 10,
-        'ram': 10
-    },
     'align_to_methyltransferases': {
         'script': scriptDir('quantify_geneset_alignments.py'),
         'fasta_db': {'filepath': pmegaDB('methyl.fasta.0')},
@@ -216,15 +225,6 @@ config = {
         'ags_script': scriptDir('normalize_genes_by_ags.py')
     },
     'python2': which('python2'),
-    'adapter_removal': {
-        'time': 5,
-        'threads': 6,
-        'ram': 10,
-        'exc': {
-            'filepath': which('AdapterRemoval'),
-            'version': resolveCmd('AdapterRemoval --version 2>&1')
-        }
-    },
     'vfdb_quantify': {
         'script': scriptDir('quantify_geneset_alignments.py'),
         'time': 10,

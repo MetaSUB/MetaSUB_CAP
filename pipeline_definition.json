@@ -10,7 +10,7 @@
   },
   "REQUIREMENTS": {},
   "ORIGINS": [
-    "raw_short_read_dna"
+    "filter_human_dna"
   ],
   "SAMPLE_TYPES": [],
   "FILE_TYPES": [
@@ -44,29 +44,24 @@
   ],
   "RESULT_TYPES": [
     {
+      "NAME": "gottcha_taxonomy_profiling",
+      "FILES": {
+        "summary": "tsv",
+        "full_table": "tsv"
+      }
+    },
+    {
+      "NAME": "centrifuge_taxonomy_profiling",
+      "FILES": {
+        "mpa": "mpa",
+        "report": "tsv",
+        "classification": "tsv"
+      }
+    },
+    {
       "NAME" : "align_to_sa_n315",
       "DEPENDENCIES": ["microbial_short_read_dna"],
       "FILES": { "bam": "bam"}
-    },
-    {
-      "NAME": "raw_short_read_dna",
-      "FILES": {
-        "read1": "gz_fastq",
-        "read2": "gz_fastq"
-      }
-    },
-    {
-      "NAME": "filter_macrobial_dna",
-      "DEPENDENCIES": [
-        "filter_macrobial_dna"
-      ],
-      "FILES": {
-        "macrobial_read1": "gz_fastq",
-        "macrobial_read2": "gz_fastq",
-        "microbial_read1": "gz_fastq",
-        "microbial_read2": "gz_fastq",
-        "bam": "bam"
-      }
     },
     {
       "NAME": "filter_human_dna",
@@ -74,8 +69,6 @@
         "adpater_removal"
       ],
       "FILES": {
-        "human_read1": "gz_fastq",
-        "human_read2": "gz_fastq",
         "nonhuman_read1": "gz_fastq",
         "nonhuman_read2": "gz_fastq",
         "bam": "bam"
@@ -120,15 +113,27 @@
       }
     },
     {
-      "NAME": "kraken_taxonomy_profiling",
+      "NAME": "krakenhll_taxonomy_profiling",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
       ],
       "FILES": {
         "read_assignments": "tsv",
+        "report": "tsv",
         "mpa": "mpa"
       }
     },
+    {
+      "NAME": "bracken_abundance_estimation",
+      "DEPENDENCIES": [
+        "microbial_short_read_dna"
+      ],
+      "FILES": {
+        "species_report": "tsv",
+        "genus_report": "tsv",
+        "phylum_report": "tsv",
+      }
+    }
     {
       "NAME": "microbe_census_group_summary",
       "LEVEL": "GROUP",
@@ -280,16 +285,6 @@
       ],
       "FILES": {
         "bam": "bam"
-      }
-    },
-    {
-      "NAME": "adapter_removal",
-      "DEPENDENCIES": [
-        "raw_short_read_dna"
-      ],
-      "FILES": {
-        "clean_read1": "gz_fastq",
-        "clean_read2": "gz_fastq"
       }
     }
   ]

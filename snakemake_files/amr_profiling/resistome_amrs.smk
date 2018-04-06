@@ -2,8 +2,8 @@
 
 rule align_reads_to_megares:
     input:
-        reads1 = config['filter_human_dna']['nonhuman_read1'],
-        reads2 = config['filter_human_dna']['nonhuman_read2'],
+        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
+        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
     output:
         sam = config['resistome_amrs']['sam']
     threads: int( config['resistome_amrs']['threads'])

@@ -15,25 +15,21 @@ rule filter_human_dna:
         reads1 = config['adapter_removal']['clean_read1'],
         reads2 = config['adapter_removal']['clean_read2'],
     output:
-        human_reads1 = config['filter_human_dna']['human_read1'],
-        human_reads2 = config['filter_human_dna']['human_read2'],
         nonhuman_reads1 = config['filter_human_dna']['nonhuman_read1'],
         nonhuman_reads2 = config['filter_human_dna']['nonhuman_read2'],
         bam = config['filter_human_dna']['bam']
     params:
         bt2 = config['bt2']['exc']['filepath'],
-        db = config['filter_human_dna']['db']['filepath']	
+        db = config['filter_human_dna']['db']['filepath']
     threads: int(config['filter_human_dna']['threads'])
     resources:
         time = int(config['filter_human_dna']['time']),
         n_gb_ram = int(config['filter_human_dna']['ram'])
     run:
-        humanPattern = replaceDiff('%', output.human_reads1, output.human_reads2)
         nonhumanPattern = replaceDiff('%', output.nonhuman_reads1, output.nonhuman_reads2)
         cmd = (' {params.bt2} '
            '-p {threads} '
            '--very-fast '
-           ' --al-conc-gz ' + humanPattern,
            ' --un-conc-gz ' + nonhumanPattern,
            ' -x {params.db} '
            ' -1 {input.reads1} '

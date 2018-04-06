@@ -1,4 +1,5 @@
 
+
 rule normalize_kraken_taxonomy:
     input:
         ags = config['microbe_census_group_summary']['vector'],
