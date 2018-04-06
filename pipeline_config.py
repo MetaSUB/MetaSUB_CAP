@@ -211,9 +211,9 @@ config = {
     'align_to_amr_genes': {
         'script': scriptDir('quantify_geneset_alignments.py'),
         'time': 10,
-        'fasta_db': {'filepath': pmegaDB('vfdb.fasta.0')},
+        'fasta_db': {'filepath': pmegaDB('card.fasta.0')},
         'dmnd': {
-            'filepath': pmegaDB('vfdb.dmnd.0'),
+            'filepath': pmegaDB('card.dmnd.0'),
             'threads': 6,
             'time': 20,
             'ram': 6,
