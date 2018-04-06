@@ -22,8 +22,8 @@ rule krakenhll_read_assignment:
             '> {output.readAssignments}')
         shell(cmd)
 
-
+'''
 rule krakenhll_filter_assignments:
     input:
         readAssignments = config['krakenhll_taxonomy_profiling']['read_assignments']
-
+'''
