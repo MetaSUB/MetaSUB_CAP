@@ -5,6 +5,7 @@ from json import loads as jloads
 import pandas as pd
 from sys import stdout
 
+from .pybam import pybam
 
 million = 1000 * 1000
 
@@ -47,6 +48,14 @@ def getSeqLens(fastaf):
     return lenout, memoout
 
 
+def parseAlignments(alf):
+    if '.m8' in alf:
+        return parseM8(alf)
+    elif '.bam' in alf:
+        return parseBAM(alf)
+    assert False, f'Cannot parse {alf} file type not recognized'
+
+
 def parseM8(m8f):
     out = {}
     with open(m8f) as m8:
@@ -58,6 +67,18 @@ def parseM8(m8f):
             except KeyError:
                 out[sid] = set()
                 out[sid].add(rid)
+    out = {sid: len(rids) for sid, rids in out.items()}
+    return out
+
+
+def parseBAM(bamf):
+    out = {}
+    for rid, sid in pybam.read(bamf, ['sam_qname', 'sam_rname']):
+        try:
+            out[sid].add(rid)
+        except KeyError:
+            out[sid] = set()
+            out[sid].add(rid)
     out = {sid: len(rids) for sid, rids in out.items()}
     return out
 
@@ -79,9 +100,9 @@ def makeTable(readsPerSeq, seqMemos, seqLens, nreadsInSample, ags):
 @click.option('-s', '--read-stats')
 @click.option('-a', '--ags')
 @click.option('-f', '--fasta')
-@click.argument('m8')
-def main(read_stats, ags, fasta, m8):
-    readsPerSeq = parseM8(m8)
+@click.argument('alignment_file')
+def main(read_stats, ags, fasta, alignment_file):
+    readsPerSeq = parseAlignments(alignment_file)
     seqLens, seqMemos = getSeqLens(fasta)
     nreadsInSample = getNReads(read_stats)
     ags = getAGS(ags)

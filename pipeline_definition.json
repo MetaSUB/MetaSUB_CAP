@@ -278,6 +278,7 @@
         "microbial_short_read_dna"
       ],
       "FILES": {
+        "table": "tsv",
         "bam": "bam"
       }
     }

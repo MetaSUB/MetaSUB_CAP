@@ -23,3 +23,25 @@ rule align_to_amr_genes:
            '| {params.samtools} view -F 4 -b '
            '> {output.bam} ')
         shell(cmd)
+
+
+rule amr_quantify:
+    input:
+        bam = config['align_to_amr_genes']['bam'],
+        readstats = config['read_stats']['json'],
+        ags = config['microbe_census']['stats'],
+        fasta = config['align_to_amr_genes']['fasta_db']['filepath']
+    output:
+        tbl = config['align_to_amr_genes']['table']
+    params:
+        script = config['align_to_amr_genes']['script'],
+    resources:
+        time = int(config['align_to_amr_genes']['time'])
+    run:
+        cmd = ('{params.script} '
+               '-s {input.readstats} '
+               '-a {input.ags} '
+               '-f {input.fasta} '
+               '{input.bam} '
+               '> {output.tbl} ') 
+        shell(cmd)
