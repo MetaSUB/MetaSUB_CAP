@@ -2,7 +2,7 @@
 
 rule gottcha_taxonomy_profiling:
     input:
-        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
+        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1')
     output:
         summary = config['gottcha_taxonomy_profiling']['summary_table']
         full = config['gottcha_taxonomy_profiling']['full_table']
