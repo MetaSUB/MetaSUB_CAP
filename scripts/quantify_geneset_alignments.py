@@ -92,7 +92,7 @@ def makeTable(readsPerSeq, seqMemos, seqLens, nreadsInSample, ags):
         out[sid]['RPK'] = nreads / seqLens[sid]
         out[sid]['RPKM'] = nreads / (seqLens[sid] * nreadsInSample)
         out[sid]['RPKMG'] = nreads / (seqLens[sid] * nreadsInSample * ags)
-    out = pd.DataFrame(out)
+    out = pd.DataFrame(out).transpose()
     return out
 
 

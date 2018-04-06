@@ -93,7 +93,11 @@
         "gene": "tsv",
         "group": "tsv",
         "classus": "tsv",
-        "mech": "tsv"
+        "mech": "tsv",
+        "gene_normalized": "csv",
+        "group_normalized": "csv",
+        "classus_normalized": "csv",
+        "mech_normalized": "csv"        
       }
     },
     {

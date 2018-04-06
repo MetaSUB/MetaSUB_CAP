@@ -54,3 +54,118 @@ rule analyze_with_resistome:
               '-t {params.thresh}')
        shell(cmd)
 
+
+rule quantify_resistome_gene:
+    input:
+        gene = config['resistome_amrs']['gene'],
+        fasta = config['resistome_amrs']['db']['fasta'],
+        annot = config['resistome_amrs']['db']['annotations']
+        readstats = config['read_stats']['json'],
+        ags = config['microbe_census']['stats'],
+    output:
+        norm_tbl = config['resistome_amrs']['gene_normalized']
+    threads: 1
+    params:
+        script = config['resistome_amrs']['script']
+    resources:
+        time = 1,
+        n_gb_ram = 5
+    run: 
+        cmd = (
+            '{params.script} '
+            '-s {input.readstats} '
+            '-a {input.ags} '
+            '-f {input.fasta} '
+            '-c {input.annot} '
+            'gene '
+            '{input.gene} '
+            '> {output.norm_tbl}'
+        )
+        shell(cmd)
+
+
+rule quantify_resistome_group:
+    input:
+        group = config['resistome_amrs']['group'],
+        fasta = config['resistome_amrs']['db']['fasta'],
+        annot = config['resistome_amrs']['db']['annotations']
+        readstats = config['read_stats']['json'],
+        ags = config['microbe_census']['stats'],
+    output:
+        norm_tbl = config['resistome_amrs']['group_normalized']
+    threads: 1
+    params:
+        script = config['resistome_amrs']['script']
+    resources:
+        time = 1,
+        n_gb_ram = 5
+    run: 
+        cmd = (
+            '{params.script} '
+            '-s {input.readstats} '
+            '-a {input.ags} '
+            '-f {input.fasta} '
+            '-c {input.annot} '
+            'group '
+            '{input.group} '
+            '> {output.norm_tbl}'
+        )
+        shell(cmd)
+
+
+rule quantify_resistome_classus:
+    input:
+        classus = config['resistome_amrs']['classus'],
+        fasta = config['resistome_amrs']['db']['fasta'],
+        annot = config['resistome_amrs']['db']['annotations']
+        readstats = config['read_stats']['json'],
+        ags = config['microbe_census']['stats'],
+    output:
+        norm_tbl = config['resistome_amrs']['classus_normalized']
+    threads: 1
+    params:
+        script = config['resistome_amrs']['script']
+    resources:
+        time = 1,
+        n_gb_ram = 5
+    run: 
+        cmd = (
+            '{params.script} '
+            '-s {input.readstats} '
+            '-a {input.ags} '
+            '-f {input.fasta} '
+            '-c {input.annot} '
+            'classus '
+            '{input.classus} '
+            '> {output.norm_tbl}'
+        )
+        shell(cmd)
+
+
+rule quantify_resistome_mech:
+    input:
+        mech = config['resistome_amrs']['mech'],
+        fasta = config['resistome_amrs']['db']['fasta'],
+        annot = config['resistome_amrs']['db']['annotations']
+        readstats = config['read_stats']['json'],
+        ags = config['microbe_census']['stats'],
+    output:
+        norm_tbl = config['resistome_amrs']['mech_normalized']
+    threads: 1
+    params:
+        script = config['resistome_amrs']['script']
+    resources:
+        time = 1,
+        n_gb_ram = 5
+    run: 
+        cmd = (
+            '{params.script} '
+            '-s {input.readstats} '
+            '-a {input.ags} '
+            '-f {input.fasta} '
+            '-c {input.annot} '
+            'mech '
+            '{input.mech} '
+            '> {output.norm_tbl}'
+        )
+        shell(cmd)
