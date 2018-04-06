@@ -27,6 +27,6 @@ rule krakenhll_filter_assignments:
     input:
         readAssignments = config['krakenhll_taxonomy_profiling']['read_assignments']
     output:
-        filtered = config['krakenhll_taxonomy_profiling']['read_assignments']
+        filtered = config['krakenhll_taxonomy_profiling']['report']
     run:
         pass
