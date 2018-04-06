@@ -56,7 +56,7 @@ def getChunksFromSeq(seq, k):
     for i in range(len(seq) - k + 1):
         out.append(seq[i:i + k])
         out.append(rcseq[i:i + k])
-    return rcseq
+    return out
 
 
 def rcBase(base):
@@ -81,25 +81,14 @@ def rc(kmer):
 
 @click.command()
 @click.option('-n', '--num-seqs', type=int, default=10000)
-@click.argument('raw_reads')
 @click.argument('microbial_reads')
-def main(num_seqs, raw_reads, microbial_reads):
-    rawSeqs = sampleFastq(raw_reads, num_seqs)
+def main(num_seqs, microbial_reads):
     microbeSeqs = sampleFastq(microbial_reads, num_seqs)
     obj = {
-        'raw': {
-            'num_reads': nreads(raw_reads),
-            'gc_content': gcContent(rawSeqs),
-            'codons': codons(rawSeqs),
-            'tetramers': tetramers(rawSeqs)
-        },
-        'microbial': {
-            'num_reads': nreads(microbial_reads),
-            'gc_content': gcContent(microbeSeqs),
-            'codons': codons(microbeSeqs),
-            'tetramers': tetramers(microbeSeqs)
-
-        }
+        'num_reads': nreads(microbial_reads),
+        'gc_content': gcContent(microbeSeqs),
+        'codons': codons(microbeSeqs),
+        'tetramers': tetramers(microbeSeqs),
     }
     sys.stdout.write(jdumps(obj))
 

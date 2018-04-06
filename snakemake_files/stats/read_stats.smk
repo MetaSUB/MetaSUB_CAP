@@ -13,7 +13,6 @@ rule find_read_stats:
     run:
         cmd = ('{params.script} '
                '-n {params.nseqs} '
-               '{input.raw_reads1} '
                '{input.microbial_reads1} '
                ' > {output.json}')
 
