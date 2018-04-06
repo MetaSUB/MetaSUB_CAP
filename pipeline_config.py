@@ -209,13 +209,15 @@ config = {
         }
     },
     'align_to_amr_genes': {
-        'threads': 6,
-        'time': 10,
-        'ram': 10,
         'script': scriptDir('quantify_geneset_alignments.py'),
-        'card_amrs': {
-            'bt2': '/athena/masonlab/scratch/users/dcd3001/Refs/CAP_databases/abr_genes/CARD/ARmeta-genes.nt2',
-            'fasta': 'foobar',
+        'time': 10,
+        'fasta_db': {'filepath': pmegaDB('vfdb.fasta.0')},
+        'dmnd': {
+            'filepath': pmegaDB('vfdb.dmnd.0'),
+            'threads': 6,
+            'time': 20,
+            'ram': 6,
+            'block_size': 6
         }
     },
     'samtools': {

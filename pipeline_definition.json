@@ -279,7 +279,7 @@
       ],
       "FILES": {
         "table": "tsv",
-        "bam": "bam"
+        "m8": "m8"
       }
     }
   ]

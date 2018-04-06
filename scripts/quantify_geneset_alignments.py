@@ -5,7 +5,7 @@ from json import loads as jloads
 import pandas as pd
 from sys import stdout
 
-from .pybam import pybam
+#from .pybam import pybam
 
 million = 1000 * 1000
 
