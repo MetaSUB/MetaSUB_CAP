@@ -30,7 +30,7 @@ rule centrifuge_make_mpa:
     input:
         classification = config['centrifuge_taxonomy_profiling']['classification']
     output:
-        kreport = config['centrifuge_taxonomy_profiling']['mpa']
+        mpa = config['centrifuge_taxonomy_profiling']['mpa']
     params:
         index = config['centrifuge_taxonomy_profiling']['index']['filepath'],
         kreport = config['centrifuge_taxonomy_profiling']['kreport']['filepath'],

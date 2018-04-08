@@ -61,7 +61,7 @@ def getCategoryLengths(category_table, category, seq_lengths):
 
     base pairs are in the same units as getSeqLens.
     """
-    if category == 'genes':
+    if category == 'gene':
         return seq_lengths
     ind = {'classus': 1, 'mech': 2, 'group': 3}[category]
     cat_length_table = {}
