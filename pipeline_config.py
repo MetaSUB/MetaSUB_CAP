@@ -109,7 +109,7 @@ config = {
             'version': resolveCmd('krakenhll --version | tr "\n"  " "')
         },
         'db': {
-            'filepath': pmegaDB('krakenhll.db.dir')
+            'filepath': pmegaDB('krakenhll.refseq.dir')
         },
         'threads': 2,
         'time': 2,

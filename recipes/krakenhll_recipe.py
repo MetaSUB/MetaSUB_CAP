@@ -8,7 +8,7 @@ class KrakenHLLRecipe(BaseRecipe):
     '''
 
     def __init__(self):
-        super(KrakenHllRecipe, self).__init__()
+        super(KrakenHLLRecipe, self).__init__()
         self.refseq = SourceFile(self.repo, "refseq-db")
         self.nt = SourceFile(self.repo, "nt")
 
