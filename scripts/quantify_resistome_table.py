@@ -28,7 +28,7 @@ def getNReads(readStatsF):
 def getSeqLens(fastaf):
     """Return a table with length in kilobases for each seq in fastaf."""
     lenout = {}
-    curRec, curLen = None, None, 0
+    curRec, curLen = None, 0
     with open(fastaf) as ff:
         for line in ff:
             line = line.strip()
