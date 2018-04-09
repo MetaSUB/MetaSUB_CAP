@@ -11,7 +11,7 @@ rule krakenhll_read_assignment:
 
     params:
         krakenhll = config['krakenhll_taxonomy_profiling']['exc']['filepath'],
-        db = config['kraken_taxonomy_profiling']['db']['filepath'],
+        db = config['krakenhll_taxonomy_profiling']['db']['filepath'],
     resources:
         time = int(config['kraken_taxonomy_profiling']['time']),
         n_gb_ram = int(config['kraken_taxonomy_profiling']['ram'])
