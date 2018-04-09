@@ -20,7 +20,7 @@ def getAGS(agsf):
 def getNReads(readStatsF):
     """Return the number of reads in millions."""
     readStats = jloads(open(readStatsF).read())
-    nreads = int(readStats['microbial']['num_reads'])
+    nreads = int(readStats['num_reads'])
     nreads = nreads / million
     return nreads
 

@@ -20,7 +20,7 @@ def getAGS(agsf):
 
 def getNReads(readStatsF):
     readStats = jloads(open(readStatsF).read())
-    nreads = int(readStats['microbial']['num_reads'])
+    nreads = int(readStats['num_reads'])
     nreads = nreads / (1000 * 1000)
     return nreads
 
