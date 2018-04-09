@@ -17,9 +17,17 @@ rule krakenhll_read_assignment:
         n_gb_ram = int(config['kraken_taxonomy_profiling']['ram'])
     run:
         cmd = (
-            '{params.krakenhll} --gzip-compressed --fastq-input --threads {threads} '
-        '--paired --preload --db {params.db} {input.reads1} {input.reads2} '
-            '> {output.readAssignments}')
+            '{params.krakenhll} '
+            '--report-file {output.readAssignments} '
+            '--gzip-compressed '
+            '--fastq-input '
+            '--threads {threads} '
+            '--paired '
+            '--preload '
+            '--db {params.db} '
+            '{input.reads1} '
+            '{input.reads2} '
+        )
         shell(cmd)
 
 
