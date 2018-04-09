@@ -99,7 +99,7 @@ def makeTable(reads_per_category, category_lengths, num_reads, ags):
 @click.option('-c', '--category-table')
 @click.argument('category')
 @click.argument('resistome_table')
-def main(read_stats, ags, fasta, table, category_table,
+def main(read_stats, ags, fasta, category_table,
          category, resistome_table):
     reads_per_category = getReadsPerCategory(resistome_table)
     num_reads = getNReads(read_stats)
