@@ -43,7 +43,9 @@ class Sample:
         if line[0] == '#':
             return
         taxon, abund = line.split()
-        taxonList = [t.split('__')[1] for t in taxon.split('|')]
+        taxonList = [t.split('__')[1]
+                     for t in taxon.split('|')
+                     if taxon.strip() != 'unclassified']
         if checkLevel(taxon, 'species'):
             self.abunds['__'.join(taxonList).lower()] = float(abund)
             self.total += float(abund)
