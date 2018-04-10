@@ -111,9 +111,9 @@ config = {
         'db': {
             'filepath': pmegaDB('krakenhll.refseq.dir')
         },
-        'threads': 2,
-        'time': 2,
-        'ram': 5
+        'threads': 4,
+        'time': 10,
+        'ram': 12
     },
     'microbe_census_group_summary': {
         'script': scriptDir('summarize_microbe_census.py')
