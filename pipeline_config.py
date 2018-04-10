@@ -112,7 +112,7 @@ config = {
             'filepath': pmegaDB('krakenhll.refseq.dir')
         },
         'threads': 16,
-        'time': 10,
+        'time': 99,
         'ram': 16
     },
     'microbe_census_group_summary': {
