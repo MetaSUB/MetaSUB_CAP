@@ -13,8 +13,8 @@ rule krakenhll_read_assignment:
         krakenhll = config['krakenhll_taxonomy_profiling']['exc']['filepath'],
         db = config['krakenhll_taxonomy_profiling']['db']['filepath'],
     resources:
-        time = int(config['kraken_taxonomy_profiling']['time']),
-        n_gb_ram = int(config['kraken_taxonomy_profiling']['ram'])
+        time = int(config['krakenhll_taxonomy_profiling']['time']),
+        n_gb_ram = int(config['krakenhll_taxonomy_profiling']['ram'])
     run:
         cmd = (
             '{params.krakenhll} '
