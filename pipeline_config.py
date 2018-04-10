@@ -111,7 +111,7 @@ config = {
         'db': {
             'filepath': pmegaDB('krakenhll.refseq.dir')
         },
-        'threads': 4,
+        'threads': 8,
         'time': 10,
         'ram': 12
     },
