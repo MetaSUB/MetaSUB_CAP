@@ -113,7 +113,7 @@ config = {
         },
         'threads': 4,
         'time': 10,
-        'ram': 12
+        'ram': 24
     },
     'microbe_census_group_summary': {
         'script': scriptDir('summarize_microbe_census.py')
