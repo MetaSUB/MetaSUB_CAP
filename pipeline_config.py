@@ -132,20 +132,6 @@ config = {
             'version': resolveCmd('run_microbe_census.py --version 2>&1')
         }
     },
-    'shortbred': {
-        'exc': {
-            'filepath': which('shortbred_quantify.py'),
-            'version': ''
-        }
-    },
-    'shortbred_amr_profiling': {
-        'ref': {
-            'filepath': pmegaDB('card.sbred.0')
-        },
-        'threads': 2,
-        'time': 2,
-        'ram': 5
-    },
     'resistome_amrs': {
         'script': scriptDir('quantify_resistome_table.py'),
         'threads': 4,

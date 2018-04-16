@@ -60,15 +60,6 @@
       }
     },
     {
-      "NAME": "shortbred_amr_profiling",
-      "DEPENDENCIES": [
-        "microbial_short_read_dna"
-      ],
-      "FILES": {
-        "table": "tsv"
-      }
-    },
-    {
       "NAME": "resistome_amrs",
       "DEPENDENCIES": [
         "microbial_short_read_dna"
