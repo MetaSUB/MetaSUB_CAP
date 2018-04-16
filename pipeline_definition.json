@@ -44,21 +44,6 @@
   ],
   "RESULT_TYPES": [
     {
-      "NAME": "gottcha_taxonomy_profiling",
-      "FILES": {
-        "summary": "tsv",
-        "full_table": "tsv"
-      }
-    },
-    {
-      "NAME": "centrifuge_taxonomy_profiling",
-      "FILES": {
-        "mpa": "mpa",
-        "report": "tsv",
-        "classification": "tsv"
-      }
-    },
-    {
       "NAME" : "align_to_sa_n315",
       "DEPENDENCIES": ["microbial_short_read_dna"],
       "FILES": { "bam": "bam"}
