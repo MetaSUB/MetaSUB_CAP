@@ -50,7 +50,7 @@ def getReadsPerCategory(resistome_table):
     with open(resistome_table) as rt:
         rt.readline()
         for line in rt:
-            tkns = line.strip().split()
+            tkns = line.strip().split('\t')
             cat_val, nreads = tkns[1], int(tkns[2])
             out[cat_val] = nreads
     return out
