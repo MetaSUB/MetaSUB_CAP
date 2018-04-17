@@ -39,7 +39,7 @@ def main(read_stats, biases, bam):
         rpk = reads / (bias['effective_length'] / 1000)
         rpkm = rpk / millions_of_reads(read_stats)
         common_name = bias['common_name']
-        tbl[common_name] = rpkm
+        tbl[common_name] = {'total_reads': reads, 'rpkm': rpkm}
     stdout.write(dumps(tbl))
 
 
