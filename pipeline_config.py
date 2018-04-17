@@ -201,5 +201,13 @@ config = {
             'ram': 6,
             'block_size': 6
         }
-    }
+    },
+    'quantify_macrobial': {
+        'script': scriptDir(),
+        'biases': 'foo',
+        'db': {'filepath': 'bar'},
+        'threads': 6,
+        'ram': 8,
+
+    },
 }

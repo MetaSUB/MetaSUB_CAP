@@ -252,6 +252,13 @@
       }
     },
     {
+      "NAME": "quantify_macrobial",
+      "FILES": {
+        "bam": "bam",
+        "tbl": "json"
+      }
+    },
+    {
       "NAME": "align_to_amr_genes",
       "DEPENDENCIES": [
         "microbial_short_read_dna"

@@ -16,10 +16,31 @@ rule align_to_macrobial_fragments:
     run:
         cmd = (' {params.bt2} '
                '-p {threads} '
-               '--very-fast '
+               '--fast '
                ' -x {params.db} '
                ' -1 {input.reads1} '
                ' -2 {input.reads2} '
                '| samtools view -F 4 -b '
                '> {output.bam} ')
         shell(cmd)
+
+
+rule quantify_macrobial:
+    input:
+        bam = config['quantify_macrobial']['bam'],
+        readstats = config['read_stats']['json'],
+        biases = config['quantify_macrobial']['biases'],
+    output:
+        tbl = config['quantify_macrobial']['tbl'],
+    params:
+        script = config['quantify_macrobial']['script']
+    run:
+        cmd = (
+            '{params.script} '
+            '-s {input.readstats} '
+            '{input.biases} '
+            '{input.bam} '
+            '> {output.tbl} '
+        )
+        shell(cmd)
+
