@@ -3,19 +3,19 @@
 
 rule count_class_proportions:
     input:
+        human_reads = getOriginResultFiles(config, 'filter_human_dna', 'human_read1'),
+        readstats = config['read_stats']['json'],
+        tbl = config['quantify_macrobial']['tbl'],
         kraken = config['kraken_taxonomy_profiling']['mpa'],
-        human_reads1 = config['filter_human_dna']['human_read1'],
-        nonhuman_reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
-        microbial_reads1 = config['filter_macrobial_dna']['microbial_read1'],
     output:
         json = config['read_classification_proportions']['json']
     params:
         script = config['read_classification_proportions']['script']
     run:
         cmd = ('{params.script} '
-               '{input.human_reads1} '
-               '{input.nonhuman_reads1} '
-               '{input.microbial_reads1} '
+               '{input.human_reads} '
+               '{input.readstats} '
+               '{input.tbl} '
                '{input.kraken} '
                ' > {output.json}')
 
