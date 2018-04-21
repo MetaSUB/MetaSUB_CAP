@@ -10,7 +10,8 @@
   },
   "REQUIREMENTS": {},
   "ORIGINS": [
-    "filter_human_dna"
+    "filter_human_dna",
+    "adapter_removal"
   ],
   "SAMPLE_TYPES": [],
   "FILE_TYPES": [

@@ -72,13 +72,14 @@ def formatOut(humanReads,
 
 
 @click.command()
-@click.argument('human_fastq')
+@click.argument('all_fastq')
 @click.argument('read_stats')
 @click.argument('macrobes')
 @click.argument('microbe_mpa')
-def main(human_fastq, read_stats, macrobes, microbe_mpa):
-    nHum = countFastq(human_fastq)
+def main(all_fastq, read_stats, macrobes, microbe_mpa):
+    nAll = countFastq(all_fastq)
     nNonHum = reads_in_json(read_stats)
+    nHum = nAll - nNonHum
     nMacrobe = reads_in_macrobe(macrobes)
     nBact, nArch, nViral = countMPA(microbe_mpa)
     nMicrobial = nBact + nArch + nViral
