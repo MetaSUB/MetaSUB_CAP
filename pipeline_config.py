@@ -203,7 +203,7 @@ config = {
         }
     },
     'quantify_macrobial': {
-        'script': scriptDir(),
+        'script': scriptDir('quantify_macrobial.py'),
         'biases': 'foo',
         'db': {'filepath': 'bar'},
         'threads': 6,
