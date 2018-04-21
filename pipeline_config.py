@@ -208,6 +208,7 @@ config = {
         'db': {'filepath': 'bar'},
         'threads': 6,
         'ram': 8,
+        'time': 10,
 
     },
 }
