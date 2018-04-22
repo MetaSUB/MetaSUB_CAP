@@ -20,7 +20,7 @@ def countFastq(fname):
 def reads_in_json(read_stats_file):
     readStats = json.loads(open(read_stats_file).read())
     nreads = int(readStats['num_reads'])
-    nreads = nreads / (1000 * 1000)
+    nreads = nreads
     return nreads
 
 
@@ -77,14 +77,15 @@ def formatOut(humanReads,
 @click.argument('macrobes')
 @click.argument('microbe_mpa')
 def main(all_fastq, read_stats, macrobes, microbe_mpa):
-    nAll = countFastq(all_fastq)
+    totalReads = countFastq(all_fastq)
     nNonHum = reads_in_json(read_stats)
-    nHum = nAll - nNonHum
+
+    nHum = totalReads - nNonHum
     nMacrobe = reads_in_macrobe(macrobes)
+
     nBact, nArch, nViral = countMPA(microbe_mpa)
     nMicrobial = nBact + nArch + nViral
 
-    totalReads = nHum + nNonHum
     unknownReads = nNonHum - nMacrobe - nMicrobial
 
     assert unknownReads >= 0
@@ -98,6 +99,7 @@ def main(all_fastq, read_stats, macrobes, microbe_mpa):
                     totalReads)
     sys.stdout.write(json.dumps(out))
 
-
+    
+    
 if __name__ == '__main__':
     main()
