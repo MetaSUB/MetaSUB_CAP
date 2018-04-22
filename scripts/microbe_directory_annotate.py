@@ -4,7 +4,21 @@ import pandas as pd
 import click
 from json import dumps
 
-
+'''
+{
+    "gram_stain": {"1.0": 0.6348978175655748, "0.0": 0.12937136867380725 "2.0": 0.006112381332830759},
+    "microbiome_location": {"1.0": 0.6608044522412223"0.0": 0.036777353150309416}, 
+    "antimicrobial_susceptibility": {"1.0": 0.7089475834039308, "0.0": 0.0015535635887611514},
+    "optimal_temperature": {"37.0": 0.49118901314628005, "30.0": 0.06614712870345012, "34.0": 0.05548622530432669, "26.0": 0.04929267068039149, "35.0": 0.0041728923907680072},
+    "extreme_environment": {"0.0": 0.7163033574855482, "1.0": 0.06774566814776313},
+    "biofilm_forming": {"1.0": 0.5861109356029197, "0.0": 0.00208828857982829632}, 
+    "optimal_ph": "7.25": 0.02771531432216563 "11.0": 0.006112381332830759, "6.6": 0.002753822866440241, "6.75": 0.0026091414997854705, "6.0": 0.00155356358876115142},
+    "animal_pathogen":"0.0": 0.06777243690998316 "1.0": 0.03244135554844371},
+    "spore_forming": {"0.0": 0.6757222390866626, "1.0": 0.0015535635887611514},
+    "pathogenicity": {"2.0": 0.6319251844524858, "1.0": 0.06675771658339989},
+    "plant_pathogen": {"0.0": 0.6890774671722312}
+}
+'''
 class LevelNotFoundException(Exception):
     pass
 
@@ -17,12 +31,12 @@ def checkLevel(taxon, level):
     raise LevelNotFoundException()
 
 
-def getColumnDist(mdb, sample, col):
+def getColumnDist(mdb, sample, col, key_conversion=lambda x: x):
     out = {}
     for taxonkey, abund in sample.iterTaxa():
         #print(taxonkey)
         try:
-            val = mdb[taxonkey][col]
+            val = key_conversion(mdb[taxonkey][col])
         except KeyError:
             val = 'NaN'
         try:
@@ -76,6 +90,13 @@ def parseMDB(mdbf):
     return mdb
 
 
+def chooser(*choices):
+    def foo(val):
+        val = int(val)
+        return choices[val]
+    return foo
+
+
 @click.command()
 @click.argument('microbe_directory')
 @click.argument('sample_name')
@@ -83,20 +104,22 @@ def parseMDB(mdbf):
 def main(microbe_directory, sample_name, mpa):
     mdb = parseMDB(microbe_directory)
     sample = Sample.parseMPA(sample_name, mpa)
-    keys = ['gram_stain',
-            'microbiome_location',
-            'antimicrobial_susceptibility',
-            'optimal_temperature',
-            'extreme_environment',
-            'biofilm_forming',
-            'optimal_ph',
-            'animal_pathogen',
-            'spore_forming',
-            'pathogenicity',
-            'plant_pathogen']
+    keys = [
+        ('gram_stain', chooser('gram_negative', 'gram_positive')),
+        ('microbiome_location', chooser('non_human', 'human')),
+        ('antimicrobial_susceptibility', chooser('no_known_abx', 'known_abx')),
+        ('optimal_temperature', lambda x: str(int(x)) + 'c'),
+        ('extreme_environment', chooser('mesophile', 'extremophile')),
+        ('biofilm_forming', chooser('no', 'yes')),
+        ('optimal_ph', lambda x: 'ph' + '_'.join(x.split('.'))),
+        ('animal_pathogen', chooser('no', 'yes')),
+        ('spore_forming', chooser('no', 'yes')),
+        ('pathogenicity', lambda x: 'cogem_' + str(int(x))),
+        ('plant_pathogen', chooser('no', 'yes')),
+    ]
 
-    obj = {key: getColumnDist(mdb, sample, key)
-           for key in keys}
+    obj = {key: getColumnDist(mdb, sample, key, key_conversion=converter)
+           for key, converter in keys}
     print(dumps(obj))
 
 
