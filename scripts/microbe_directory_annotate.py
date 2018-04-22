@@ -36,9 +36,11 @@ def getColumnDist(mdb, sample, col, key_conversion=lambda x: x):
     for taxonkey, abund in sample.iterTaxa():
         #print(taxonkey)
         try:
-            val = key_conversion(mdb[taxonkey][col])
+            val = str(key_conversion(mdb[taxonkey][col]))
         except KeyError:
-            val = 'NaN'
+            val = 'unknown'
+        if 'nan' in val:
+            val = 'unknown'
         try:
             out[val] += abund
         except KeyError:
@@ -92,10 +94,20 @@ def parseMDB(mdbf):
 
 def chooser(*choices):
     def foo(val):
-        val = int(val)
-        return choices[val]
+        try:
+            val = int(val)
+            return choices[val]
+        except ValueError:
+            return val
     return foo
 
+def strOrUnk(func):
+    def bar(val):
+        try:
+            return func(val)
+        except ValueError:
+            return 'unknown'
+    return bar
 
 @click.command()
 @click.argument('microbe_directory')
@@ -108,13 +120,13 @@ def main(microbe_directory, sample_name, mpa):
         ('gram_stain', chooser('gram_negative', 'gram_positive')),
         ('microbiome_location', chooser('non_human', 'human')),
         ('antimicrobial_susceptibility', chooser('no_known_abx', 'known_abx')),
-        ('optimal_temperature', lambda x: str(int(x)) + 'c'),
+        ('optimal_temperature', strOrUnk(lambda x: str(int(x)) + 'c')),
         ('extreme_environment', chooser('mesophile', 'extremophile')),
         ('biofilm_forming', chooser('no', 'yes')),
-        ('optimal_ph', lambda x: 'ph' + '_'.join(x.split('.'))),
+        ('optimal_ph', strOrUnk(lambda x: 'ph' + '_'.join(str(x).split('.')))),
         ('animal_pathogen', chooser('no', 'yes')),
         ('spore_forming', chooser('no', 'yes')),
-        ('pathogenicity', lambda x: 'cogem_' + str(int(x))),
+        ('pathogenicity', strOrUnk(lambda x: 'cogem_' + str(int(x)))),
         ('plant_pathogen', chooser('no', 'yes')),
     ]
 
