@@ -10,18 +10,18 @@ Please start an issue or contact David C. Danko (dcd3001@med.cornell.edu) if you
 Current Modules
 ----------------
 
-** Taxonomy Profiling **
+**Taxonomy Profiling**
 
 - KrakenHLL, searching RefSeq Microbial
 - Kraken, searching the minikraken database
 - MetaPhlAn2
 
-** Antibiotic Resistance Profiling **
+**Antibiotic Resistance Profiling**
 
 - Resistome + MegaRES
 - CARD
 
-** Assorted Gene Sets **
+**Assorted Gene Sets**
 
 - Methyltransferases Genes
 - Virulence Factor Genes
@@ -30,7 +30,7 @@ Current Modules
 - Staph. Aureus n315
 - `Common Macrobial Genomes <https://github.com/MetaSUB/macrobial-genomes>`_
 
-** Statistics **
+**Statistics**
 
 - Alpha Diversity
 - Beta Diversity
