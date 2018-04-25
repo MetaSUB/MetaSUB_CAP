@@ -72,7 +72,8 @@ To run the CAP use the following commands
 .. code-block:: bash
 
    cd /analysis/dir
-   python /path/to/MetaSUB_CAP/add_fastq_data_to_datasuper.py <sample_type> [<fastq files>...]
+   datasuper bio add-fastqs -1 <forward file ext> -2 <reverse file ext> <sample_type> [<fastq files>...]
+   moduleultra run -p metasub_qc_cap -j <njobs> [--dryrun]
    moduleultra run -p metasub_cap -j <njobs> [--dryrun]
    
 To see more options just use the help commands
