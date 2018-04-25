@@ -17,6 +17,11 @@ The CAP uses Uniref90 as a diamond index. There are separate downloads for the d
 CARD
 ----
 
+Comprehensive Antibiotic Resistance Database
+
+`Sequences <https://s3.amazonaws.com/metasub-cap-databases/card_oct_2017_prot_seqs.faa>`_
+`Diamond Index <https://s3.amazonaws.com/metasub-cap-databases/card_oct_2017_prot_seqs.dmnd>`_
+
 MegaRes
 -------
 
@@ -27,11 +32,16 @@ The CAP uses MegaRes to identify antibiotic resistance genes.
 MethylTransferases
 ------------------
 
+Database of known methyltransferases including diamond index.
+
+`AWS Download Link <https://s3.amazonaws.com/metasub-cap-databases/methyls_90.tar.gz>`_
+
 Virulence Factor DB
 -------------------
 
-HMP Profiles
-------------
+Database of known virulence factors including diamond index.
+
+`AWS Download Link <https://s3.amazonaws.com/metasub-cap-databases/vfdb_setB_pro.tar.gz>`_
 
 Hg38
 ----
