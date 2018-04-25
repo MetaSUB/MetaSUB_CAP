@@ -11,15 +11,18 @@ Current Modules
 ----------------
 
 ** Taxonomy Profiling **
+
 - KrakenHLL, searching RefSeq Microbial
 - Kraken, searching the minikraken database
 - MetaPhlAn2
 
 ** Antibiotic Resistance Profiling **
+
 - Resistome + MegaRES
 - CARD
 
 ** Assorted Gene Sets **
+
 - Methyltransferases Genes
 - Virulence Factor Genes
 - HUMANn2 Pathway Profiling
@@ -28,6 +31,7 @@ Current Modules
 - `Common Macrobial Genomes <https://github.com/MetaSUB/macrobial-genomes>`_
 
 ** Statistics **
+
 - Alpha Diversity
 - Beta Diversity
 - Kmer Profiles
