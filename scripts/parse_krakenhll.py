@@ -74,7 +74,7 @@ def make_filter(filter_ranks=True, min_kmer=4, min_cov=0.0001):
 
 def get_short_rank(long_rank):
     if long_rank == 'superkingdom':
-        return 'k'
+        return 'd'
     if long_rank == 'subspecies':
         return 't'
     short_rank = long_rank[0]

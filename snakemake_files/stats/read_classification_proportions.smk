@@ -6,7 +6,7 @@ rule count_class_proportions:
         all_reads = getOriginResultFiles(config, 'adapter_removal', 'clean_read1'),
         readstats = config['read_stats']['json'],
         tbl = config['quantify_macrobial']['tbl'],
-        kraken = config['kraken_taxonomy_profiling']['mpa'],
+        kraken = config['krakenhll_taxonomy_profiling']['report'],
     output:
         json = config['read_classification_proportions']['json']
     params:
