@@ -88,7 +88,10 @@ config = {
         },
         'threads': 16,
         'time': 99,
-        'ram': 16
+        'ram': 16,
+        'min_kmer': 4,
+        'min_cov': 0.0001,
+        'script': scriptDir('parse_krakenhll.py'),
     },
     'microbe_census_group_summary': {
         'script': scriptDir('summarize_microbe_census.py')

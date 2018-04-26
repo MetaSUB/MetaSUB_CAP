@@ -36,5 +36,17 @@ rule krakenhll_filter_assignments:
         readAssignments = config['krakenhll_taxonomy_profiling']['read_assignments']
     output:
         filtered = config['krakenhll_taxonomy_profiling']['report']
+    params:
+        minkmer = config['krakenhll_taxonomy_profiling']['min_kmer']
+        mincov = config['krakenhll_taxonomy_profiling']['min_cov']
+        script = config['krakenhll_taxonomy_profiling']['script']
     run:
-        pass
+        cmd = (
+            '{params.script} '
+            '--min-kmer {params.minkmer} '
+            '--min-cov {params.mincov} '
+            '{input.readAssignments} '
+            '> {output.filtered}'
+        )
+        shell(cmd)
+

@@ -106,11 +106,13 @@ def as_mpa(ultimate_root, use_proportions):
 
 
 @click.command()
+@click.option('-k', '--min-kmer', default=4)
+@click.option('-c', '--min-cov', default=0.0001)
 @click.option('-p/-r', '--proportions/--reads', default=False)
 @click.argument('read_assignments_file')
-def main(proportions, read_assignments_file):
+def main(min_kmer, min_cov, proportions, read_assignments_file):
     tokenizer = tokenize(read_assignments_file)
-    filter_func = make_filter()
+    filter_func = make_filter(min_kmer=min_kmer, min_cov=min_cov)
     ultimate_root = build_tree(tokenizer, filter_func)
     names = as_mpa(ultimate_root, proportions)
     for name in names:
