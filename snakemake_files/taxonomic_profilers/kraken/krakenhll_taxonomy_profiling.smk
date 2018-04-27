@@ -37,9 +37,9 @@ rule krakenhll_filter_assignments:
     output:
         filtered = config['krakenhll_taxonomy_profiling']['report']
     params:
-        minkmer = config['krakenhll_taxonomy_profiling']['min_kmer']
-        mincov = config['krakenhll_taxonomy_profiling']['min_cov']
-        script = config['krakenhll_taxonomy_profiling']['script']
+        minkmer = config['krakenhll_taxonomy_profiling']['min_kmer'],
+        mincov = config['krakenhll_taxonomy_profiling']['min_cov'],
+        script = config['krakenhll_taxonomy_profiling']['script'],
     run:
         cmd = (
             '{params.script} '
