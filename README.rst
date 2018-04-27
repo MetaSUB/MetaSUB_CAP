@@ -10,18 +10,18 @@ Please start an issue or contact David C. Danko (dcd3001@med.cornell.edu) if you
 Current Modules
 ----------------
 
-** Taxonomy Profiling **
+**Taxonomy Profiling**
 
 - KrakenHLL, searching RefSeq Microbial
 - Kraken, searching the minikraken database
 - MetaPhlAn2
 
-** Antibiotic Resistance Profiling **
+**Antibiotic Resistance Profiling**
 
 - Resistome + MegaRES
 - CARD
 
-** Assorted Gene Sets **
+**Assorted Gene Sets**
 
 - Methyltransferases Genes
 - Virulence Factor Genes
@@ -30,7 +30,7 @@ Current Modules
 - Staph. Aureus n315
 - `Common Macrobial Genomes <https://github.com/MetaSUB/macrobial-genomes>`_
 
-** Statistics **
+**Statistics**
 
 - Alpha Diversity
 - Beta Diversity
@@ -72,7 +72,8 @@ To run the CAP use the following commands
 .. code-block:: bash
 
    cd /analysis/dir
-   python /path/to/MetaSUB_CAP/add_fastq_data_to_datasuper.py <sample_type> [<fastq files>...]
+   datasuper bio add-fastqs -1 <forward file ext> -2 <reverse file ext> <sample_type> [<fastq files>...]
+   moduleultra run -p metasub_qc_cap -j <njobs> [--dryrun]
    moduleultra run -p metasub_cap -j <njobs> [--dryrun]
    
 To see more options just use the help commands
