@@ -6,8 +6,8 @@ rule measure_hmp_dists_metaphlan2:
 	output:
 		main=config['hmp_site_dists']['metaphlan2']
 	resources:
-		time=1,
-		n_gb_ram=2
+		time=2,
+		n_gb_ram=4
 	threads: 1
 	params:
 		script=config['pipeline_dir'] + '/scripts/hmp_sites_metaphlan_dists.py',

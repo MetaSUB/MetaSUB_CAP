@@ -59,21 +59,9 @@ config = {
         'time': 2,
         'ram': 5
     },
-    'midas_single_samples': {
-        'time': 4,
-        'ram': 4,
-        'threads': 6,
-        'exc': {
-            'filepath': which('run_midas.py')
-        },
-        'db': {
-            'filepath': pmegaDB('midas.default_midas.0')
-        }
-    },
-    'midas_merge_groups': {
-        'exc': {
-            'filepath': which('merge_midas.py')
-        }
+    'bracken_abundance_estimation': {
+        'exc': which('bracken_estimate_abundance.py'),
+        'kmer_distributions': pmegaDB('bracken.kmers.0'),
     },
     'kraken_taxonomy_profiling': {
         'exc': {
@@ -87,9 +75,28 @@ config = {
             'filepath': which('kraken-mpa-report'),
             'version': resolveCmd('kraken-mpa-report --version | tr "\n"  " "')
         },
+        'report_exc': {
+            'filepath': which('kraken-report'),
+            'version': resolveCmd('kraken-report --version | tr "\n"  " "')
+        },
         'threads': 2,
         'time': 2,
         'ram': 5
+    },
+    'krakenhll_taxonomy_profiling': {
+        'exc': {
+            'filepath': which('krakenhll'),
+            'version': resolveCmd('krakenhll --version | tr "\n"  " "')
+        },
+        'db': {
+            'filepath': pmegaDB('krakenhll.refseq.dir')
+        },
+        'threads': 16,
+        'time': 99,
+        'ram': 16,
+        'min_kmer': 4,
+        'min_cov': 0.0001,
+        'script': scriptDir('parse_krakenhll.py'),
     },
     'microbe_census_group_summary': {
         'script': scriptDir('summarize_microbe_census.py')
@@ -133,21 +140,8 @@ config = {
             'version': resolveCmd('run_microbe_census.py --version 2>&1')
         }
     },
-    'shortbred': {
-        'exc': {
-            'filepath': which('shortbred_quantify.py'),
-            'version': ''
-        }
-    },
-    'shortbred_amr_profiling': {
-        'ref': {
-            'filepath': pmegaDB('card.sbred.0')
-        },
-        'threads': 2,
-        'time': 2,
-        'ram': 5
-    },
     'resistome_amrs': {
+        'script': scriptDir('quantify_resistome_table.py'),
         'threads': 4,
         'thresh': 80,
         'exc': {
@@ -173,22 +167,6 @@ config = {
             'version': resolveCmd('diamond --version')
         }
     },
-    'filter_macrobial_dna': {
-        'db': {
-            'filepath': pmegaDB('common_macrobial.bt2.prefix')
-        },
-        'threads': 6,
-        'time': 10,
-        'ram': 10
-    },
-    'filter_human_dna': {
-        'db': {
-            'filepath': pmegaDB('hg38_ucsc.bt2.prefix')
-        },
-        'threads': 6,
-        'time': 10,
-        'ram': 10
-    },
     'align_to_methyltransferases': {
         'script': scriptDir('quantify_geneset_alignments.py'),
         'fasta_db': {'filepath': pmegaDB('methyl.fasta.0')},
@@ -201,11 +179,15 @@ config = {
         }
     },
     'align_to_amr_genes': {
-        'threads': 6,
+        'script': scriptDir('quantify_geneset_alignments.py'),
         'time': 10,
-        'ram': 10,
-        'card_amrs': {
-            'bt2': '/athena/masonlab/scratch/users/dcd3001/Refs/CAP_databases/abr_genes/CARD/ARmeta-genes.nt2'
+        'fasta_db': {'filepath': pmegaDB('card.fasta.0')},
+        'dmnd': {
+            'filepath': pmegaDB('card.dmnd.0'),
+            'threads': 6,
+            'time': 20,
+            'ram': 6,
+            'block_size': 6
         }
     },
     'samtools': {
@@ -216,15 +198,6 @@ config = {
         'ags_script': scriptDir('normalize_genes_by_ags.py')
     },
     'python2': which('python2'),
-    'adapter_removal': {
-        'time': 5,
-        'threads': 6,
-        'ram': 10,
-        'exc': {
-            'filepath': which('AdapterRemoval'),
-            'version': resolveCmd('AdapterRemoval --version 2>&1')
-        }
-    },
     'vfdb_quantify': {
         'script': scriptDir('quantify_geneset_alignments.py'),
         'time': 10,
@@ -236,5 +209,14 @@ config = {
             'ram': 6,
             'block_size': 6
         }
-    }
+    },
+    'quantify_macrobial': {
+        'script': scriptDir('quantify_macrobial.py'),
+        'biases': 'foo',
+        'db': {'filepath': 'bar'},
+        'threads': 6,
+        'ram': 8,
+        'time': 10,
+
+    },
 }

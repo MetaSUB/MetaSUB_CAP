@@ -96,7 +96,7 @@ class Sample:
         return H
 
     def chao1(self):
-        sings, doubs = 0, 0
+        sings, doubs = 0, 1  # give doubles a pseudocount to avoid div by zero
         for val in self.abunds.values():
             if val == 1:
                 sings += 1
@@ -138,10 +138,13 @@ def handleCounts(tool, fname):
         sample = Sample.parseMPA(tool, fname, level)
         for subsetSize in getSubsets(sample.total()):
             subsample = sample.subset(subsetSize)
-            obj[level]['richness'][subsetSize] = subsample.richness()
-            obj[level]['shannon_index'][subsetSize] = subsample.shannonIndex()
-            obj[level]['gini-simpson'][subsetSize] = subsample.ginisimpson()
-            obj[level]['chao1'][subsetSize] = subsample.chao1()
+            key = str(subsetSize)
+            if subsample == sample:
+                key = 'all_reads'
+            obj[level]['shannon_index'][key] = subsample.shannonIndex()
+            obj[level]['richness'][key] = subsample.richness()
+            obj[level]['gini-simpson'][key] = subsample.ginisimpson()
+            obj[level]['chao1'][key] = subsample.chao1()
     return obj
 
 

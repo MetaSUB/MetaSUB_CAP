@@ -1,43 +1,68 @@
 MetaSUB Core Analysis Pipeline
 =========
 
-This is the core analysis pipeline which will be run on every sample collected by the MetaSUB consortium. This pipeline uses ModuleUlta, DataSuper and SnakeMake.
+This is the core analysis pipeline which is run on every sample collected by the MetaSUB consortium. It is designed to provide a comprehensive set of analyses for metagenomic data. 
 
-This pipeline is under heavy development. Most of the documentation for this pipeline is currently internal to MetaSUB.
+Collaboration is welcome and encouraged.
 
-Collaboration by MetaSUB consortium members is welcome and encouraged.
+Please start an issue or contact David C. Danko (dcd3001@med.cornell.edu) if you have questions about this pipeline.
 
-Please contact David C. Danko (dcd3001@med.cornell.edu) if you have questions about this pipeline.
+Current Modules
+----------------
+
+**Taxonomy Profiling**
+
+- KrakenHLL, searching RefSeq Microbial
+- Kraken, searching the minikraken database
+- MetaPhlAn2
+
+**Antibiotic Resistance Profiling**
+
+- Resistome + MegaRES
+- CARD
+
+**Assorted Gene Sets**
+
+- Methyltransferases Genes
+- Virulence Factor Genes
+- HUMANn2 Pathway Profiling
+- HUMANn2 Functional Gene Profiling
+- Staph. Aureus n315
+- `Common Macrobial Genomes <https://github.com/MetaSUB/macrobial-genomes>`_
+
+**Statistics**
+
+- Alpha Diversity
+- Beta Diversity
+- Kmer Profiles
+- GC content
+- Similarity to human body site microbiomes
+- `Microbe Directory <https://microbe.directory/>`_ Annotation
+- Average Genome Size Estimation
+
+See docs.modules.rst for more detail.
 
 
 Installation
 ------------
 
-To install the Core Analysis Pipeline in developer mode you will need to install PackageMega, DataSuper, ModuleUltra and the CAP itself. This process will be streamlined in the future.
+To install the Core Analysis Pipeline in developer mode you will need to install PackageMega, DataSuper, ModuleUltra and the CAP itself. 
+
+To install `DataSuper <https://github.com/dcdanko/DataSuper>`_, `PackageMega <https://github.com/dcdanko/PackageMega>`_, and `ModuleUltra <https://github.com/dcdanko/ModuleUltra>`_ visit their respective github pages.
+
+Normal use of the Core Analysis Pipeline also requires the `MetaSUB QC Pipeline <https://github.com/MetaSUB/MetaSUB_QC_CAP>`_. This is included in the installation directions below.
+
+Once all three programs are installed run the following commands.
+
 
 .. code-block:: bash
-   
-    git clone git@github.com:dcdanko/DataSuper.git 
-    cd DataSuper
-    python setup.py develop
-    cd ..
-    
-    git clone git@github.com:dcdanko/PackageMega.git 
-    cd DataSuper
-    python setup.py develop
-    cd ..
-    
-    git clone git@github.com:dcdanko/ModuleUltra.git 
-    cd ModuleUltra
-    python setup.py develop
-    cd ..
-    
-    git clone git@github.com:MetaSUB/MetaSUB_CAP
-    
+
     cd /analysis/dir
     moduleultra init
-    moduleultra install --dev /path/to/MetaSUB_CAP
+    moduleultra install  git@github.com:MetaSUB/MetaSUB_QC_CAP
+    moduleultra install  git@github.com:MetaSUB/MetaSUB_CAP
     moduleultra add pipeline metasub_cap
+    moduleultra add pipeline metasub_qc_cap
 
 Running
 -------
@@ -47,7 +72,8 @@ To run the CAP use the following commands
 .. code-block:: bash
 
    cd /analysis/dir
-   python /path/to/MetaSUB_CAP/add_fastq_data_to_datasuper.py <sample_type> [<fastq files>...]
+   datasuper bio add-fastqs -1 <forward file ext> -2 <reverse file ext> <sample_type> [<fastq files>...]
+   moduleultra run -p metasub_qc_cap -j <njobs> [--dryrun]
    moduleultra run -p metasub_cap -j <njobs> [--dryrun]
    
 To see more options just use the help commands
@@ -86,7 +112,7 @@ Most modules will need extra parameters at runtime. These may be stored in pipel
 
 If your module needs custom scripts you may add them to the scripts directory here. You can reference this directory in your modules as config['pipeline_dir']['script_dir']. We are working on a protocol to download and store large databases but this is not yet complete.
 
-**You should add your module on a seperate branch named** `module.<module_name>`
+**You should add your module on a seperate branch named** `module/<module_name>`
 
 How to make a branch
 
@@ -95,46 +121,14 @@ How to make a branch
    cd /path/to/MetaSUB_CAP
    git checkout -b module.<module_name>
 
-Planned Modules
-----------------
-
-Feel free to add to this list
-
-- CLARK for taxonomy profiling
-- Taxonomy Normalisation using genome counts
-- CRASS (CRISPRs)
-- StrainPhlAn
-- Repeat Masker
-
-Finished Modules
-----------------
-
-See docs.modules.rst for more detail.
-
-- Humann2
-- Microbe Census (Avergae Genome Size, Genome Counts) 
-- Kraken
-- Metaphlan2
-- Mash
-- microbial/macrobial filtering
-- Comparisons to HMP  
-- Map to AMRs
-- Map to Methyltransferases
-- Resistome MEGARes
-- Intrasample (beta) Diversity
-- Intersample (alpha) diversity
-- Microbe DB Annotations
-- Read Statistics
-- Proportions Classified
-- Adapter Removal
 
 
 Module Dependencies
 -------------------
 
-We are building a system so that every pipeline can be run in its own conda environement. In principle modules can use any software on Conda or PyPi. Projects on github or bitbucket are also fine so long as they can be installed by script.
+Currently every program in the CAP must be installed manually. Future development will streamline this step. 
 
-Licence
+License
 -------
 
 MIT License

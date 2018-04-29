@@ -17,12 +17,26 @@ def countFastq(fname):
     return int(raw) / 4
 
 
+def reads_in_json(read_stats_file):
+    readStats = json.loads(open(read_stats_file).read())
+    nreads = int(readStats['num_reads'])
+    nreads = nreads
+    return nreads
+
+
+def reads_in_macrobe(macrobe_file):
+    macrobes = json.loads(open(macrobe_file).read())
+    tot_reads = 0
+    for val in macrobes.values():
+        tot_reads += int(val['total_reads'])
+    return tot_reads
+
+
 def countMPA(fname):
-    nBact, nArch, nViral = 0, 0, 0
+    nBact, nArch, nViral, nEuk = 0, 0, 0, 0
     with open(fname) as mf:
-        # only look through first 10 lines
-        for arb in range(10):
-            line = mf.readline().strip().lower()
+        for line in mf:
+            line = line.strip().lower()
             if '|' in line:
                 continue
             if 'd__bacteria' in line:
@@ -31,7 +45,9 @@ def countMPA(fname):
                 nArch = int(line.split()[-1])
             if 'd__viruses' in line:
                 nViral = int(line.split()[-1])
-    return nBact, nArch, nViral
+            if 'd__eukaryota' in line:
+                nEuk = int(line.split()[-1])
+    return nBact, nArch, nViral, nEuk
 
 
 def formatOut(humanReads,
@@ -40,6 +56,7 @@ def formatOut(humanReads,
               bactReads,
               archReads,
               viralReads,
+              eukReads,
               totalReads):
     totals = {
         'total': totalReads,
@@ -48,27 +65,32 @@ def formatOut(humanReads,
         'nonhost_macrobial': macrobeReads,
         'bacterial': bactReads,
         'archaeal': archReads,
-        'viral': viralReads
+        'viral': viralReads,
+        'eukaryotic': eukReads,
     }
     out = {}
     out['totals'] = totals
     out['proportions'] = {k: v / totalReads for k, v in totals.items()}
     return out
 
-@click.command()
-@click.argument('human_fastq')
-@click.argument('nonhuman_fastq')
-@click.argument('nonmacrobe_fastq')
-@click.argument('microbe_mpa')
-def main(human_fastq, nonhuman_fastq, nonmacrobe_fastq, microbe_mpa):
-    nHum = countFastq(human_fastq)
-    nNonHum = countFastq(nonhuman_fastq)
-    nNonMacrobe = countFastq(nonmacrobe_fastq)
-    nBact, nArch, nViral = countMPA(microbe_mpa)
 
-    totalReads = nHum + nNonHum
-    nMacrobe = nNonHum - nNonMacrobe
-    unknownReads = nNonMacrobe - (nBact + nArch + nViral)
+@click.command()
+@click.argument('all_fastq')
+@click.argument('read_stats')
+@click.argument('macrobes')
+@click.argument('microbe_mpa')
+def main(all_fastq, read_stats, macrobes, microbe_mpa):
+    totalReads = countFastq(all_fastq)
+    nNonHum = reads_in_json(read_stats)
+
+    nHum = totalReads - nNonHum
+    nMacrobe = reads_in_macrobe(macrobes)
+
+    nBact, nArch, nViral, nEuk = countMPA(microbe_mpa)
+    nMicrobial = nBact + nArch + nViral + nEuk
+
+    unknownReads = nNonHum - nMacrobe - nMicrobial
+
     assert unknownReads >= 0
 
     out = formatOut(nHum,
@@ -77,9 +99,11 @@ def main(human_fastq, nonhuman_fastq, nonmacrobe_fastq, microbe_mpa):
                     nBact,
                     nArch,
                     nViral,
+                    nEuk,
                     totalReads)
     sys.stdout.write(json.dumps(out))
 
-
+    
+    
 if __name__ == '__main__':
     main()

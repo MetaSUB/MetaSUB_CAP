@@ -16,8 +16,8 @@ rule kraken_read_assignment:
         # these file patterns are automatically generated when
         # the snakemake is preprocessed. The definitions used
         # to generate can be found in pipeline_definition.json.
-        reads1 = config['filter_human_dna']['nonhuman_read1'],
-        reads2 = config['filter_human_dna']['nonhuman_read2'] 
+        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
+        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
     output:
         readAssignments = config['kraken_taxonomy_profiling']['read_assignments']
     threads: int( config['kraken_taxonomy_profiling']['threads'])
@@ -54,5 +54,22 @@ rule kraken_make_mpa:
         n_gb_ram=5
     shell:
         '{params.kraken_mpa} {input.raw} --db {params.db} > {output.mpa}'
+
+
+rule kraken_make_report:
+    input:
+        raw = config['kraken_taxonomy_profiling']['read_assignments']
+    output:
+        report = config['kraken_taxonomy_profiling']['report']
+    threads: 1
+    version: config['kraken_taxonomy_profiling']['report_exc']['version']
+    params:
+        kraken_report = config['kraken_taxonomy_profiling']['report_exc']['filepath'],
+        db = config['kraken_taxonomy_profiling']['db']['filepath'],
+    resources:
+        time=1,
+        n_gb_ram=5
+    shell:
+        '{params.kraken_report} {input.raw} --db {params.db} > {output.report}'
 
 
