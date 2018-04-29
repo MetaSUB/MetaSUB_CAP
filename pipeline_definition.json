@@ -95,7 +95,7 @@
       "FILES": {
         "read_assignments": "tsv",
         "mpa": "mpa",
-        "report": "tsv",
+        "report": "tsv"
       }
     },
     {
