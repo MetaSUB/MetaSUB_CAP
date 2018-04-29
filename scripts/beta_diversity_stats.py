@@ -25,8 +25,8 @@ def checkLevel(taxon, level):
 
 
 def clr(X):
-    print('$$$')
-    _X = X / norm(X, ord=1)
+    _X = X + 0.0000001
+    _X = _X / norm(_X, ord=1)
     g = gmean(_X)
     _X = np.divide(_X, g)
     _X = np.log(_X)
@@ -58,6 +58,7 @@ class SampleSet:
         mpas = {name: Sample.parseMPA(name, mpaf, level).abunds
                 for name, mpaf in self.mpaFiles}
         self.mpas = pd.DataFrame(mpas).transpose()
+        self.mpas.fillna(value=0, inplace=True)
 
     def distanceMatrix(self, metric):
         X = self.mpas.as_matrix()
@@ -65,8 +66,10 @@ class SampleSet:
             distm = squareform(pdist(X, jensenShannonDistance))
         elif metric == 'rho_proportionality':
             distm = squareform(pdist(X, rhoProportionality))
-        distm = pd.DataFrame(distm, index=self.mpas.index)
-        return distm.to_json()
+        distm = pd.DataFrame(distm, 
+                             index=self.mpas.index,
+                             columns=self.mpas.index)
+        return distm.to_dict()
 
 
 class Sample:

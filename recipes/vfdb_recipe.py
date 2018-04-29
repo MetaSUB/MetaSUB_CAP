@@ -1,19 +1,18 @@
 from packagemega import BaseRecipe, SourceFile, ConstructedFile
 
 
-class MethyltransferaseRecipe(BaseRecipe):
+class VFDBRecipe(BaseRecipe):
     '''
-    Recipe for the comprehensive antibiotic resistance
-    database
+    Recipe for uniref90 with diamond index
     '''
 
     def __init__(self):
-        super(MethyltransferaseRecipe, self).__init__()
-        self.fasta = SourceFile(self.repo, "methyls.faa")
-        self.dmnd = ConstructedFile(self.repo, "methyls.dmnd")
+        super(VFDBRecipe, self).__init__()
+        self.fasta = SourceFile(self.repo, "vfdb.faa")
+        self.dmnd = ConstructedFile(self.repo, "vfdb.dmnd")
 
     def name(self):
-        return 'methyl'
+        return 'vfdb'
 
     def fileTypes(self):
         return ['gz_fasta_aa', 'dmnd-db']
@@ -33,4 +32,3 @@ class MethyltransferaseRecipe(BaseRecipe):
         self.repo.saveFiles(self,
                             'dmnd',
                             self.dmnd.filepath())
-
