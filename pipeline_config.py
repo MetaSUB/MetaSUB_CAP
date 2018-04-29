@@ -75,6 +75,10 @@ config = {
             'filepath': which('kraken-mpa-report'),
             'version': resolveCmd('kraken-mpa-report --version | tr "\n"  " "')
         },
+        'report_exc': {
+            'filepath': which('kraken-report'),
+            'version': resolveCmd('kraken-report --version | tr "\n"  " "')
+        },
         'threads': 2,
         'time': 2,
         'ram': 5
