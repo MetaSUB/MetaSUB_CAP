@@ -96,7 +96,7 @@ class Sample:
         return H
 
     def chao1(self):
-        sings, doubs = 0, 0
+        sings, doubs = 0, 1  # give doubles a pseudocount to avoid div by zero
         for val in self.abunds.values():
             if val == 1:
                 sings += 1
