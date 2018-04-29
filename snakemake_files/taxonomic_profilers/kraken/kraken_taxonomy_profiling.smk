@@ -56,3 +56,20 @@ rule kraken_make_mpa:
         '{params.kraken_mpa} {input.raw} --db {params.db} > {output.mpa}'
 
 
+rule kraken_make_report:
+    input:
+        raw = config['kraken_taxonomy_profiling']['read_assignments']
+    output:
+        report = config['kraken_taxonomy_profiling']['report']
+    threads: 1
+    version: config['kraken_taxonomy_profiling']['report_exc']['version']
+    params:
+        kraken_report = config['kraken_taxonomy_profiling']['report_exc']['filepath'],
+        db = config['kraken_taxonomy_profiling']['db']['filepath'],
+    resources:
+        time=1,
+        n_gb_ram=5
+    shell:
+        '{params.kraken_report} {input.raw} --db {params.db} > {output.report}'
+
+

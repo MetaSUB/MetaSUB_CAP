@@ -2,7 +2,7 @@
 
 rule bracken_estimate_abundance_species:
     input:
-        report = config['kraken_taxonomy_profiling']['mpa']
+        report = config['kraken_taxonomy_profiling']['report']
     output:
         report = config['bracken_abundance_estimation']['species_report']
     params:
@@ -19,7 +19,7 @@ rule bracken_estimate_abundance_species:
 
 rule bracken_estimate_abundance_genus:
     input:
-        report = config['kraken_taxonomy_profiling']['mpa']
+        report = config['kraken_taxonomy_profiling']['report']
     output:
         report = config['bracken_abundance_estimation']['genus_report']
     params:
@@ -36,7 +36,7 @@ rule bracken_estimate_abundance_genus:
 
 rule bracken_estimate_abundance_phylum:
     input:
-        report = config['kraken_taxonomy_profiling']['mpa']
+        report = config['kraken_taxonomy_profiling']['report']
     output:
         report = config['bracken_abundance_estimation']['phylum_report']
     params:
