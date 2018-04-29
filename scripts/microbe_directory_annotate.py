@@ -3,6 +3,7 @@
 import pandas as pd
 import click
 from json import dumps
+from sys import stderr
 
 '''
 {
@@ -99,6 +100,9 @@ def chooser(*choices):
             return choices[val]
         except ValueError:
             return val
+        except IndexError:
+            print('{}, {}'.format(val, choices), file=stderr)
+            raise
     return foo
 
 def strOrUnk(func):
@@ -117,7 +121,7 @@ def main(microbe_directory, sample_name, mpa):
     mdb = parseMDB(microbe_directory)
     sample = Sample.parseMPA(sample_name, mpa)
     keys = [
-        ('gram_stain', chooser('gram_negative', 'gram_positive')),
+        ('gram_stain', chooser('gram_negative', 'gram_positive', 'indeterminate')),
         ('microbiome_location', chooser('non_human', 'human')),
         ('antimicrobial_susceptibility', chooser('no_known_abx', 'known_abx')),
         ('optimal_temperature', strOrUnk(lambda x: str(int(x)) + 'c')),

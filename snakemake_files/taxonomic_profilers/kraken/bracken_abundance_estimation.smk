@@ -6,7 +6,7 @@ rule bracken_estimate_abundance_species:
     output:
         report = config['bracken_abundance_estimation']['species_report']
     params:
-        exc = config['bracken_abundance_estimation']['exc']
+        exc = config['bracken_abundance_estimation']['exc'],
         kmers = config['bracken_abundance_estimation']['kmer_distributions']
     run:
         cmd = ('{params.exc} '
@@ -23,7 +23,7 @@ rule bracken_estimate_abundance_genus:
     output:
         report = config['bracken_abundance_estimation']['genus_report']
     params:
-        exc = config['bracken_abundance_estimation']['exc']
+        exc = config['bracken_abundance_estimation']['exc'],
         kmers = config['bracken_abundance_estimation']['kmer_distributions']
     run:
         cmd = ('{params.exc} '
@@ -40,7 +40,7 @@ rule bracken_estimate_abundance_phylum:
     output:
         report = config['bracken_abundance_estimation']['phylum_report']
     params:
-        exc = config['bracken_abundance_estimation']['exc']
+        exc = config['bracken_abundance_estimation']['exc'],
         kmers = config['bracken_abundance_estimation']['kmer_distributions']
     run:
         cmd = ('{params.exc} '

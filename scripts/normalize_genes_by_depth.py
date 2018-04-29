@@ -16,7 +16,7 @@ Produces output in reads per kilobase per millions of reads (RPKM)
 @click.argument('read_stats')
 def main(humann2_genes, read_stats):
     readStats = jloads(open(read_stats).read())
-    nreads = int(readStats['microbial']['num_reads'])
+    nreads = int(readStats['num_reads'])
     nreads = nreads / (1000 * 1000)
     print('# Normalized RPKM\tNUM_READS={}M'.format(nreads))
     with open(humann2_genes) as hgs:

@@ -63,8 +63,11 @@ def make_filter(filter_ranks=True, min_kmer=4, min_cov=0.0001):
         """Return False if the parsed does not pass, otherwise True."""
         if min_kmer and (parsed['kmers'] < min_kmer):
             return False
-        if min_cov and(parsed['coverage'] < min_cov):
-            return False
+        try:
+            if min_cov and(parsed['coverage'] < min_cov):
+                return False
+        except TypeError:
+            pass
         if filter_ranks and (parsed['rank'] in ['assembly', 'sequence', 'no_rank']):
             return False
         return True
@@ -106,8 +109,8 @@ def as_mpa(ultimate_root, use_proportions):
 
 
 @click.command()
-@click.option('-k', '--min-kmer', default=4)
-@click.option('-c', '--min-cov', default=0.0001)
+@click.option('-k', '--min-kmer', default=4, type=int)
+@click.option('-c', '--min-cov', default=0.0001, type=float)
 @click.option('-p/-r', '--proportions/--reads', default=False)
 @click.argument('read_assignments_file')
 def main(min_kmer, min_cov, proportions, read_assignments_file):
