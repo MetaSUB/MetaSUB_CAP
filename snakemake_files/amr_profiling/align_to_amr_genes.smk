@@ -5,7 +5,7 @@ rule amr_make_blastm8:
         reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
         dmnd_db = config['align_to_amr_genes']['dmnd']['filepath']
     output:
-        m8 = config['align_to_amr_genes']['m8']
+        m8 = temp(config['align_to_amr_genes']['m8'][:-3])
     threads: int(config['align_to_amr_genes']['dmnd']['threads'])
     params:
         dmnd = config['diamond']['exc']['filepath'],
@@ -26,7 +26,7 @@ rule amr_make_blastm8:
 
 rule amr_quantify:
     input:
-        m8 = config['align_to_amr_genes']['m8'],
+        m8 = config['align_to_amr_genes']['m8'][:-3],
         readstats = config['read_stats']['json'],
         ags = config['microbe_census']['stats'],
         fasta = config['align_to_amr_genes']['fasta_db']['filepath']
@@ -43,4 +43,14 @@ rule amr_quantify:
                '-f {input.fasta} '
                '{input.m8} '
                '> {output.tbl} ') 
+        shell(cmd)
+
+
+rule gzip_m8_amr:
+    input:
+        m8 = config['align_to_amr_genes']['m8'][:-3]
+    output:
+        gzm8 = config['align_to_amr_genes']['m8']
+    run:
+        cmd = 'gzip {input.m8}'
         shell(cmd)
