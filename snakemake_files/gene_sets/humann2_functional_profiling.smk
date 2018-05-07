@@ -7,7 +7,7 @@ rule humann2_make_blastm8:
         reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
         dmnd_db = config['humann2_functional_profiling']['db']['filepath']
     output:
-        m8 = config['humann2_functional_profiling']['m8']
+        m8 = temp(config['humann2_functional_profiling']['m8'][:-3])
     threads: int(config['humann2_functional_profiling']['dmnd']['threads'])
     params:
         dmnd = config['diamond']['exc']['filepath'],
@@ -27,7 +27,7 @@ rule humann2_make_blastm8:
 
 rule humann2_make_summaries:
     input:
-        m8 = config['humann2_functional_profiling']['m8']
+        m8 = config['humann2_functional_profiling']['m8'][:-3]
     output:
         genes = config['humann2_functional_profiling']['genes'],
         path_abunds = config['humann2_functional_profiling']['path_abunds'],
@@ -52,3 +52,14 @@ rule humann2_make_summaries:
                'mv ' + abunds + ' {output.path_abunds} ; '
                'mv ' + covs + ' {output.path_cov} ; ')
     	shell(cmd)
+
+
+rule gzip_m8_humann2:
+    input:
+        m8 = config['humann2_functional_profiling']['m8'][:-3]
+    output:
+        gzm8 = m8 = config['humann2_functional_profiling']['m8']
+    run:
+        cmd = 'gzip {input.m8}'
+        shell(cmd)
+
