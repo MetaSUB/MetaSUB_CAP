@@ -29,6 +29,10 @@
       "txt",
       "m8",
     {
+      "name": "gz_m8",
+      "ext": "m8.gz"
+    }
+    {
       "name": "mpa",
       "ext": "mpa.tsv"
     },
@@ -223,7 +227,7 @@
         "microbial_short_read_dna"
       ],
       "FILES": {
-        "m8": "m8",
+        "m8": "gz_m8",
         "genes": "tsv",
         "path_abunds": "tsv",
         "path_cov": "tsv"
@@ -242,7 +246,7 @@
         "microbial_short_read_dna"
       ],
       "FILES": {
-        "m8": "m8",
+        "m8": "gz_m8",
         "table": "tsv"
       }
     },
@@ -250,7 +254,7 @@
       "NAME": "vfdb_quantify",
       "FILES": {
         "table": "tsv",
-        "m8": "m8"
+        "m8": "gz_m8"
       }
     },
     {
@@ -267,7 +271,7 @@
       ],
       "FILES": {
         "table": "tsv",
-        "m8": "m8"
+        "m8": "gz_m8"
       }
     }
   ]
