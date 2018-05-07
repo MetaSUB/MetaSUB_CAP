@@ -197,8 +197,7 @@
         "microbial_short_read_dna"
       ],
       "FILES": {
-          "mpa": "mpa",
-	  "sam": "sam"
+          "mpa": "mpa"
       }
     },
     {
