@@ -97,7 +97,7 @@
         "microbial_short_read_dna"
       ],
       "FILES": {
-        "read_assignments": "tsv",
+        "read_assignments": "gz_tsv",
         "mpa": "mpa",
         "report": "tsv"
       }

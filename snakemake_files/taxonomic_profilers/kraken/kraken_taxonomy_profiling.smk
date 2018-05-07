@@ -19,7 +19,7 @@ rule kraken_read_assignment:
         reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
         reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
     output:
-        readAssignments = config['kraken_taxonomy_profiling']['read_assignments']
+        readAssignments = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
     threads: int( config['kraken_taxonomy_profiling']['threads'])
     # User specified parameters like this can be stored in pipeline_config.json
     # The parameters can be user supplied parameters or constants as necessary
@@ -71,5 +71,15 @@ rule kraken_make_report:
         n_gb_ram=5
     shell:
         '{params.kraken_report} {input.raw} --db {params.db} > {output.report}'
+
+
+rule compress_read_assignments_kraken:
+    input:
+        raw = config['kraken_taxonomy_profiling']['read_assignments'][:-3]
+    output:
+        compressed = config['kraken_taxonomy_profiling']['read_assignments']
+    run:
+        cmd = 'gzip {input.raw}'
+        shell(cmd)
 
 
