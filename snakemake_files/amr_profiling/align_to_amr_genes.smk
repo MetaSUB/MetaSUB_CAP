@@ -1,4 +1,13 @@
 
+rule unzip_amr_blastm8:
+    input:
+        gzm8 = config['align_to_amr_genes']['m8']
+    output:
+        m8 = temp(config['align_to_amr_genes']['m8'][:-3])
+    run:
+        cmd = 'zcat {input.gzm8} > {output.m8}'
+	shell(cmd)
+
 rule amr_make_blastm8:
     input:
         reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
@@ -23,6 +32,7 @@ rule amr_make_blastm8:
                '> {output.m8} ') 
         shell(cmd)
 
+ruleorder: unzip_amr_blastm8 > amr_make_blastm8
 
 rule amr_quantify:
     input:

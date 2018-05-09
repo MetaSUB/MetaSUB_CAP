@@ -1,5 +1,14 @@
 
 
+rule unzip_vfdb_blastm8:
+    input:
+        gzm8 = config['vfdb_quantify']['m8']
+    output:
+        m8 = temp(config['vfdb_quantify']['m8'][:-3])
+    run:
+        cmd = 'zcat {input.gzm8} > {output.m8}'
+	shell(cmd)
+
 
 rule vfdb_make_blastm8:
     input:
@@ -24,6 +33,7 @@ rule vfdb_make_blastm8:
                '> {output.m8} ') 
         shell(cmd)
 
+ruleorder: unzip_vfdb_blastm8 > vfdb_make_blastm8
 
 rule vfdb_quantify:
     input:

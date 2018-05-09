@@ -1,5 +1,14 @@
 
 
+rule unzip_methyl_blastm8:
+    input:
+        gzm8 =config['align_to_methyltransferases']['m8']
+    output:
+        m8 = temp(config['align_to_methyltransferases']['m8'][:-3])
+    run:
+        cmd = 'zcat {input.gzm8} > {output.m8}'
+	shell(cmd)
+
 rule methyl_make_blastm8:
     input:
         reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
@@ -23,6 +32,7 @@ rule methyl_make_blastm8:
                '> {output.m8} ') 
         shell(cmd)
 
+ruleorder: unzip_methyl_blastm8 > methyl_make_blastm8
 
 rule methyl_quantify:
     input:

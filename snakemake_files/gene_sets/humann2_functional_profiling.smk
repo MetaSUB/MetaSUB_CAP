@@ -1,13 +1,15 @@
 from glob import glob
 
+
 rule unzip_humann2_blastm8:
     input:
-	gzm8 = config['humann2_functional_profiling']['m8']
+        gzm8 = config['humann2_functional_profiling']['m8']
     output:
         m8 = temp(config['humann2_functional_profiling']['m8'][:-3])
     run:
-	cmd = 'zcat {input.gzm8} > {output.m8}
-	shell(cmd)
+        cmd = 'zcat {input.gzm8} > {output.m8}'
+        shell(cmd)
+
 
 rule humann2_make_blastm8:
     input:

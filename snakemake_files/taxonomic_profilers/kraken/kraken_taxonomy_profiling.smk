@@ -10,6 +10,14 @@ pipeline_definitions.json. This definition tells ModuleUltra what outputs
 it should expect.
 '''
 
+rule unzip_kraken_read_assignments:
+    input:
+        gzRA = config['kraken_taxonomy_profiling']['read_assignments']
+    output:
+        ra = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
+    run:
+        cmd = 'zcat {input.gzRA} > {output.ra}'
+        shell(cmd)
 
 rule kraken_read_assignment:
     input:
@@ -38,6 +46,7 @@ rule kraken_read_assignment:
             '> {output.readAssignments}')
         shell(cmd)
 
+ruleorder: unzip_kraken_read_assignments > kraken_read_assignment
 
 rule kraken_make_mpa:
     input:
