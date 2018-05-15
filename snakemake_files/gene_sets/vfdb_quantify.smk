@@ -7,7 +7,7 @@ rule unzip_vfdb_blastm8:
         m8 = temp(config['vfdb_quantify']['m8'][:-3])
     run:
         cmd = 'zcat {input.gzm8} > {output.m8}'
-	shell(cmd)
+        shell(cmd)
 
 
 rule vfdb_make_blastm8:

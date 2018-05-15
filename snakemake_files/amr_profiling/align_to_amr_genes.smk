@@ -6,7 +6,7 @@ rule unzip_amr_blastm8:
         m8 = temp(config['align_to_amr_genes']['m8'][:-3])
     run:
         cmd = 'zcat {input.gzm8} > {output.m8}'
-	shell(cmd)
+        shell(cmd)
 
 rule amr_make_blastm8:
     input:

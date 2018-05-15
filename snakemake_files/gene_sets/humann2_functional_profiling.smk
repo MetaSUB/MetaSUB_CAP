@@ -71,6 +71,6 @@ rule gzip_m8_humann2:
     output:
         gzm8 = config['humann2_functional_profiling']['m8']
     run:
-        cmd = 'cat {input.m8} | gzip > {output.m8}'
+        cmd = 'cat {input.m8} | gzip > {output.gzm8}'
         shell(cmd)
 

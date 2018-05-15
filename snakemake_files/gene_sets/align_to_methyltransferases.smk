@@ -2,12 +2,12 @@
 
 rule unzip_methyl_blastm8:
     input:
-        gzm8 =config['align_to_methyltransferases']['m8']
+        gzm8 = config['align_to_methyltransferases']['m8']
     output:
         m8 = temp(config['align_to_methyltransferases']['m8'][:-3])
     run:
         cmd = 'zcat {input.gzm8} > {output.m8}'
-	shell(cmd)
+        shell(cmd)
 
 rule methyl_make_blastm8:
     input:
@@ -60,5 +60,5 @@ rule gzip_m8_methyls:
     output:
         gzm8 = config['align_to_methyltransferases']['m8']
     run:
-        cmd = 'gzip {input.m8}'
+        cmd = 'cat {input.m8} | gzip > {output.gzm8}'
         shell(cmd)
