@@ -11,7 +11,9 @@
   "REQUIREMENTS": {},
   "ORIGINS": [
     "filter_human_dna",
-    "adapter_removal"
+    "filter_human_dna_single",
+    "adapter_removal",
+    "adpater_removal_single"
   ],
   "SAMPLE_TYPES": [],
   "FILE_TYPES": [
@@ -271,6 +273,25 @@
       "FILES": {
         "table": "tsv",
         "m8": "gz_m8"
+      }
+    },
+    {
+      "NAME": "filter_human_dna_single",
+      "DEPENDENCIES": [
+        "adapater_removal_single"
+      ],
+      "FILES": {
+        "nonhuman_reads": "gz_fastq",
+        "bam": "bam"
+      }
+    },
+    {
+      "NAME": "adapter_removal_single",
+      "DEPENDENCIES": [
+        "raw_short_read_dna_single"
+      ],
+      "FILES": {
+        "clean_reads": "gz_fastq",
       }
     }
   ]

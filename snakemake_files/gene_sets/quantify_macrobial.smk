@@ -24,6 +24,27 @@ rule align_to_macrobial_fragments:
                '> {output.bam} ')
         shell(cmd)
 
+rule align_to_macrobial_fragments_single:
+    input:
+        reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
+    output:
+        bam = config['quantify_macrobial']['bam']
+    params:
+        bt2 = config['bt2']['exc']['filepath'],
+        db = config['quantify_macrobial']['db']['filepath']
+    threads: int(config['quantify_macrobial']['threads'])
+    resources:
+        time = int(config['quantify_macrobial']['time']),
+        n_gb_ram = int(config['quantify_macrobial']['ram'])
+    run:
+        cmd = (' {params.bt2} '
+               '-p {threads} '
+               '--fast '
+               ' -x {params.db} '
+               ' -U {input.reads1} '
+               '| samtools view -F 4 -b '
+               '> {output.bam} ')
+        shell(cmd)
 
 rule quantify_macrobial:
     input:
