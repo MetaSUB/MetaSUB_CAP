@@ -280,6 +280,7 @@
       "DEPENDENCIES": [
         "adapater_removal_single"
       ],
+	"SNAKEMAKE": "filter_human_dna.smk",
       "FILES": {
         "nonhuman_reads": "gz_fastq",
         "bam": "bam"
@@ -290,8 +291,9 @@
       "DEPENDENCIES": [
         "raw_short_read_dna_single"
       ],
+	"SNAKEMAKE": "adapter_removal.smk",
       "FILES": {
-        "clean_reads": "gz_fastq",
+        "clean_reads": "gz_fastq"
       }
     }
   ]
