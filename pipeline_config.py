@@ -113,6 +113,12 @@ config = {
             'version': resolveCmd('mash --version')
         }
     },
+    'finch': {
+        'exc': {
+            'filepath': which('finch'),
+            'version': resolveCmd('finch --version')
+        }
+    },
     'humann2_functional_profiling': {
         'exc': {
             'filepath': which('humann2'),
