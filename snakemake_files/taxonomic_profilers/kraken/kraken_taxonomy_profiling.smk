@@ -69,11 +69,12 @@ rule kraken_read_assignment_single:
     run:
         cmd = (
             '{params.kraken} --gzip-compressed --fastq-input --threads {threads} '
-        '--paired --preload --db {params.db} {input.reads1} '
+            '--preload --db {params.db} {input.reads1} '
             '> {output.readAssignments}')
         shell(cmd)
 
 ruleorder: unzip_kraken_read_assignments > kraken_read_assignment
+ruleorder: unzip_kraken_read_assignments > kraken_read_assignment_single
 
 rule kraken_make_mpa:
     input:

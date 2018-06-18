@@ -57,6 +57,7 @@ rule amr_make_blastm8_single:
         shell(cmd)
 
 ruleorder: unzip_amr_blastm8 > amr_make_blastm8
+ruleorder: unzip_amr_blastm8 > amr_make_blastm8_single
 
 rule amr_quantify:
     input:

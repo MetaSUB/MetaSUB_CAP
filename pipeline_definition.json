@@ -10,10 +10,8 @@
   },
   "REQUIREMENTS": {},
   "ORIGINS": [
-    "filter_human_dna",
-    "filter_human_dna_single",
-    "adapter_removal",
-    "adpater_removal_single"
+      ["filter_human_dna", "filter_human_dna_single"],
+    ["adapter_removal", "adapter_removal_single"]
   ],
   "SAMPLE_TYPES": [],
   "FILE_TYPES": [
@@ -54,17 +52,6 @@
       "NAME" : "align_to_sa_n315",
       "DEPENDENCIES": ["microbial_short_read_dna"],
       "FILES": { "bam": "bam"}
-    },
-    {
-      "NAME": "filter_human_dna",
-      "DEPENDENCIES": [
-        "adpater_removal"
-      ],
-      "FILES": {
-        "nonhuman_read1": "gz_fastq",
-        "nonhuman_read2": "gz_fastq",
-        "bam": "bam"
-      }
     },
     {
       "NAME": "resistome_amrs",
@@ -273,27 +260,6 @@
       "FILES": {
         "table": "tsv",
         "m8": "gz_m8"
-      }
-    },
-    {
-      "NAME": "filter_human_dna_single",
-      "DEPENDENCIES": [
-        "adapater_removal_single"
-      ],
-	"SNAKEMAKE": "filter_human_dna.smk",
-      "FILES": {
-        "nonhuman_reads": "gz_fastq",
-        "bam": "bam"
-      }
-    },
-    {
-      "NAME": "adapter_removal_single",
-      "DEPENDENCIES": [
-        "raw_short_read_dna_single"
-      ],
-	"SNAKEMAKE": "adapter_removal.smk",
-      "FILES": {
-        "clean_reads": "gz_fastq"
       }
     }
   ]

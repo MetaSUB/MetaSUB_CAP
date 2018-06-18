@@ -34,6 +34,7 @@ rule humann2_make_blastm8:
                '> {output.m8} ') 
     	shell(cmd)
 
+ruleorder: unzip_humann2_blastm8 > humann2_make_blastm8_single
 
 rule humann2_make_blastm8_single:
     input:
@@ -93,7 +94,7 @@ rule gzip_m8_humann2:
     input:
         m8 = config['humann2_functional_profiling']['m8'][:-3]
     output:
-        gzm8 = config['humann2_functional_profiling']['m8']
+        gzm8 = temp(config['humann2_functional_profiling']['m8'])
     run:
         cmd = 'cat {input.m8} | gzip > {output.gzm8}'
         shell(cmd)

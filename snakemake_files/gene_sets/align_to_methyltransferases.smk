@@ -58,6 +58,8 @@ rule methyl_make_blastm8_single:
 
 ruleorder: unzip_methyl_blastm8 > methyl_make_blastm8
 
+ruleorder: unzip_methyl_blastm8 > methyl_make_blastm8_single
+
 rule methyl_quantify:
     input:
         m8 = config['align_to_methyltransferases']['m8'][:-3],

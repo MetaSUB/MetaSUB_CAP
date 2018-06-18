@@ -58,6 +58,7 @@ rule vfdb_make_blastm8_single:
 
 
 ruleorder: unzip_vfdb_blastm8 > vfdb_make_blastm8
+ruleorder: unzip_vfdb_blastm8 > vfdb_make_blastm8_single
 
 rule vfdb_quantify:
     input:

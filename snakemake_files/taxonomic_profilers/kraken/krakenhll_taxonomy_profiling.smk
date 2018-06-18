@@ -52,7 +52,6 @@ rule krakenhll_read_assignment_single:
             '--gzip-compressed '
             '--fastq-input '
             '--threads {threads} '
-            '--paired '
             '--preload '
             '--db {params.db} '
             '{input.reads1} '
