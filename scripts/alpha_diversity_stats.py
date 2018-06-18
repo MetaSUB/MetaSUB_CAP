@@ -107,8 +107,8 @@ class Sample:
 
 
 def getSubsets(N):
-    vals = [1, 5, 10, 20, 40, 80, 160, 320, 640, 128, 256, 512, 1024, 2048]
-    vals = [el * 100 * 1000 for el in vals]
+    vals = [1, 5, 10, 100, 500, 1000, 10 * 1000]
+    vals = [el * 1000 for el in vals]
     out = []
     for val in vals:
         if val < N:
