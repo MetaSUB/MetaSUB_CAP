@@ -50,7 +50,7 @@ To install the Core Analysis Pipeline in developer mode you will need to install
 
 To install `DataSuper <https://github.com/dcdanko/DataSuper>`_, `PackageMega <https://github.com/dcdanko/PackageMega>`_, and `ModuleUltra <https://github.com/dcdanko/ModuleUltra>`_ visit their respective github pages.
 
-Normal use of the Core Analysis Pipeline also requires the `MetaSUB QC Pipeline <https://github.com/MetaSUB/MetaSUB_QC_CAP>`_. This is included in the installation directions below.
+Normal use of the Core Analysis Pipeline also requires the `MetaSUB QC Pipeline <https://github.com/MetaSUB/MetaSUB_QC_Pipeline>`_. This is included in the installation directions below.
 
 Once all three programs are installed run the following commands.
 
