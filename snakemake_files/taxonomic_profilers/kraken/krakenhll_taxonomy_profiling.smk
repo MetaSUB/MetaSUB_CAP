@@ -83,10 +83,10 @@ rule krakenhll_filter_assignments_medium:
     input:
         readAssignments = config['krakenhll_taxonomy_profiling']['read_assignments']
     output:
-        filtered = config['krakenhll_taxonomy_profiling']['medium_report']
+        filtered = config['krakenhll_taxonomy_profiling']['report_medium']
     params:
         num_kmer = config['krakenhll_taxonomy_profiling']['med_kmer'],
-        required_cov = config['krakenhll_taxonomy_profiling']['mied_cov'],
+        required_cov = config['krakenhll_taxonomy_profiling']['med_cov'],
         script = config['krakenhll_taxonomy_profiling']['script'],
     run:
         cmd = (
@@ -103,7 +103,7 @@ rule krakenhll_filter_assignments_strict:
     input:
         readAssignments = config['krakenhll_taxonomy_profiling']['read_assignments']
     output:
-        filtered = config['krakenhll_taxonomy_profiling']['strict_report']
+        filtered = config['krakenhll_taxonomy_profiling']['report_strict']
     params:
         num_kmer = config['krakenhll_taxonomy_profiling']['max_kmer'],
         required_cov = config['krakenhll_taxonomy_profiling']['max_cov'],
