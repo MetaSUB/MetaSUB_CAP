@@ -117,7 +117,9 @@ config = {
         'exc': {
             'filepath': which('finch'),
             'version': resolveCmd('finch --version')
-        }
+        },
+        'seed': 42,
+        'n_hashes': 10000000,
     },
     'humann2_functional_profiling': {
         'exc': {
