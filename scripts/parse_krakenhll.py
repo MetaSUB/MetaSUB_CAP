@@ -2,6 +2,41 @@
 
 import click
 
+TAXA_LIST = [
+    'no rank',
+    'superkingdom',
+    'kingdom',
+    'subkingdom',
+    'superphylum',
+    'phylum',
+    'subphylum',
+    'superclass',
+    'class',
+    'subclass',
+    'infraclass',
+    'superorder',
+    'order',
+    'cohort',
+    'suborder',
+    'infraorder',
+    'parvorder',
+    'superfamily',
+    'family',
+    'subfamily',
+    'tribe',
+    'subtribe',
+    'genus',
+    'subgenus',
+    'species group',
+    'species subgroup',
+    'species',
+    'subspecies',
+    'varietas',
+    'forma',
+    'assembly',
+    'sequence',
+]
+TAXA_LIST = {taxa: depth for depth, taxa in enumerate(TAXA_LIST)}
 
 def floatorna(tkn):
     try:
@@ -15,7 +50,7 @@ def floatorna(tkn):
 def handle_tokens(tkns):
     assert len(tkns) == 9
     taxon_name = tkns[8]
-    depth = (len(taxon_name) - len(taxon_name.strip())) / 2
+    depth = TAXA_LIST[tkns[7]]
     return {
         'percent': float(tkns[0]),
         'reads': int(tkns[1]),

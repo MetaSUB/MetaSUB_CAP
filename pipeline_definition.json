@@ -1,6 +1,6 @@
 {
   "NAME": "metasub_cap",
-  "VERSION": "0.0.1",
+  "VERSION": "1.0.0",
   "SNAKEMAKE": {
     "DIR": "snakemake_files",
     "CONF": "pipeline_config.py"
@@ -10,8 +10,8 @@
   },
   "REQUIREMENTS": {},
   "ORIGINS": [
-    "filter_human_dna",
-    "adapter_removal"
+      ["filter_human_dna", "filter_human_dna_single"],
+    ["adapter_removal", "adapter_removal_single"]
   ],
   "SAMPLE_TYPES": [],
   "FILE_TYPES": [
@@ -52,17 +52,6 @@
       "NAME" : "align_to_sa_n315",
       "DEPENDENCIES": ["microbial_short_read_dna"],
       "FILES": { "bam": "bam"}
-    },
-    {
-      "NAME": "filter_human_dna",
-      "DEPENDENCIES": [
-        "adpater_removal"
-      ],
-      "FILES": {
-        "nonhuman_read1": "gz_fastq",
-        "nonhuman_read2": "gz_fastq",
-        "bam": "bam"
-      }
     },
     {
       "NAME": "resistome_amrs",

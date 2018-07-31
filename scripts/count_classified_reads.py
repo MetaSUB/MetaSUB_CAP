@@ -33,7 +33,7 @@ def reads_in_macrobe(macrobe_file):
 
 
 def countMPA(fname):
-    nBact, nArch, nViral, nEuk = 0, 0, 0, 0
+    nBact, nArch, nViral, nEuk, nFung = 0, 0, 0, 0, 0
     with open(fname) as mf:
         for line in mf:
             line = line.strip().lower()
@@ -47,7 +47,9 @@ def countMPA(fname):
                 nViral = int(line.split()[-1])
             if 'd__eukaryota' in line:
                 nEuk = int(line.split()[-1])
-    return nBact, nArch, nViral, nEuk
+            if 'k__fung' in line:
+                nFung = int(line.split()[-1])
+    return nBact, nArch, nViral, nEuk, nFung
 
 
 def formatOut(humanReads,
@@ -57,6 +59,7 @@ def formatOut(humanReads,
               archReads,
               viralReads,
               eukReads,
+              fungReads,
               totalReads):
     totals = {
         'total': totalReads,
@@ -66,7 +69,8 @@ def formatOut(humanReads,
         'bacterial': bactReads,
         'archaeal': archReads,
         'viral': viralReads,
-        'eukaryotic': eukReads,
+        'nonfungal_eukaryotic': eukReads,
+        'fungal': fungReads
     }
     out = {}
     out['totals'] = totals
@@ -86,12 +90,10 @@ def main(all_fastq, read_stats, macrobes, microbe_mpa):
     nHum = totalReads - nNonHum
     nMacrobe = reads_in_macrobe(macrobes)
 
-    nBact, nArch, nViral, nEuk = countMPA(microbe_mpa)
+    nBact, nArch, nViral, nEuk, nFung = countMPA(microbe_mpa)
     nMicrobial = nBact + nArch + nViral + nEuk
 
     unknownReads = nNonHum - nMacrobe - nMicrobial
-
-    assert unknownReads >= 0
 
     out = formatOut(nHum,
                     nMacrobe,
@@ -99,8 +101,10 @@ def main(all_fastq, read_stats, macrobes, microbe_mpa):
                     nBact,
                     nArch,
                     nViral,
-                    nEuk,
+                    nEuk - nFung,
+                    nFung,
                     totalReads)
+    assert unknownReads >= 0, out
     sys.stdout.write(json.dumps(out))
 
     

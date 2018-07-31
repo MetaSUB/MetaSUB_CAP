@@ -46,7 +46,35 @@ rule kraken_read_assignment:
             '> {output.readAssignments}')
         shell(cmd)
 
+
+rule kraken_read_assignment_single:
+    input:
+        # these file patterns are automatically generated when
+        # the snakemake is preprocessed. The definitions used
+        # to generate can be found in pipeline_definition.json.
+        reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
+    output:
+        readAssignments = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
+    threads: int( config['kraken_taxonomy_profiling']['threads'])
+    # User specified parameters like this can be stored in pipeline_config.json
+    # The parameters can be user supplied parameters or constants as necessary
+    version: ' '.join(config['kraken_taxonomy_profiling']['exc']['version'].split('\n'))
+    # version isn't required but helps with provenance
+    params:
+        kraken = config['kraken_taxonomy_profiling']['exc']['filepath'],
+        db = config['kraken_taxonomy_profiling']['db']['filepath'],
+    resources:
+        time=int(config['kraken_taxonomy_profiling']['time']),
+        n_gb_ram=int(config['kraken_taxonomy_profiling']['ram'])
+    run:
+        cmd = (
+            '{params.kraken} --gzip-compressed --fastq-input --threads {threads} '
+            '--preload --db {params.db} {input.reads1} '
+            '> {output.readAssignments}')
+        shell(cmd)
+
 ruleorder: unzip_kraken_read_assignments > kraken_read_assignment
+ruleorder: unzip_kraken_read_assignments > kraken_read_assignment_single
 
 rule kraken_make_mpa:
     input:
