@@ -123,7 +123,7 @@ config = {
         },
         'dmnd': {
             'time': 99,
-            'ram': 6,
+            'ram': 8,
             'threads': 10,
             'block_size': 6
         },
