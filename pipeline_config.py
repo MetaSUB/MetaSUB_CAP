@@ -219,4 +219,15 @@ config = {
         'time': 10,
 
     },
+    'jellyfish': {
+        'exc': {
+            'filepath': which('jellyfish'),
+            'version': resolveCmd('jellyfish --version')
+        }
+    },
+    'count_31mers': {
+        'threads': 6,
+        'time': 99,
+        'ram': 32
+    },
 }
