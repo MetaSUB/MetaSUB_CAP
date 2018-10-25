@@ -19,7 +19,10 @@ def countFastq(fname):
 
 def reads_in_json(read_stats_file):
     readStats = json.loads(open(read_stats_file).read())
-    nreads = int(readStats['num_reads'])
+    try:
+        nreads = int(readStats['raw']['num_reads'])
+    except KeyError:
+        nreads = int(readStats['num_reads'])
     nreads = nreads
     return nreads
 

@@ -21,7 +21,7 @@ rule count_class_proportions:
 
         shell(cmd)
 
-
+"""
 rule count_class_proportions_single:
     input:
         all_reads = getOriginResultFiles(config, 'adapter_removal_single', 'clean_reads'),
@@ -41,3 +41,4 @@ rule count_class_proportions_single:
                ' > {output.json}')
 
         shell(cmd)
+"""
