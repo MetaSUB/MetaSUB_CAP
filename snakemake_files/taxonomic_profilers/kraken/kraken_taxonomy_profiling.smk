@@ -10,6 +10,14 @@ pipeline_definitions.json. This definition tells ModuleUltra what outputs
 it should expect.
 '''
 
+rule unzip_kraken_read_assignments:
+    input:
+        gzRA = config['kraken_taxonomy_profiling']['read_assignments']
+    output:
+        ra = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
+    run:
+        cmd = 'zcat {input.gzRA} > {output.ra}'
+        shell(cmd)
 
 rule kraken_read_assignment:
     input:
@@ -19,7 +27,7 @@ rule kraken_read_assignment:
         reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
         reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
     output:
-        readAssignments = config['kraken_taxonomy_profiling']['read_assignments']
+        readAssignments = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
     threads: int( config['kraken_taxonomy_profiling']['threads'])
     # User specified parameters like this can be stored in pipeline_config.json
     # The parameters can be user supplied parameters or constants as necessary
@@ -38,6 +46,35 @@ rule kraken_read_assignment:
             '> {output.readAssignments}')
         shell(cmd)
 
+
+rule kraken_read_assignment_single:
+    input:
+        # these file patterns are automatically generated when
+        # the snakemake is preprocessed. The definitions used
+        # to generate can be found in pipeline_definition.json.
+        reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
+    output:
+        readAssignments = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
+    threads: int( config['kraken_taxonomy_profiling']['threads'])
+    # User specified parameters like this can be stored in pipeline_config.json
+    # The parameters can be user supplied parameters or constants as necessary
+    version: ' '.join(config['kraken_taxonomy_profiling']['exc']['version'].split('\n'))
+    # version isn't required but helps with provenance
+    params:
+        kraken = config['kraken_taxonomy_profiling']['exc']['filepath'],
+        db = config['kraken_taxonomy_profiling']['db']['filepath'],
+    resources:
+        time=int(config['kraken_taxonomy_profiling']['time']),
+        n_gb_ram=int(config['kraken_taxonomy_profiling']['ram'])
+    run:
+        cmd = (
+            '{params.kraken} --gzip-compressed --fastq-input --threads {threads} '
+            '--preload --db {params.db} {input.reads1} '
+            '> {output.readAssignments}')
+        shell(cmd)
+
+ruleorder: unzip_kraken_read_assignments > kraken_read_assignment
+ruleorder: unzip_kraken_read_assignments > kraken_read_assignment_single
 
 rule kraken_make_mpa:
     input:
@@ -71,5 +108,15 @@ rule kraken_make_report:
         n_gb_ram=5
     shell:
         '{params.kraken_report} {input.raw} --db {params.db} > {output.report}'
+
+
+rule compress_read_assignments_kraken:
+    input:
+        raw = config['kraken_taxonomy_profiling']['read_assignments'][:-3]
+    output:
+        compressed = config['kraken_taxonomy_profiling']['read_assignments']
+    run:
+        cmd = 'gzip {input.raw}'
+        shell(cmd)
 
 
