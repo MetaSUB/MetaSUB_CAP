@@ -13,31 +13,19 @@ ENV LANG C.UTF-8
 # MetaSUB_CAP Dependencies
 RUN mkdir /opt/metasub/ \
     && cd /opt/metasub/ \
-    && git clone https://github.com/dcdanko/DataSuper.git \
-    && cd DataSuper \
-    && python3 setup.py develop \
-    && cd .. \
-    && git clone https://github.com/dcdanko/PackageMega.git \
-    && cd PackageMega \
-    && python3 setup.py develop \
-    && cd .. \
-    && git clone https://github.com/dcdanko/gimme_input.git \
-    && cd gimme_input \
-    && python3 setup.py develop \
-    && cd .. \
-    && git clone https://github.com/dcdanko/ModuleUltra.git \
-    && cd ModuleUltra \
-    && python3 setup.py develop \
-    && cd .. \
-    && pip3 install blessings
+    && pip3 install moduleultra==0.1.5
 
 
 USER metasub
 RUN cd /home/metasub \
+    && mkdir base_repo \
+    && mkdir repo \
+    && cd /home/metasub/base_repo \
     && moduleultra init \
     && echo y | moduleultra install https://github.com/MetaSUB/MetaSUB_QC_Pipeline.git \
     && echo y | moduleultra install https://github.com/MetaSUB/MetaSUB_CAP \
     && moduleultra add pipeline metasub_cap \
     && moduleultra add pipeline metasub_qc_cap
 
-WORKDIR /home/metasub
+
+WORKDIR /home/metasub/repo
