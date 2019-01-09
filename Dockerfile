@@ -1,4 +1,6 @@
-FROM ubuntu:18.04
+FROM continuumio/miniconda3
+
+ENTRYPOINT [ “/bin/bash”, “-c” ]
 
 RUN apt-get update \
     && apt-get install -y locales git python3-dev python3-pip libyaml-dev \
@@ -10,14 +12,20 @@ RUN apt-get update \
 ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
+ADD cap_env.yml /tmp/environment.yml
+WORKDIR /tmp
+RUN conda env create
+RUN source activate cap \
+    && pip install moduleultra==0.1.5
+
 # MetaSUB_CAP Dependencies
 RUN mkdir /opt/metasub/ \
-    && cd /opt/metasub/ \
-    && pip3 install moduleultra==0.1.5
+    && cd /opt/metasub/
 
 
 USER metasub
 RUN cd /home/metasub \
+    && source activate cap \
     && mkdir base_repo \
     && mkdir repo \
     && cd /home/metasub/base_repo \
@@ -29,3 +37,4 @@ RUN cd /home/metasub \
 
 
 WORKDIR /home/metasub/repo
+RUN source activate cap
