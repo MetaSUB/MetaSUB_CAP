@@ -7,6 +7,8 @@ Collaboration is welcome and encouraged.
 
 Please start an issue or contact David C. Danko (dcd3001@med.cornell.edu) if you have questions about this pipeline.
 
+Utilities are available to parse the output of the CAP. Please see the `CAPalyzer <https://github.com/dcdanko/capalyzer>`_. for details.
+
 Current Modules
 ----------------
 
