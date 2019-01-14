@@ -12,19 +12,17 @@ ENV LC_ALL C.UTF-8
 ENV LANG C.UTF-8
 
 ADD cap_env.yml /tmp/environment.yml
+
+USER metasub
 WORKDIR /home/metasub
 RUN conda env create -f=/tmp/environment.yml
 
-RUN mkdir /opt/metasub/ \
-    && cd /opt/metasub/
 
 ENTRYPOINT [ "/bin/bash", "-c" ]
 RUN /bin/bash -c "source activate cap \
-    && pip install --ignore-installed PyYAML moduleultra==0.1.5 \
-    && pip install pytest"
+    && pip install --ignore-installed PyYAML moduleultra==0.1.5" 
 
 
-USER metasub
 RUN cd /home/metasub \
     && /bin/bash -c "source activate cap \
     && mkdir base_repo \

@@ -32,12 +32,12 @@ config = {
         'time': 10,
         'ram': 10,
         'db': {
-            'bt2': pmegaDB('staph_aureus_n315.bt2.prefix')
+            'bt2': pmegaDB('staph_aureus_n315.bt2.prefix'),
         }
     },
     'filter_human_dna': {
         'db': {
-            'filepath': pmegaDB('hg38_ucsc.bt2.prefix')
+            'filepath': pmegaDB('hg38_ucsc.bt2.prefix'),
         },
         'threads': 6,
         'time': 10,
