@@ -12,7 +12,6 @@ Utilities are available to parse the output of the CAP. Please see the
 [CAPalyzer](https://github.com/dcdanko/capalyzer). for details.
 
 ## Current Modules
-===============
 
 ### Taxonomy Profiling
 -   KrakenHLL, searching RefSeq Microbial
@@ -111,33 +110,18 @@ snakemake\_files/mash\_intersample\_dists.snkmk as examples for the snakemake ru
 You will also you need to add a `result_type` to `pipeline_definition.yml` describing the expected files output by your module.
 
 This definition is a small Yaml dictionary that defines:
-    -   The name of the module
-    -   The names of the files in the modules
-    -   The types of files in the module (you may also define your own
-        file types)
-    -   Any modules that your module depends on
-    -   A flag if the module is run on groups of samples
+-   The name of the module
+-   The names of the files in the modules
+-   The types of files in the module (you may also define your own file types)
+-   Any modules that your module depends on
+-   A flag if the module is run on groups of samples
 
 
-ModuleUltra generates filename patterns for modules automatically. You
-may reference these filenames (or filenames from modules your module
-depends on) as
-config\['&lt;module\_name&gt;'\]\['&lt;file\_type\_name&gt;'\]. Many
-tools will need all microbial reads, these come from the
-'filter\_macrobial\_reads' module and can be referenced as
-config\['filter\_macrobial\_dna'\]\['microbial\_read1'\] and
-config\['filter\_macrobial\_dna'\]\['microbial\_read2'\].
+ModuleUltra generates filename patterns for modules automatically. You may reference these filenames (or filenames from modules your module depends on) as `config['<module_name>']['<file_type_name>']` for both Snakemake input and output fields.
 
-Most modules will need extra parameters at runtime. These may be stored
-in `pipeline_config.json`. There is no limit to what you can store here
-so long as it is valid JSON. You may even include the results of shell
-commands in this config by enclosing the commands in backticks. These
-backticks are evaluated just before the pipeline is run. This is useful
-to get the absolute path and version of the program being run.
+Most modules will need extra parameters at runtime. These may be stored in `pipeline_config.py`. There is no limit to what you can store though this should be lightweight.
 
-If your module needs custom scripts you may add them to the scripts
-directory. You can reference this directory in your modules as
-config\['pipeline\_dir'\]\['script\_dir'\].
+If your module needs custom scripts you may add them to the scripts directory. You can reference this directory in your modules as `config['pipeline_dir']['script_dir']`.
 
 **You should add your module on a separate branch** named `module/<module_name>`
 
