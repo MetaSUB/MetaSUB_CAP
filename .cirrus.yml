@@ -1,4 +1,5 @@
 
 test_task:
-
+  container:
+    dockerfile: Dockerfile
   test_script: python -m pytest --color=yes tests -s
