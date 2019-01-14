@@ -35,6 +35,23 @@ config = {
             'bt2': pmegaDB('staph_aureus_n315.bt2.prefix')
         }
     },
+    'filter_human_dna': {
+        'db': {
+            'filepath': pmegaDB('hg38_ucsc.bt2.prefix')
+        },
+        'threads': 6,
+        'time': 10,
+        'ram': 10,
+    },
+    'adapter_removal': {
+        'time': 5,
+        'threads': 6,
+        'ram': 10,
+        'exc': {
+            'filepath': which('AdapterRemoval'),
+            'version': resolveCmd('AdapterRemoval --version 2>&1'),
+        },
+    },
     'alpha_diversity_stats': {
         'script': scriptDir('alpha_diversity_stats.py')
     },
