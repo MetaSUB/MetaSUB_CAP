@@ -125,11 +125,11 @@
       }
     },
     {
-	  "NAME": "mash_sketch",
-	  "DEPENDENCIES": ["microbial_short_read_dna"],
-	  "FILES": {
-	      "sketch": "minsketch"
-	    }
+      "NAME": "finch_sketch",
+      "DEPENDENCIES": ["microbial_short_read_dna"],
+      "FILES": {
+        "sketch": "minsketch"
+      }
     },
     {
       "NAME": "read_classification_proportions",
