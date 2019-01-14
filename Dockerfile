@@ -20,11 +20,8 @@ RUN mkdir /opt/metasub/ \
 
 ENTRYPOINT [ "/bin/bash", "-c" ]
 RUN /bin/bash -c "source activate cap \
-    && pip install --ignore-installed PyYAML moduleultra==0.1.5"
-
-RUN /bin/bash -c "source activate cap \
+    && pip install --ignore-installed PyYAML moduleultra==0.1.5 \
     && pip install pytest"
-
 
 
 USER metasub
