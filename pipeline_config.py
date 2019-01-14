@@ -20,6 +20,7 @@ def pmegaDB(operand):
         res = ''
     return res
 
+
 def which(tool):
     cmd = 'which {}'.format(tool)
     return resolveCmd(cmd)
@@ -96,6 +97,10 @@ config = {
         'ram': 16,
         'min_kmer': 4,
         'min_cov': 0.0001,
+        'med_kmer': 256,
+        'med_cov': 0.0001,
+        'max_kmer': 512,
+        'max_cov': 0.001,
         'script': scriptDir('parse_krakenhll.py'),
     },
     'microbe_census_group_summary': {
@@ -113,6 +118,14 @@ config = {
             'version': resolveCmd('mash --version')
         }
     },
+    'finch': {
+        'exc': {
+            'filepath': which('finch'),
+            'version': resolveCmd('finch --version')
+        },
+        'seed': 42,
+        'n_hashes': 10000000,
+    },
     'humann2_functional_profiling': {
         'exc': {
             'filepath': which('humann2'),
@@ -123,7 +136,7 @@ config = {
         },
         'dmnd': {
             'time': 99,
-            'ram': 6,
+            'ram': 8,
             'threads': 10,
             'block_size': 6
         },

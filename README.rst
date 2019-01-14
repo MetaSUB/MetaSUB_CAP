@@ -7,6 +7,8 @@ Collaboration is welcome and encouraged.
 
 Please start an issue or contact David C. Danko (dcd3001@med.cornell.edu) if you have questions about this pipeline.
 
+Utilities are available to parse the output of the CAP. Please see the `CAPalyzer <https://github.com/dcdanko/capalyzer>`_. for details.
+
 Current Modules
 ----------------
 
@@ -89,6 +91,16 @@ Most cluster systems will need a custom submit script. You can set a default scr
 .. code-block:: bash
    
    moduleultra config cluster_submit /path/to/submit_script
+
+
+Running with Docker
+-------------------
+
+To start a shell in the docker machine use the following command:
+
+.. code-block:: bash
+
+   docker run --rm -it -v $PWD:/home/metasub/repo metasub_cap:latest /bin/bash -c "source activate cap"
 
 Adding Modules
 --------------

@@ -76,6 +76,17 @@ Finds the jaccard distance between pairs of kmer profiles in a group of samples.
 
 Runs only on reads that did not align to the human genome or macrobial genomes.
 
+
+Finch Sketch
+------------
+
+Alternative implementation of Mash that includes error-correction for FASTQ files.
+
+`Finch Paper <http://joss.theoj.org/papers/10.21105/joss.00505>`_
+
+`Finch GitHub <https://github.com/onecodex/finch-rs>`_
+
+
 Functional Profiling
 ====================
 

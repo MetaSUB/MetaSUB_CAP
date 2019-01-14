@@ -25,6 +25,29 @@ rule align_reads_to_megares:
         shell(cmd)
 
 
+rule align_reads_to_megares_single:
+    input:
+        reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
+    output:
+        sam = config['resistome_amrs']['sam']
+    threads: int(config['resistome_amrs']['threads'])
+    params:
+        bt2=config['bt2']['exc']['filepath'],
+        db = config['resistome_amrs']['db']['bt2']
+    resources:
+        time=int(config['resistome_amrs']['bt2_time']),
+        n_gb_ram=int(config['resistome_amrs']['bt2_ram'])
+    run:
+        cmd = (' {params.bt2} '
+         '-p {threads} '
+         '--very-sensitive '
+         ' -x {params.db} '
+         ' -U {input.reads1} '
+         '| samtools view -F 4  '
+         '> {output.sam} ')
+        shell(cmd)
+
+
 rule analyze_with_resistome:
     input:
         sam = config['resistome_amrs']['sam'],

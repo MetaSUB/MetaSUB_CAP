@@ -8,7 +8,7 @@ kraken_taxonomy_profiling.snkmk
 
 rule mash_dists:
     input:
-        sketch = expandGroup(config['mash_sketch']['sketch'])
+        sketch = expandGroup(config['finch_sketch']['sketch'])
     output:
         distTable=config['mash_intersample_dists']['distance_table']
     resources:
