@@ -42,7 +42,7 @@ def get_downloader(top_dir, dirname, uri, dryrun=True):
 
 
 @click.command()
-@click.option('-t', '--threads', defualt=1)
+@click.option('-t', '--threads', default=1)
 @click.option('-d/-w', '--dryrun/--wetrun', default=True)
 @click.option('-l/-n', '--light/--normal', default=False, help='Only download small databases')
 @click.argument('target_dir', default='.')
@@ -59,4 +59,4 @@ def main(threads, dryrun, light, target_dir):
 
 
 if __name__ == '__main__':
-    pass
+    main()
