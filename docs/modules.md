@@ -1,12 +1,9 @@
----
-title: Modules
----
+# Modules
 
-Quality Control
-===============
 
-Filter Human DNA
-----------------
+## Quality Control
+
+### Filter Human DNA
 
 Nearly every metagenomic sample contains human DNA. This may be normal
 (i.e. a human saliva sample) or lab contamination.
@@ -15,8 +12,7 @@ Either way the human DNA needs to be removed. The CAP aligns reads to
 hg38 (with alt contigs) using `bowtie2 --very-fast` and proceeds with
 that did not align.
 
-Filter Macrobial DNA
---------------------
+### Filter Macrobial DNA
 
 The CAP looks for DNA from common macrobial species in a sample. This
 DNA can help us to understand the environment that a sample was sourced
@@ -25,22 +21,18 @@ associated species like dogs, cats, wheat, and rice.
 
 See databases for the full list of species.
 
-Adapter Removal
----------------
+### Adapter Removal
 
 The CAP removes reads that contain 'N', reads with low quality bases and
 trims adapters. This is done via AdapterRemoval ver 2.1.7.
 
-[AdapterRemoval
-GitHub](https://github.com/MikkelSchubert/adapterremoval)
+[AdapterRemoval GitHub](https://github.com/MikkelSchubert/adapterremoval)
 
 [AdapterRemoval Paper](https://doi.org/10.1186/s13104-016-1900-2)
 
-Diversity
-=========
+## Diversity
 
-Alpha Diversity Stats
----------------------
+### Alpha Diversity Stats
 
 Calculates the richness and shannon index at the species and genus level
 for both kraken and metaphlan2 output. Output is a json file.
@@ -49,8 +41,7 @@ These outputs are produced by a script `alpha_diversity_stats.py`
 
 [Diversity Indices](https://en.wikipedia.org/wiki/Diversity_index)
 
-Beta Diversity Stats
---------------------
+### Beta Diversity Stats
 
 Calculates the rho proportionality and Jensen Shannon Distance at the
 species and genus level for both kraken and metaphlan2 outputs. Output
@@ -59,20 +50,16 @@ every pair of samples in a given group.
 
 These outputs are produced by a script `beta_diversity_stats.py`
 
-[Rho
-Proportionality](https://cran.r-project.org/web/packages/propr/index.html)
+[Rho Proportionality](https://cran.r-project.org/web/packages/propr/index.html)
 
-[Jensen Shannon
-Distances](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence)
+[Jensen Shannon Distances](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence)
 
 N.B. This is J.S. Distance, the squareroot of J.S. Divergence. This is a
 metric.
 
-HMP Site Distances
-------------------
+### HMP Site Distances
 
-Mash Sketch
------------
+### Mash Sketch
 
 Produces a Mash Sketch with 10,000,000 representative kmers.
 
@@ -84,14 +71,11 @@ Produces a Mash Sketch with 10,000,000 representative kmers.
 
 ### Mash Intersample Distances
 
-Finds the jaccard distance between pairs of kmer profiles in a group of
-samples.
+Finds the jaccard distance between pairs of kmer profiles in a group of samples.
 
-Runs only on reads that did not align to the human genome or macrobial
-genomes.
+Runs only on reads that did not align to the human genome or macrobial genomes.
 
-Finch Sketch
-------------
+### Finch Sketch
 
 Alternative implementation of Mash that includes error-correction for
 FASTQ files.
@@ -100,11 +84,9 @@ FASTQ files.
 
 [Finch GitHub](https://github.com/onecodex/finch-rs)
 
-Functional Profiling
-====================
+## Functional Profiling
 
-HUMAnN2 Functional Profiling
-----------------------------
+### HUMAnN2 Functional Profiling
 
 Finds how many reads map to particular genes in particular pathways. The
 catalog of genes is uniref90 and diamond is used as an aligner. HUMAnN2
@@ -119,8 +101,7 @@ genomes.
 
 [DIAMOND GitHub](https://github.com/bbuchfink/diamond)
 
-[DIAMOND
-Paper](https://www.nature.com/articles/nmeth.3176?message-global=remove)
+[DIAMOND Paper](https://www.nature.com/articles/nmeth.3176?message-global=remove)
 
 ### HUMAaN2 Gene Normalization
 
@@ -132,11 +113,9 @@ This ouput is produced by a script `normalize_genes.py`
 
 [MicrobeCensus Paper](https://doi.org/10.1186/s13059-015-0611-7)
 
-Taxonomy
-========
+## Taxonomy
 
-Kraken Taxonomy Profiling
--------------------------
+### Kraken Taxonomy Profiling
 
 Uses kraken to pseudo-map reads to a database of species. See databases
 for the details of the database being used.
@@ -144,42 +123,27 @@ for the details of the database being used.
 Runs only on reads that did not align to the human genome or macrobial
 genomes.
 
-[Kraken Paper](https://doi.org/10.1186/gb-2014-15-3-r46) [Kraken Home
-Page](https://ccb.jhu.edu/software/kraken/)
+[Kraken Paper](https://doi.org/10.1186/gb-2014-15-3-r46)
+[Kraken Home Page](https://ccb.jhu.edu/software/kraken/)
 
-### Kraken Summary
 
-Combines the kraken outputs from a group of samples into a single table.
-
-Produced by a script `summarize_kraken.py`
-
-### Normalized Kraken Taxonomy
-
-Not yet implemented.
-
-MetaPhlAn2 Taxonomy Profiling
------------------------------
+### MetaPhlAn2 Taxonomy Profiling
 
 Uses MetaPhlAn2 to estimate the abundance of various species.
 
-Runs only on reads that did not align to the human genome or macrobial
-genomes.
+Runs only on reads that did not align to the human genome or macrobial genomes.
 
 [MetaPhlAn2 BitBucket](https://bitbucket.org/biobakery/metaphlan2)
 
 [MetaPhlAn2 Paper](http://www.nature.com/doifinder/10.1038/nbt.3589)
 
-Statistics
-==========
+## Statistics
 
-Microbe Census
---------------
+### Microbe Census
 
-Estimates the average genome size for a sample by counting reads that
-map to Universal Single Copy Genes.
+Estimates the average genome size for a sample by counting reads that map to Universal Single Copy Genes.
 
-Runs only on reads that did not align to the human genome or macrobial
-genomes.
+Runs only on reads that did not align to the human genome or macrobial genomes.
 
 [MicrobeCensus GitHub](https://github.com/snayfach/MicrobeCensus)
 [MicrobeCensus Paper](https://doi.org/10.1186/s13059-015-0611-7)
@@ -190,16 +154,13 @@ Summarizes the AGS for a groups of samples into a single file.
 
 Produced by a script `summarize_microbe_census.py`
 
-Read Classification Proportions
--------------------------------
+### Read Classification Proportions
 
-Counts the proportion of reads that mapped to human, bacteria, archaea,
-virus, and macrobes.
+Counts the proportion of reads that mapped to human, bacteria, archaea, virus, and macrobes.
 
 Produced by a script `count_classified_reads.py`
 
-Read Statistics
----------------
+### Read Statistics
 
 Counts some statistics like codon usage frequency and GC content on a
 subset of sequences.
@@ -208,20 +169,14 @@ Runs seperately on filtered and raw reads.
 
 Produced by a script `read_stats.py`
 
-AMR Detection
-=============
+## AMR Detection
 
-Resistome AMR Profiling
------------------------
+### Resistome AMR Profiling
 
-Shortbred AMR Profiling
------------------------
 
-Miscellaneous
-=============
+## Miscellaneous
 
-Align To Staph Aureus
----------------------
+### Align To Staph Aureus
 
 Maps reads to the Staph. Aureus genome using bowtie2. See databases for
 the details of the genome being used.
