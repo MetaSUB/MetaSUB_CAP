@@ -1,0 +1,4 @@
+
+test_task:
+
+  test_script: python -m pytest --color=yes tests -s
