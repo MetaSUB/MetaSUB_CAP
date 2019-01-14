@@ -2,41 +2,6 @@
 
 import click
 
-TAXA_LIST = [
-    'no rank',
-    'superkingdom',
-    'kingdom',
-    'subkingdom',
-    'superphylum',
-    'phylum',
-    'subphylum',
-    'superclass',
-    'class',
-    'subclass',
-    'infraclass',
-    'superorder',
-    'order',
-    'cohort',
-    'suborder',
-    'infraorder',
-    'parvorder',
-    'superfamily',
-    'family',
-    'subfamily',
-    'tribe',
-    'subtribe',
-    'genus',
-    'subgenus',
-    'species group',
-    'species subgroup',
-    'species',
-    'subspecies',
-    'varietas',
-    'forma',
-    'assembly',
-    'sequence',
-]
-TAXA_LIST = {taxa: depth for depth, taxa in enumerate(TAXA_LIST)}
 
 def floatorna(tkn):
     try:
@@ -50,7 +15,7 @@ def floatorna(tkn):
 def handle_tokens(tkns):
     assert len(tkns) == 9
     taxon_name = tkns[8]
-    depth = TAXA_LIST[tkns[7]]
+    depth = (len(taxon_name) - len(taxon_name.strip())) / 2
     return {
         'percent': float(tkns[0]),
         'reads': int(tkns[1]),
@@ -60,7 +25,7 @@ def handle_tokens(tkns):
         'coverage': floatorna(tkns[5]),
         'taxon_id': int(tkns[6]),
         'rank': '_'.join(tkns[7].split()),
-        'taxon_name': taxon_name.strip(),
+        'taxon_name': taxon_name.strip().replace(' ', '_').replace('sp.', 'sp'),
         'depth': depth,
         'children': [],
         'parent': None,
@@ -69,19 +34,22 @@ def handle_tokens(tkns):
 
 def tokenize(read_assignments_file):
     with open(read_assignments_file) as raf:
+        raf.readline() # 2 comment lines in kraken output, quick dirty fix
+        raf.readline() # 
         raf.readline()  # header
         for line in raf:
-            tkns = line.strip().split('\t')
-            parsed = handle_tokens(tkns)
-            yield parsed
+            if not line.startswith("#"):
+                tkns = line.strip().split('\t')
+                parsed = handle_tokens(tkns)
+                yield parsed
 
 
 def build_tree(tokenizer, filter_func):
     ultimate_root = {'children': [], 'parent': None, 'depth': -1}
     tree_root = ultimate_root
     for parsed in tokenizer:
-        if not filter_func(parsed):
-            continue
+        #if not filter_func(parsed):
+        #    continue
         if parsed['depth'] <= tree_root['depth']:
             while parsed['depth'] <= tree_root['depth']:
                 tree_root = tree_root['parent']
@@ -92,7 +60,7 @@ def build_tree(tokenizer, filter_func):
     return ultimate_root
 
 
-def make_filter(filter_ranks=True, min_kmer=4, min_cov=0.0001):
+def make_filter(filter_ranks=True, min_kmer=20, min_cov=0.00001):
 
     def filter_func(parsed):
         """Return False if the parsed does not pass, otherwise True."""
@@ -103,10 +71,11 @@ def make_filter(filter_ranks=True, min_kmer=4, min_cov=0.0001):
                 return False
         except TypeError:
             pass
-        if filter_ranks and (parsed['rank'] in ['assembly', 'sequence', 'no_rank']):
+        if filter_ranks and (parsed['rank'] in ['assembly', 'sequence', 'no_rank', 'rank', 'species_group', 'species_subgroup', 'subclass', 'suborder', 'subfamily', 'subgenus', 'tribe', 'subphylum', 'superclass', 'superorder', 'infraorder', 'parvorder', 'superfamily', 'infraclass', 'subkingdom', 'varietas', 'subtribe']) and parsed['taxon_id'] != 0:
             return False
         return True
-
+        
+        
     return filter_func
 
 
@@ -115,44 +84,78 @@ def get_short_rank(long_rank):
         return 'd'
     if long_rank == 'subspecies':
         return 't'
-    short_rank = long_rank[0]
-    assert short_rank in 'kpcofgst', long_rank
-    return short_rank
+    if long_rank == 'kingdom':
+        return 'k'
+    if long_rank == 'phylum':
+        return 'p'
+    if long_rank == 'class':
+        return 'c'
+    if long_rank == 'order':
+        return 'o'
+    if long_rank == 'family':
+        return 'f'
+    if long_rank == 'genus':
+        return 'g'
+    if long_rank == 'species':
+        return 's'
+    
+    return 'x'
 
-
-def as_mpa_r(root, prefix, use_proportions):
+def as_mpa_r(root, prefix, use_proportions, filter_func):
     short_rank = get_short_rank(root['rank'])
-    new_prefix = prefix + '|{}__{}'.format(short_rank, root['taxon_name'])
+    
+    if short_rank=='x' and root['parent'] is not None: 
+        parent = root['parent']
+        if 'rank' in parent and parent['rank'] == "species":
+            short_rank = 't' # not all strains have the designation subspecies, add those back while excluding sequences and substrains
+    
     if not prefix:
         new_prefix = '{}__{}'.format(short_rank, root['taxon_name'])
+        if root['taxon_id'] == 0 or ( short_rank != 'x' and root['taxon_id'] != 1 ):
+            new_prefix = '{}__{}'.format(short_rank, root['taxon_name'])
+        else:
+            new_prefix = ''
+    else:
+        if short_rank != 'x' and root['taxon_id'] != 1:
+            new_prefix = prefix + '|{}__{}'.format(short_rank, root['taxon_name'])
+        else:
+            new_prefix = prefix
+
+    
+        
     val = root['reads']
     if use_proportions:
         val = root['percent'] / 100
 
-    name_line = '{}\t{}'.format(new_prefix, val)
-    names = [name_line]
+    if not filter_func(root):
+        names = []
+    else:
+        name_line = '{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}'.format(root['taxon_id'], new_prefix, root['percent'], root['reads'], root['tax_reads'], root['kmers'], root['dup'], root['coverage'], root['rank'])
+        names = [name_line]
+
     for child in root['children']:
-        names += as_mpa_r(child, new_prefix, use_proportions)
+        names += as_mpa_r(child, new_prefix, use_proportions, filter_func)
     return names
 
 
-def as_mpa(ultimate_root, use_proportions):
+def as_mpa(ultimate_root, use_proportions, filter_func):
     names = []
     for root in ultimate_root['children']:
-        names += as_mpa_r(root, '', use_proportions)
+        names += as_mpa_r(root, '', use_proportions, filter_func)
     return names
 
 
 @click.command()
-@click.option('-k', '--min-kmer', default=4, type=int)
-@click.option('-c', '--min-cov', default=0.0001, type=float)
+@click.option('-k', '--min-kmer', default=20, type=int)
+@click.option('-c', '--min-cov', default=0, type=float)
 @click.option('-p/-r', '--proportions/--reads', default=False)
 @click.argument('read_assignments_file')
 def main(min_kmer, min_cov, proportions, read_assignments_file):
     tokenizer = tokenize(read_assignments_file)
     filter_func = make_filter(min_kmer=min_kmer, min_cov=min_cov)
     ultimate_root = build_tree(tokenizer, filter_func)
-    names = as_mpa(ultimate_root, proportions)
+    names = as_mpa(ultimate_root, proportions, filter_func)
+    print("TaxID\tTaxon\tRelAbundance\tReads\tTaxReads\tkmers\tdup\tcoverage\trank")
     for name in names:
         print(name)
 
