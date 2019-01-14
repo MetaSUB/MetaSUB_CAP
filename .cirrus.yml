@@ -2,4 +2,8 @@
 test_task:
   container:
     dockerfile: Dockerfile
-  test_script: pip install -r requirements.txt && python -m pytest --color=yes tests -s
+  test_script: |
+    python3 -m venv venv
+    . venv/bin/activate
+    pip install -r requirements.txt
+    python -m pytest --color=yes tests -s
