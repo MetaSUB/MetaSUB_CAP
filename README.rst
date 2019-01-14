@@ -7,6 +7,8 @@ Collaboration is welcome and encouraged.
 
 Please start an issue or contact David C. Danko (dcd3001@med.cornell.edu) if you have questions about this pipeline.
 
+Utilities are available to parse the output of the CAP. Please see the `CAPalyzer <https://github.com/dcdanko/capalyzer>`_. for details.
+
 Current Modules
 ----------------
 
@@ -50,7 +52,7 @@ To install the Core Analysis Pipeline in developer mode you will need to install
 
 To install `DataSuper <https://github.com/dcdanko/DataSuper>`_, `PackageMega <https://github.com/dcdanko/PackageMega>`_, and `ModuleUltra <https://github.com/dcdanko/ModuleUltra>`_ visit their respective github pages.
 
-Normal use of the Core Analysis Pipeline also requires the `MetaSUB QC Pipeline <https://github.com/MetaSUB/MetaSUB_QC_CAP>`_. This is included in the installation directions below.
+Normal use of the Core Analysis Pipeline also requires the `MetaSUB QC Pipeline <https://github.com/MetaSUB/MetaSUB_QC_Pipeline>`_. This is included in the installation directions below.
 
 Once all three programs are installed run the following commands.
 
@@ -89,6 +91,16 @@ Most cluster systems will need a custom submit script. You can set a default scr
 .. code-block:: bash
    
    moduleultra config cluster_submit /path/to/submit_script
+
+
+Running with Docker
+-------------------
+
+To start a shell in the docker machine use the following command:
+
+.. code-block:: bash
+
+   docker run --rm -it -v $PWD:/home/metasub/repo metasub_cap:latest /bin/bash -c "source activate cap"
 
 Adding Modules
 --------------

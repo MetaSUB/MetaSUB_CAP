@@ -35,7 +35,7 @@ rule measure_hmp_dists_kraken:
 
 rule measure_hmp_dists_mash:
 	input:
-            sketch = config['mash_sketch']['sketch'],
+            sketch = config['finch_sketch']['sketch'],
             db=config['pipeline_dir'] + '/references/hmp_site_dists/hmp_sites.msh'
 	output:
 	    main=config['hmp_site_dists']['mash']

@@ -44,13 +44,33 @@
       "name": "gz_tsv",
       "ext": "tsv.gz"
     },
-    "json"
+    "json",
+    {
+      "name": "jellyfish",
+      "ext": "jf"
+    }
   ],
   "RESULT_TYPES": [
     {
       "NAME" : "align_to_sa_n315",
       "DEPENDENCIES": ["microbial_short_read_dna"],
       "FILES": { "bam": "bam"}
+    },
+    {
+      "NAME" : "count_31mers",
+      "DEPENDENCIES": ["microbial_short_read_dna"],
+      "FILES": { "jf": "jellyfish"}
+    },
+    {
+      "NAME": "filter_human_dna",
+      "DEPENDENCIES": [
+        "adpater_removal"
+      ],
+      "FILES": {
+        "nonhuman_read1": "gz_fastq",
+        "nonhuman_read2": "gz_fastq",
+        "bam": "bam"
+      }
     },
     {
       "NAME": "resistome_amrs",
@@ -66,7 +86,7 @@
         "gene_normalized": "csv",
         "group_normalized": "csv",
         "classus_normalized": "csv",
-        "mech_normalized": "csv"        
+        "mech_normalized": "csv"
       }
     },
     {
@@ -125,16 +145,16 @@
       }
     },
     {
-	  "NAME": "mash_sketch",
-	  "DEPENDENCIES": ["microbial_short_read_dna"],
-	  "FILES": {
-	      "sketch": "minsketch"
-	    }
+      "NAME": "finch_sketch",
+      "DEPENDENCIES": ["microbial_short_read_dna"],
+      "FILES": {
+        "sketch": "minsketch"
+      }
     },
     {
       "NAME": "read_classification_proportions",
       "DEPENDENCIES": [
-        "kraken_taxonomy_profiling", 
+        "kraken_taxonomy_profiling",
         "microbial_short_read_dna",
         "filter_human_dna",
         "filter_macrobial_dna"
@@ -159,7 +179,7 @@
     {
       "NAME": "alpha_diversity_stats",
       "DEPENDENCIES": [
-        "kraken_taxonomy_profiling", 
+        "kraken_taxonomy_profiling",
         "metaphlan2_taxonomy_profiling"
       ],
       "FILES": {"json": "json"}
@@ -167,7 +187,7 @@
     {
       "NAME": "beta_diversity_stats",
       "DEPENDENCIES": [
-        "kraken_taxonomy_profiling", 
+        "kraken_taxonomy_profiling",
         "metaphlan2_taxonomy_profiling"
       ],
       "LEVEL": "GROUP",

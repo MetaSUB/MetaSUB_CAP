@@ -118,6 +118,14 @@ config = {
             'version': resolveCmd('mash --version')
         }
     },
+    'finch': {
+        'exc': {
+            'filepath': which('finch'),
+            'version': resolveCmd('finch --version')
+        },
+        'seed': 42,
+        'n_hashes': 10000000,
+    },
     'humann2_functional_profiling': {
         'exc': {
             'filepath': which('humann2'),
@@ -223,5 +231,16 @@ config = {
         'ram': 8,
         'time': 10,
 
+    },
+    'jellyfish': {
+        'exc': {
+            'filepath': which('jellyfish'),
+            'version': resolveCmd('jellyfish --version')
+        }
+    },
+    'count_31mers': {
+        'threads': 6,
+        'time': 99,
+        'ram': 32
     },
 }
