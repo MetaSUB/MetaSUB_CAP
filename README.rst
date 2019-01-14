@@ -92,6 +92,16 @@ Most cluster systems will need a custom submit script. You can set a default scr
    
    moduleultra config cluster_submit /path/to/submit_script
 
+
+Running with Docker
+-------------------
+
+To start a shell in the docker machine use the following command:
+
+.. code-block:: bash
+
+   docker run --rm -it -v $PWD:/home/metasub/repo metasub_cap:latest /bin/bash -c "source activate cap"
+
 Adding Modules
 --------------
 
