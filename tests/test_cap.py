@@ -11,7 +11,7 @@ TEST_DIR = dirname(__file__)
 
 
 def my_call(cmd):
-    cmd = f'/bin/bash -c "{cmd}"'
+    cmd = f'/bin/bash -c "source activate cap && {cmd}"'
     check_call(cmd, shell=True)
 
 
@@ -19,7 +19,6 @@ def in_mu_repo(func):
     """Run the test in an initialized MU repo."""
     @wraps(func)
     def decorated_function(self, *args, **kwargs):
-        my_call('source activate cap')
         repo_dir = mkdtemp()
         chdir(repo_dir)
         my_call('moduleultra init')
