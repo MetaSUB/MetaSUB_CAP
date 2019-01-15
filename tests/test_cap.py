@@ -19,6 +19,7 @@ def in_mu_repo(func):
     """Run the test in an initialized MU repo."""
     @wraps(func)
     def decorated_function(self, *args, **kwargs):
+        my_call('source activate cap')
         repo_dir = mkdtemp()
         chdir(repo_dir)
         my_call('moduleultra init')
