@@ -4,6 +4,6 @@ test_task:
     dockerfile: Dockerfile
   pip_cache:
     folder: ~/.cache/pip
-    fingerprint_script: echo $PYTHON_VERSION && cat requirements.txt
-    populate_script: pip install -r requirements.txt
-  test_script: python -m pytest --color=yes tests -s
+    fingerprint_script: /bin/bash -c "echo $PYTHON_VERSION && cat requirements.txt"
+    populate_script: /bin/bash -c "pip install -r requirements.txt"
+  test_script: /bin/bash -c "python -m pytest --color=yes tests -s"
