@@ -1,7 +1,7 @@
 """Test suite for metasub cap."""
 
 from unittest import TestCase
-from os import chdir, listdir
+from os import chdir
 from subprocess import call
 from functools import wraps
 from tempfile import mkdtemp
@@ -28,14 +28,13 @@ def add_data_to_mu(func):
     """Run the test in an initialized MU repo."""
     @wraps(func)
     def decorated_function(self, *args, **kwargs):
-        print(listdir(TEST_DIR))
         call((
             'datasuper bio add-fastqs '
             '-1 _1.fastq.gz -2 _2.fastq.gz '
             'microbiome '
             f'{TEST_DIR}/sample_data/zymo_control_1.fq.gz '
             f'{TEST_DIR}/sample_data/zymo_control_2.fq.gz'
-        ))
+        ), shell=True)
         return func(self, *args, **kwargs)
 
     return decorated_function
@@ -47,4 +46,4 @@ class TestCAP(TestCase):
     @add_data_to_mu
     @in_mu_repo
     def test_druyrun(self):
-        call('moduleultra run -p metasub_cap --dryrun')
+        call('moduleultra run -p metasub_cap --dryrun', shell=True)
