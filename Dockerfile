@@ -13,7 +13,7 @@ ENV LANG C.UTF-8
 
 ADD cap_env.yml /tmp/environment.yml
 
-USER metasub
+# USER metasub
 WORKDIR /home/metasub
 RUN conda env create -f=/tmp/environment.yml
 
