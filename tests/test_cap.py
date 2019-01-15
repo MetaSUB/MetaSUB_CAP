@@ -15,7 +15,7 @@ def my_call(cmd):
     check_call(cmd, shell=True)
 
 
-def in_mu_repo(func):
+def in_mu_repo_with_data(func):
     """Run the test in an initialized MU repo."""
     @wraps(func)
     def decorated_function(self, *args, **kwargs):
@@ -24,15 +24,6 @@ def in_mu_repo(func):
         my_call('moduleultra init')
         my_call('datasuper add type sample microbiome')
         my_call('moduleultra add pipeline metasub_cap')
-        return func(self, *args, **kwargs)
-
-    return decorated_function
-
-
-def add_data_to_mu(func):
-    """Run the test in an initialized MU repo."""
-    @wraps(func)
-    def decorated_function(self, *args, **kwargs):
         my_call((
             'datasuper bio add-fastqs '
             '-1 _1.fastq.gz -2 _2.fastq.gz '
@@ -48,7 +39,6 @@ def add_data_to_mu(func):
 class TestCAP(TestCase):
     """Test suite for metasub cap."""
 
-    @add_data_to_mu
-    @in_mu_repo
+    @in_mu_repo_with_data
     def test_druyrun(self):
         my_call('moduleultra run -p metasub_cap --dryrun')
