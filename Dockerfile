@@ -27,6 +27,7 @@ RUN /bin/bash -c "source activate cap \
 
 WORKDIR /home/metasub/manual_tools
 RUN /bin/bash -c "source activate cap \
+    && source $HOME/.cargo/env \
     && cargo install finch"
 WORKDIR /home/metasub/manual_tools
 RUN /bin/bash -c "source activate cap \
