@@ -90,10 +90,14 @@ moduleultra config cluster_submit /path/to/submit_script
 
 Docker images for the MetaSUB CAP may be found [on docker hub](https://cloud.docker.com/u/metasub/repository/docker/metasub/metasub_cap)
 
+You will still need to download the databases outside of docker. You can use the `download_databases.py` script for this purpose.
+
 To start a shell in the docker machine use the following command:
 ``` {.sourceCode .bash}
-docker run --rm -it -v $PWD:/home/metasub/repo metasub_cap:latest /bin/bash -c "source activate cap"
+docker run --rm -it -v /path/to/local/dbs:/home/metasub/dbs -v $PWD:/home/metasub/repo metasub_cap:latest /bin/bash -c "source activate cap"
 ```
+
+From within the shell in the docker machine you can run moduleultra as normal, but be sure to use the flag `-c /home/metasub/docker_conf.py` in order to correctly find the databases.
 
 ## Adding Modules
 
