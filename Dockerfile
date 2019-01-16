@@ -22,6 +22,7 @@ RUN conda env create -f=/tmp/environment.yml
 ENTRYPOINT [ "/bin/bash", "-c" ]
 RUN /bin/bash -c "source activate cap \
     && pip install --ignore-installed PyYAML moduleultra==0.1.5 \
+    && pip install MicrobeCensus \
     && mkdir manual_tools"
 
 

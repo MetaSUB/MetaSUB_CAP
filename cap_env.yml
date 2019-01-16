@@ -15,7 +15,6 @@ dependencies:
   - adapterremoval2
   - metaphlan2
   - bracken
-  - microbecensus
   - pip:
     - humann2
 
