@@ -22,20 +22,28 @@ RUN conda env create -f=/tmp/environment.yml
 ENTRYPOINT [ "/bin/bash", "-c" ]
 RUN /bin/bash -c "source activate cap \
     && pip install --ignore-installed PyYAML moduleultra==0.1.5 \
-    && pip install MicrobeCensus \
     && mkdir manual_tools"
 
 
 WORKDIR /home/metasub/manual_tools
 RUN /bin/bash -c "source activate cap \
-    && cargo install finch \
+    && cargo install finch"
+WORKDIR /home/metasub/manual_tools
+RUN /bin/bash -c "source activate cap \
     && git clone https://github.com/cdeanj/resistomeanalyzer.git \
     && cd resistomeanalyzer \
     && make \
-    && mv resistome /bin \
+    && mv resistome /bin"
+WORKDIR /home/metasub/manual_tools
+RUN /bin/bash -c "source activate cap \
     && hg clone https://bitbucket.org/biobakery/metaphlan2 \
     && cd metaphlan2 \
-    && mv metaphlan2.py /bin "
+    && mv metaphlan2.py /bin"
+WORKDIR /home/metasub/manual_tools
+RUN /bin/bash -c "source activate cap \
+    && git clone https://github.com/snayfach/MicrobeCensus \
+    && cd MicrobeCensus \
+    && python setup.py install"
 
 
 
