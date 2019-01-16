@@ -13,6 +13,10 @@ dependencies:
   - diamond==0.8.36
   - bowtie2
   - adapterremoval2
+  - metaphlan2
+  - bracken
+  - microbecensus
   - pip:
     - humann2
+
 

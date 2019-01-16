@@ -16,7 +16,6 @@ def pmegaDB(operand):
     try:
         res = processOperand(pmrepo, operand, stringify=True)
     except KeyError:
-        stderr.write('[packagemega] {} not found.\n'.format(operand))
         res = ''
     return res
 
