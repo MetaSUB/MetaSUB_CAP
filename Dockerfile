@@ -49,7 +49,7 @@ WORKDIR /home/metasub/manual_tools
 RUN /bin/bash -c "source activate cap \
     && git clone https://github.com/jenniferlu717/Bracken.git \
     && cd Bracken \
-    && sh install.sh \
+    && bash install.sh \
     && mv bracken bracken-build /bin"
 
 
