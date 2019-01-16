@@ -100,15 +100,6 @@ RESULT_TYPES:
     mpa: mpa
     report: tsv
 
-- NAME: bracken_abundance_estimation
-  DEPENDENCIES:
-  - kraken_taxonomy_profiling
-  FILES:
-    species_report: tsv
-    genus_report: tsv
-    phylum_report: tsv
-
-
 - NAME: finch_sketch
   DEPENDENCIES:
   - filter_human_dna

@@ -45,12 +45,6 @@ RUN /bin/bash -c "source activate cap \
     && git clone https://github.com/snayfach/MicrobeCensus \
     && cd MicrobeCensus \
     && python setup.py install"
-WORKDIR /home/metasub/manual_tools
-RUN /bin/bash -c "source activate cap \
-    && git clone https://github.com/jenniferlu717/Bracken.git \
-    && cd Bracken \
-    && bash install.sh \
-    && mv bracken bracken-build /bin"
 
 
 RUN cd /home/metasub \

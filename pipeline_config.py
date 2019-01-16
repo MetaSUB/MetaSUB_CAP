@@ -76,10 +76,6 @@ config = {
         'time': 2,
         'ram': 5
     },
-    'bracken_abundance_estimation': {
-        'exc': which('bracken_estimate_abundance.py'),
-        'kmer_distributions': pmegaDB('bracken.kmers.0'),
-    },
     'kraken_taxonomy_profiling': {
         'exc': {
             'filepath': which('kraken'),

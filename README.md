@@ -97,7 +97,7 @@ To start a shell in the docker machine use the following command:
 docker run --rm -it -v /path/to/local/dbs:/home/metasub/dbs -v $PWD:/home/metasub/repo metasub_cap:latest /bin/bash -c "source activate cap"
 ```
 
-From within the shell in the docker machine you can run moduleultra as normal, but be sure to use the flag `-c /home/metasub/docker_conf.py` in order to correctly find the databases.
+From within the shell in the docker machine you can run moduleultra as normal, but be sure to use the flag `-c /home/metasub/docker_pipeline_config.py` in order to correctly find the databases.
 
 ## Adding Modules
 
