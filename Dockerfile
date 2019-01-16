@@ -3,7 +3,7 @@ FROM continuumio/miniconda3
 
 
 RUN apt-get update \
-    && apt-get install -y locales git python3-dev python3-pip libyaml-dev \
+    && apt-get install -y locales mercurial git python3-dev python3-pip libyaml-dev \
     && (curl https://sh.rustup.rs -sSf | sh -s -- -y) \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
@@ -32,7 +32,10 @@ RUN /bin/bash -c "source activate cap \
     && git clone https://github.com/cdeanj/resistomeanalyzer.git \
     && cd resistomeanalyzer \
     && make \
-    && mv resistome /bin"
+    && mv resistome /bin \
+    && hg clone https://bitbucket.org/biobakery/metaphlan2 \
+    && cd metaphlan2 \
+    && mv metaphlan2.py /bin "
 
 
 
