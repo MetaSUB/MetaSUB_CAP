@@ -185,5 +185,5 @@ RESULT_TYPES:
   DEPENDENCIES:
   - microbial_short_read_dna
   FILES:
-    table: tsv
+    table: csv
     m8: gz_m8
