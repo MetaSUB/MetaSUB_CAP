@@ -1,5 +1,9 @@
 # MetaSUB Core Analysis Pipeline
 
+[![Build Status](https://api.cirrus-ci.com/github/MetaSUB/MetaSUB_CAP.svg)](https://cirrus-ci.com/github/MetaSUB/MetaSUB_CAP)
+![Version](https://img.shields.io/badge/Version-1.1.0-green.svg)
+
+
 This is the core analysis pipeline which is run on every sample
 collected by the MetaSUB consortium. It is designed to provide a
 comprehensive set of analyses for metagenomic data.
