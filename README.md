@@ -19,7 +19,6 @@ Utilities are available to parse the output of the CAP. Please see the
 
 ### Taxonomy Profiling
 -   KrakenHLL, searching RefSeq Microbial
--   Kraken, searching the minikraken database
 -   MetaPhlAn2
 
 ### Antibiotic Resistance Profiling
@@ -32,8 +31,6 @@ Utilities are available to parse the output of the CAP. Please see the
 -   Staph. Aureus n315
 -   [Common Macrobial
     Genomes](https://github.com/MetaSUB/macrobial-genomes)
--   Methyltransferases Genes (Deprecated)
--   Virulence Factor Genes (Deprecated)
 
 ### Statistic
 -   Kmer Profiles
@@ -41,27 +38,26 @@ Utilities are available to parse the output of the CAP. Please see the
 -   Similarity to human body site microbiomes
 -   [Microbe Directory](https://microbe.directory/) Annotation
 -   Average Genome Size Estimation
--   Alpha Diversity (Deprecated)
--   Beta Diversity (Deprecated)
 
 See docs/modules.md for more detail.
 
 
 ## Installation
 
-Normal use of the Core Analysis Pipeline also requires the [MetaSUB QC
-Pipeline](https://github.com/MetaSUB/MetaSUB_QC_Pipeline). This is
-included in the installation directions below.
-
-
+The MetaSUB CAP is a ModuleUltra pipeline. ModuleUltra stores results for a particular project in a repo. The instructions below will install ModuleUltra, the CAP, and create a new repo. If you are using Docker to run the CAP skip to the directions below for making a new repo.
 ``` {.sourceCode .bash}
 pip install moduleultra
 cd /analysis/dir
 moduleultra init
-moduleultra install  git@github.com:MetaSUB/MetaSUB_QC_CAP
 moduleultra install  git@github.com:MetaSUB/MetaSUB_CAP
 moduleultra add pipeline metasub_cap
-moduleultra add pipeline metasub_qc_cap
+```
+
+After installing for the first time follow the instructions below to make a new repo.
+```
+cd /analysis/dir
+moduleultra init
+moduleultra add pipeline metasub_cap
 ```
 
 ## Running
@@ -71,7 +67,6 @@ To run the CAP use the following commands
 ``` {.sourceCode .bash}
 cd /analysis/dir
 datasuper bio add-fastqs -1 <forward file ext> -2 <reverse file ext> <sample_type> [<fastq files>...]
-moduleultra run -p metasub_qc_cap -j <njobs> [--dryrun]
 moduleultra run -p metasub_cap -j <njobs> [--dryrun]
 ```
 
@@ -131,14 +126,13 @@ Most modules will need extra parameters at runtime. These may be stored in `pipe
 
 If your module needs custom scripts you may add them to the scripts directory. You can reference this directory in your modules as `config['pipeline_dir']['script_dir']`.
 
-**You should add your module on a separate branch** named `module/<module_name>`
+**You should add your module on a separate branch** named `feature/add-module-<module_name>`
 
 How to make a branch
 ``` {.sourceCode .bash}
 cd /path/to/MetaSUB_CAP
 git checkout -b module/<module_name>
 ```
-
 
 License
 =======
