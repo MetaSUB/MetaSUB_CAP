@@ -92,14 +92,6 @@ RESULT_TYPES:
     report_medium: tsv
     report_strict: tsv
 
-- NAME: kraken_taxonomy_profiling
-  DEPENDENCIES:
-  - filter_human_dna
-  FILES:
-    read_assignments: gz_tsv
-    mpa: mpa
-    report: tsv
-
 - NAME: finch_sketch
   DEPENDENCIES:
   - filter_human_dna
@@ -183,18 +175,6 @@ RESULT_TYPES:
   FILES:
     ags_norm_genes: tsv
     read_depth_norm_genes: tsv
-
-- NAME: align_to_methyltransferases
-  DEPENDENCIES:
-  - microbial_short_read_dna
-  FILES:
-    m8: gz_m8
-    table: tsv
-
-- NAME: vfdb_quantify
-  FILES:
-    table: tsv
-    m8: gz_m8
 
 - NAME: quantify_macrobial
   FILES:

@@ -49,6 +49,7 @@ RUN /bin/bash -c "source activate cap \
 
 RUN cd /home/metasub \
     && /bin/bash -c "source activate cap \
+    && mkdir dbs \
     && mkdir base_repo \
     && mkdir repo \
     && cd /home/metasub/base_repo \
@@ -56,6 +57,6 @@ RUN cd /home/metasub \
     && echo y | moduleultra install https://github.com/MetaSUB/MetaSUB_CAP \
     && moduleultra add pipeline metasub_cap"
 
-
+ADD docker_pipeline_config.py /home/metasub/docker_pipeline_config.py
 WORKDIR /home/metasub/repo
 RUN /bin/bash -c "source activate cap"
