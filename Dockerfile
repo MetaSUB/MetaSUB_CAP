@@ -20,11 +20,8 @@ RUN conda env create -f=/tmp/environment.yml
 
 
 ENTRYPOINT [ "/bin/bash", "-c" ]
-RUN /bin/bash -c "source activate cap \
-    && pip install --ignore-installed PyYAML moduleultra==0.1.5 \
-    && mkdir manual_tools"
 
-
+RUN mkdir /home/metasub/manual_tools
 WORKDIR /home/metasub/manual_tools
 RUN /bin/bash -c "source activate cap \
     && source $HOME/.cargo/env \
@@ -46,6 +43,8 @@ RUN /bin/bash -c "source activate cap \
     && cd MicrobeCensus \
     && python setup.py install"
 
+RUN /bin/bash -c "source activate cap \
+    && pip install --ignore-installed PyYAML moduleultra==0.1.13"
 
 RUN cd /home/metasub \
     && /bin/bash -c "source activate cap \
