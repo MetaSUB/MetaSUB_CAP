@@ -1,0 +1,5 @@
+
+test_task:
+  container:
+    dockerfile: Dockerfile
+  test_script: /bin/bash -c "pip install -r requirements.txt && python -m pytest --color=yes tests -s"

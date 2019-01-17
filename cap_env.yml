@@ -7,12 +7,13 @@ channels:
 dependencies:
   - samtools
   - snakemake==5.3.0
-  - bracken
   - krakenhll
   - mash
   - diamond==0.8.36
   - bowtie2
   - adapterremoval2
+  - bracken
   - pip:
     - humann2
+
 
