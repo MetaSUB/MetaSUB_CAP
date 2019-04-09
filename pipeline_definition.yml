@@ -1,5 +1,5 @@
 ---
-NAME: metasub_cap
+NAME: metasub_cap_single
 VERSION: 1.0.1
 SNAKEMAKE:
   DIR: snakemake_files
@@ -10,7 +10,8 @@ PACKAGE_MEGA:
   RECIPE_DIR: recipes
 
 ORIGINS:
-- - raw_short_read_dna
+- - adapter_removal_single
+  - filter_human_dna_single
 
 FILE_TYPES:
 - name: gz_fastq
@@ -39,35 +40,14 @@ FILE_TYPES:
 
 
 RESULT_TYPES:
-- NAME: raw_short_read_dna
-  FILES:
-    read1: gz_fastq
-    read2: gz_fastq
 
-- NAME: adapter_removal
-  DEPENDENCIES: raw_short_read_dna
+- NAME: adapter_removal_single
   FILES:
-    clean_read1: gz_fastq
-    clean_read2: gz_fastq
+    clean_reads: gz_fastq
 
-- NAME: filter_human_dna
-  DEPENDENCIES: adapter_removal
+- NAME: filter_human_dna_single
   FILES:
-    nonhuman_read1: gz_fastq
-    nonhuman_read2: gz_fastq
-
-
-- NAME: align_to_sa_n315
-  DEPENDENCIES:
-  - filter_human_dna
-  FILES:
-    bam: bam
-
-- NAME: count_31mers
-  DEPENDENCIES:
-  - filter_human_dna
-  FILES:
-    jf: jellyfish
+    nonhuman_reads: gz_fastq
 
 - NAME: resistome_amrs
   DEPENDENCIES:
@@ -92,12 +72,6 @@ RESULT_TYPES:
     report_medium: tsv
     report_strict: tsv
 
-- NAME: finch_sketch
-  DEPENDENCIES:
-  - filter_human_dna
-  FILES:
-    sketch: minsketch
-
 - NAME: read_classification_proportions
   DEPENDENCIES:
   - krakenhll_taxonomy_profiling
@@ -119,28 +93,6 @@ RESULT_TYPES:
   - metaphlan2_taxonomy_profiling
   FILES:
     json: json
-
-- NAME: alpha_diversity_stats
-  DEPENDENCIES:
-  - kraken_taxonomy_profiling
-  - metaphlan2_taxonomy_profiling
-  FILES:
-    json: json
-
-- NAME: beta_diversity_stats
-  DEPENDENCIES:
-  - kraken_taxonomy_profiling
-  - metaphlan2_taxonomy_profiling
-  LEVEL: GROUP
-  FILES:
-    json: json
-
-- NAME: mash_intersample_dists
-  LEVEL: GROUP
-  DEPENDENCIES:
-  - mash_sketch
-  FILES:
-    distance_table: csv
 
 - NAME: metaphlan2_taxonomy_profiling
   DEPENDENCIES:
@@ -170,11 +122,6 @@ RESULT_TYPES:
     genes: tsv
     path_abunds: tsv
     path_cov: tsv
-
-- NAME: humann2_normalize_genes
-  FILES:
-    ags_norm_genes: tsv
-    read_depth_norm_genes: tsv
 
 - NAME: quantify_macrobial
   FILES:
