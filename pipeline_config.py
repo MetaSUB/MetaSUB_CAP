@@ -16,7 +16,6 @@ def pmegaDB(operand):
     try:
         res = processOperand(pmrepo, operand, stringify=True)
     except KeyError:
-        stderr.write('[packagemega] {} not found.\n'.format(operand))
         res = ''
     return res
 
@@ -32,8 +31,25 @@ config = {
         'time': 10,
         'ram': 10,
         'db': {
-            'bt2': pmegaDB('staph_aureus_n315.bt2.prefix')
+            'bt2': pmegaDB('staph_aureus_n315.bt2.prefix'),
         }
+    },
+    'filter_human_dna': {
+        'db': {
+            'filepath': pmegaDB('hg38_ucsc.bt2.prefix'),
+        },
+        'threads': 6,
+        'time': 10,
+        'ram': 10,
+    },
+    'adapter_removal': {
+        'time': 5,
+        'threads': 6,
+        'ram': 10,
+        'exc': {
+            'filepath': which('AdapterRemoval'),
+            'version': resolveCmd('AdapterRemoval --version 2>&1'),
+        },
     },
     'alpha_diversity_stats': {
         'script': scriptDir('alpha_diversity_stats.py')
@@ -59,10 +75,6 @@ config = {
         'threads': 2,
         'time': 2,
         'ram': 5
-    },
-    'bracken_abundance_estimation': {
-        'exc': which('bracken_estimate_abundance.py'),
-        'kmer_distributions': pmegaDB('bracken.kmers.0'),
     },
     'kraken_taxonomy_profiling': {
         'exc': {
@@ -117,6 +129,14 @@ config = {
             'filepath': which('mash'),
             'version': resolveCmd('mash --version')
         }
+    },
+    'finch': {
+        'exc': {
+            'filepath': which('finch'),
+            'version': resolveCmd('finch --version')
+        },
+        'seed': 42,
+        'n_hashes': 10000000,
     },
     'humann2_functional_profiling': {
         'exc': {
@@ -223,5 +243,16 @@ config = {
         'ram': 8,
         'time': 10,
 
+    },
+    'jellyfish': {
+        'exc': {
+            'filepath': which('jellyfish'),
+            'version': resolveCmd('jellyfish --version')
+        }
+    },
+    'count_31mers': {
+        'threads': 6,
+        'time': 99,
+        'ram': 32
     },
 }

@@ -1,0 +1,19 @@
+name: cap
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - maxibor
+dependencies:
+  - samtools
+  - snakemake==5.3.0
+  - krakenhll
+  - mash
+  - diamond==0.8.36
+  - bowtie2
+  - adapterremoval2
+  - bracken
+  - pip:
+    - humann2
+
+
