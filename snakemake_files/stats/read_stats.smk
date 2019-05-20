@@ -18,7 +18,7 @@ rule find_read_stats:
 
         shell(cmd)
 
-
+'''
 rule find_read_stats_single:
     input:
         reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
@@ -34,3 +34,4 @@ rule find_read_stats_single:
                ' > {output.json}')
 
         shell(cmd)
+'''

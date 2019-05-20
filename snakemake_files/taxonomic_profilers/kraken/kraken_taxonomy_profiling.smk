@@ -27,7 +27,7 @@ rule kraken_read_assignment:
         reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
         reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
     output:
-        readAssignments = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
+        readAssignments = config['kraken_taxonomy_profiling']['read_assignments']
     threads: int( config['kraken_taxonomy_profiling']['threads'])
     # User specified parameters like this can be stored in pipeline_config.json
     # The parameters can be user supplied parameters or constants as necessary
@@ -43,10 +43,10 @@ rule kraken_read_assignment:
         cmd = (
             '{params.kraken} --gzip-compressed --fastq-input --threads {threads} '
         '--paired --preload --db {params.db} {input.reads1} {input.reads2} '
-            '> {output.readAssignments}')
+            '| gzip > {output.readAssignments}')
         shell(cmd)
 
-
+'''
 rule kraken_read_assignment_single:
     input:
         # these file patterns are automatically generated when
@@ -54,7 +54,7 @@ rule kraken_read_assignment_single:
         # to generate can be found in pipeline_definition.json.
         reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
     output:
-        readAssignments = temp(config['kraken_taxonomy_profiling']['read_assignments'][:-3])
+        readAssignments = config['kraken_taxonomy_profiling']['read_assignments']
     threads: int( config['kraken_taxonomy_profiling']['threads'])
     # User specified parameters like this can be stored in pipeline_config.json
     # The parameters can be user supplied parameters or constants as necessary
@@ -70,11 +70,13 @@ rule kraken_read_assignment_single:
         cmd = (
             '{params.kraken} --gzip-compressed --fastq-input --threads {threads} '
             '--preload --db {params.db} {input.reads1} '
-            '> {output.readAssignments}')
+            '| gzip > {output.readAssignments}')
         shell(cmd)
+ruleorder: unzip_kraken_read_assignments > kraken_read_assignment_single
+'''
 
 ruleorder: unzip_kraken_read_assignments > kraken_read_assignment
-ruleorder: unzip_kraken_read_assignments > kraken_read_assignment_single
+
 
 rule kraken_make_mpa:
     input:
@@ -108,15 +110,4 @@ rule kraken_make_report:
         n_gb_ram=5
     shell:
         '{params.kraken_report} {input.raw} --db {params.db} > {output.report}'
-
-
-rule compress_read_assignments_kraken:
-    input:
-        raw = config['kraken_taxonomy_profiling']['read_assignments'][:-3]
-    output:
-        compressed = config['kraken_taxonomy_profiling']['read_assignments']
-    run:
-        cmd = 'gzip {input.raw}'
-        shell(cmd)
-
 

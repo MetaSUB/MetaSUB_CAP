@@ -23,14 +23,14 @@ rule krakenhll_read_assignment:
             '--fastq-input '
             '--threads {threads} '
             '--paired '
-            '--preload '
             '--db {params.db} '
             '{input.reads1} '
             '{input.reads2} '
+	    '> /dev/null'
         )
         shell(cmd)
 
-
+'''
 rule krakenhll_read_assignment_single:
     input:
         reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
@@ -57,7 +57,7 @@ rule krakenhll_read_assignment_single:
             '{input.reads1} '
         )
         shell(cmd)
-
+'''
 
 rule krakenhll_filter_assignments:
     input:

@@ -22,7 +22,7 @@ rule metaphlan2_make_mpa:
                '> {output.mpa}')
         shell(cmd)
 
-
+'''
 rule metaphlan2_make_mpa_single:
     input:
         reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
@@ -43,3 +43,4 @@ rule metaphlan2_make_mpa_single:
                '--nproc {threads} '
                '> {output.mpa}')
         shell(cmd)
+'''
