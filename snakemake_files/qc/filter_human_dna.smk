@@ -29,7 +29,7 @@ rule filter_human_dna:
         nonhumanPattern = replaceDiff('%', output.nonhuman_reads1, output.nonhuman_reads2)
         cmd = (' {params.bt2} '
            '-p {threads} '
-           '--very-fast '
+           '--sensitive '
            ' --un-conc-gz ' + nonhumanPattern,
            ' -x {params.db} '
            ' -1 {input.reads1} '

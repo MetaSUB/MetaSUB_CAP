@@ -55,6 +55,7 @@ RESULT_TYPES:
   FILES:
     nonhuman_read1: gz_fastq
     nonhuman_read2: gz_fastq
+    bam: bam
 
 
 - NAME: align_to_sa_n315
