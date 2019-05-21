@@ -27,7 +27,7 @@ rule amr_make_blastm8:
 
 rule amr_quantify:
     input:
-        m8 = config['align_to_amr_genes']['m8'][:-3],
+        m8 = config['align_to_amr_genes']['m8']ß,
         readstats = config['read_stats']['json'],
         ags = config['microbe_census']['stats'],
         fasta = config['align_to_amr_genes']['fasta_db']['filepath']
