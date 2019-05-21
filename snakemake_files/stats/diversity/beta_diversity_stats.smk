@@ -1,7 +1,7 @@
 
 rule measure_beta_diversity:
     input:
-        krakens = expandGroup(config['kraken_taxonomy_profiling']['mpa']),
+        krakens = expandGroup(config['krakenhll_taxonomy_profiling']['report_strict']),
         mphlan2s = expandGroup(config['metaphlan2_taxonomy_profiling']['mpa'])
     output:
         json = config['beta_diversity_stats']['json']
