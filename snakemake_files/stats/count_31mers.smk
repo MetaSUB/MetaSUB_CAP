@@ -3,8 +3,8 @@ from random import choices as rchoices
 
 rule count_31mers:
     input:
-        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
-        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'],
     output:
         jf = config['count_31mers']['jf']
     params:

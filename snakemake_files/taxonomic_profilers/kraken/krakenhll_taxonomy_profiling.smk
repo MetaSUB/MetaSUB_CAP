@@ -2,8 +2,8 @@
 
 rule krakenhll_read_assignment:
     input:
-        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
-        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'],
     output:
         readAssignments = config['krakenhll_taxonomy_profiling']['read_assignments']
     threads: int(config['krakenhll_taxonomy_profiling']['threads'])

@@ -3,7 +3,7 @@
 
 rule count_class_proportions:
     input:
-        all_reads = getOriginResultFiles(config, 'adapter_removal', 'clean_read1'),
+        all_reads = config['adapter_removal']['clean_read1'],
         readstats = config['read_stats']['json'],
         tbl = config['quantify_macrobial']['tbl'],
         kraken = config['krakenhll_taxonomy_profiling']['report'],

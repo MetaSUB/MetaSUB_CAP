@@ -3,8 +3,8 @@
 
 rule find_read_stats:
     input:
-        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
-        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'],
     output:
         json = config['read_stats']['json']
     params:
