@@ -43,7 +43,6 @@ RESULT_TYPES:
   FILES:
     read1: gz_fastq
     read2: gz_fastq
-    bam: bam
 
 - NAME: adapter_removal
   DEPENDENCIES: raw_short_read_dna
@@ -56,7 +55,7 @@ RESULT_TYPES:
   FILES:
     nonhuman_read1: gz_fastq
     nonhuman_read2: gz_fastq
-
+    bam: bam
 
 - NAME: align_to_sa_n315
   DEPENDENCIES:
