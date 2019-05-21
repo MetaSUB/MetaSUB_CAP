@@ -43,6 +43,7 @@ RESULT_TYPES:
   FILES:
     read1: gz_fastq
     read2: gz_fastq
+    bam: bam
 
 - NAME: adapter_removal
   DEPENDENCIES: raw_short_read_dna
