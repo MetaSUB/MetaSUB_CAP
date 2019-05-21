@@ -25,8 +25,6 @@ rule humann2_make_blastm8:
     	shell(cmd)
 
 
-ruleorder: unzip_humann2_blastm8 > humann2_make_blastm8
-
 rule humann2_make_summaries:
     input:
         m8 = config['humann2_functional_profiling']['m8']
