@@ -8,13 +8,13 @@ rule count_31mers:
     output:
         jf = config['count_31mers']['jf']
     params:
-        jf=config['count_31mers']['exc']['filepath']
+        jf = config['jellyfish']['exc']['filepath']
     threads: int(config['count_31mers']['threads'])
     resources:
-        time=int(config['count_31mers']['time']),
-        n_gb_ram=int(config['count_31mers']['ram'])
+        time = int(config['count_31mers']['time']),
+        n_gb_ram = int(config['count_31mers']['ram'])
     run:
-    
+
         bloom_counter = ''.join(rchoices(string.ascii_uppercase + string.digits, k=10)) + '.temp.bc'
         # First Pass: Count 31mers
         cmd = (
