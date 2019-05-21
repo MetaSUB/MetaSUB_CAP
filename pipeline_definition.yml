@@ -45,13 +45,15 @@ RESULT_TYPES:
     read2: gz_fastq
 
 - NAME: adapter_removal
-  DEPENDENCIES: raw_short_read_dna
+  DEPENDENCIES:
+  - raw_short_read_dna
   FILES:
     clean_read1: gz_fastq
     clean_read2: gz_fastq
 
 - NAME: filter_human_dna
-  DEPENDENCIES: adapter_removal
+  DEPENDENCIES:
+  - adapter_removal
   FILES:
     nonhuman_read1: gz_fastq
     nonhuman_read2: gz_fastq
@@ -144,13 +146,13 @@ RESULT_TYPES:
 
 - NAME: metaphlan2_taxonomy_profiling
   DEPENDENCIES:
-  - microbial_short_read_dna
+  - filter_human_dna
   FILES:
     mpa: mpa
 
 - NAME: microbe_census
   DEPENDENCIES:
-  - microbial_short_read_dna
+  - filter_human_dna
   FILES:
     stats: txt
 
@@ -164,7 +166,7 @@ RESULT_TYPES:
 
 - NAME: humann2_functional_profiling
   DEPENDENCIES:
-  - microbial_short_read_dna
+  - filter_human_dna
   FILES:
     m8: gz_m8
     genes: tsv
@@ -172,18 +174,22 @@ RESULT_TYPES:
     path_cov: tsv
 
 - NAME: humann2_normalize_genes
+  DEPENDENCIES:
+  - humann2_functional_profiling
   FILES:
     ags_norm_genes: tsv
     read_depth_norm_genes: tsv
 
 - NAME: quantify_macrobial
+  DEPENDENCIES:
+  - filter_human_dna
   FILES:
     bam: bam
     tbl: json
 
 - NAME: align_to_amr_genes
   DEPENDENCIES:
-  - microbial_short_read_dna
+  - filter_human_dna
   FILES:
     table: csv
     m8: gz_m8
