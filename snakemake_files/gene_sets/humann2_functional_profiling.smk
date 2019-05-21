@@ -13,8 +13,8 @@ rule unzip_humann2_blastm8:
 
 rule humann2_make_blastm8:
     input:
-        reads1 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read1'),
-        reads2 = getOriginResultFiles(config, 'filter_human_dna', 'nonhuman_read2'),
+        reads1 = config['filter_human_dna']['nonhuman_read1'],
+        reads2 = config['filter_human_dna']['nonhuman_read2'],
         dmnd_db = config['humann2_functional_profiling']['db']['filepath']
     output:
         m8 = temp(config['humann2_functional_profiling']['m8'][:-3])

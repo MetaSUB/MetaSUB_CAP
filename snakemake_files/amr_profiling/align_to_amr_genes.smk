@@ -29,35 +29,11 @@ rule amr_make_blastm8:
                '-d {input.dmnd_db} '
                '-q {input.reads1} '
                '--block-size {params.bsize} '
-               '> {output.m8} ') 
+               '> {output.m8} ')
         shell(cmd)
 
-
-rule amr_make_blastm8_single:
-    input:
-        reads1 = getOriginResultFiles(config, 'filter_human_dna_single', 'nonhuman_reads'),
-        dmnd_db = config['align_to_amr_genes']['dmnd']['filepath']
-    output:
-        m8 = temp(config['align_to_amr_genes']['m8'][:-3])
-    threads: int(config['align_to_amr_genes']['dmnd']['threads'])
-    params:
-        dmnd = config['diamond']['exc']['filepath'],
-        bsize = int(config['align_to_amr_genes']['dmnd']['block_size']),
-    resources:
-        time = int(config['align_to_amr_genes']['dmnd']['time']),
-        n_gb_ram = int(config['align_to_amr_genes']['dmnd']['ram'])
-    run:
-        cmd = ('{params.dmnd} blastx '
-               '--sensitive '
-               '--threads {threads} '
-               '-d {input.dmnd_db} '
-               '-q {input.reads1} '
-               '--block-size {params.bsize} '
-               '> {output.m8} ') 
-        shell(cmd)
 
 ruleorder: unzip_amr_blastm8 > amr_make_blastm8
-ruleorder: unzip_amr_blastm8 > amr_make_blastm8_single
 
 rule amr_quantify:
     input:
@@ -77,7 +53,7 @@ rule amr_quantify:
                '-a {input.ags} '
                '-f {input.fasta} '
                '{input.m8} '
-               '> {output.tbl} ') 
+               '> {output.tbl} ')
         shell(cmd)
 
 
