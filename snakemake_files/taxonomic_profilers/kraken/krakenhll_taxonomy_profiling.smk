@@ -26,11 +26,11 @@ rule krakenhll_read_assignment:
             '--fastq-input '
             '--threads {threads} '
             '--paired '
-	    preload
+            preload
             '--db {params.db} '
             '{input.reads1} '
             '{input.reads2} '
-	    '> /dev/null'
+	        '> /dev/null'
         )
         shell(cmd)
 
