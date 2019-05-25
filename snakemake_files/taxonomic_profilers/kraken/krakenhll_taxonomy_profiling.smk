@@ -16,6 +16,9 @@ rule krakenhll_read_assignment:
         time = int(config['krakenhll_taxonomy_profiling']['time']),
         n_gb_ram = int(config['krakenhll_taxonomy_profiling']['ram'])
     run:
+        preload = '--preload '
+        if '/dev/shm' in params.db:
+            preload = ' '
         cmd = (
             '{params.krakenhll} '
             '--report-file {output.readAssignments} '
@@ -23,6 +26,7 @@ rule krakenhll_read_assignment:
             '--fastq-input '
             '--threads {threads} '
             '--paired '
+	    preload
             '--db {params.db} '
             '{input.reads1} '
             '{input.reads2} '
