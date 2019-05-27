@@ -44,10 +44,12 @@ rule humann2_make_summaries:
         genes = odir + '/*genefamilies.tsv'
         abunds = odir + '/*pathabundance.tsv'
         covs = odir + '/*pathcoverage.tsv'
-
-        cmd = ('{params.exc} '
-               '--input <(zcat {input.m8})'
+        temp_m8 =  '/tmp/metasub_cap_' + params.sample_name + '_humann2_temp_unzip.it_is_ok_to_delete_this_file.m8'
+        cmd = ('zcat {input.m8} > ' + temp_m8 + ' && ' 
+	       '{params.exc} '
+               '--input  ' + temp_m8 + ' '
                '--output {params.sample_name}_humann2 ; '
+               'rm ' + temp_m8 + '; '
                'mv ' + genes + ' {output.genes} ; '
                'mv ' + abunds + ' {output.path_abunds} ; '
                'mv ' + covs + ' {output.path_cov} ; ')

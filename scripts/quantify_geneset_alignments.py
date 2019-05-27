@@ -48,10 +48,10 @@ def getSeqLens(fastaf):
     return lenout, memoout
 
 
-def parseAlignments(alf):
-    if '.m8' in alf:
+def parseAlignments(alf, kind=None):
+    if kind == 'm8' or '.m8' in alf:
         return parseM8(alf)
-    elif '.bam' in alf:
+    elif kind == 'bam'  or '.bam' in alf:
         return parseBAM(alf)
     assert False, f'Cannot parse {alf} file type not recognized'
 
@@ -100,9 +100,10 @@ def makeTable(readsPerSeq, seqMemos, seqLens, nreadsInSample, ags):
 @click.option('-s', '--read-stats')
 @click.option('-a', '--ags')
 @click.option('-f', '--fasta')
+@click.option('-k', '--alignment-kind', default=None)
 @click.argument('alignment_file')
-def main(read_stats, ags, fasta, alignment_file):
-    readsPerSeq = parseAlignments(alignment_file)
+def main(read_stats, ags, fasta, alignment_kind, alignment_file):
+    readsPerSeq = parseAlignments(alignment_file, kind=alignment_kind)
     seqLens, seqMemos = getSeqLens(fasta)
     nreadsInSample = getNReads(read_stats)
     ags = getAGS(ags)

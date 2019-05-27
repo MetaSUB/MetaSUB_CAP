@@ -42,6 +42,7 @@ rule amr_quantify:
                '-s {input.readstats} '
                '-a {input.ags} '
                '-f {input.fasta} '
+               '-k m8 '
                '<(zcat {input.m8}) '
                '> {output.tbl} ')
         shell(cmd)

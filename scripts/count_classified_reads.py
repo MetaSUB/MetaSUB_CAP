@@ -43,15 +43,15 @@ def countMPA(fname):
             if '|' in line:
                 continue
             if 'd__bacteria' in line:
-                nBact = int(line.split()[-1])
+                nBact = int(line.split()[3])
             if 'd__archaea' in line:
-                nArch = int(line.split()[-1])
+                nArch = int(line.split()[3])
             if 'd__viruses' in line:
-                nViral = int(line.split()[-1])
+                nViral = int(line.split()[3])
             if 'd__eukaryota' in line:
-                nEuk = int(line.split()[-1])
-            if 'k__fung' in line:
-                nFung = int(line.split()[-1])
+                nEuk = int(line.split()[3])
+            if 'd__fung' in line:
+                nFung = int(line.split()[3])
     return nBact, nArch, nViral, nEuk, nFung
 
 
