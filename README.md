@@ -1,5 +1,7 @@
 # MetaSUB Core Analysis Pipeline
 
+This pipeline is deprecated. Please use the [CAP2](https://github.com/MetaSUB/CAP2) instead.
+
 [![Build Status](https://api.cirrus-ci.com/github/MetaSUB/MetaSUB_CAP.svg)](https://cirrus-ci.com/github/MetaSUB/MetaSUB_CAP)
 ![Version](https://img.shields.io/badge/Version-1.1.0-green.svg)
 
